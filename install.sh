@@ -14,5 +14,6 @@ git clone https://github.com/benjaminjkraft/dotfiles.git "$dir"
 files=$(ls -A "$dir" | grep -v "^$(echo $exclude | sed 's/ /\$\\|\^/g')$")
 
 for i in $files ; do
-  ln -sf "$dir/$i"
+  rm -rf "$i"
+  ln -s "$dir/$i"
 done
