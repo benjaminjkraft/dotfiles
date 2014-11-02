@@ -4,12 +4,10 @@
 
 set +e
 
-exclude="README.md .git LICENSE install.sh install-athena.sh"
-dir="${1:-.dotfiles}"
+exclude="README.md .git LICENSE install.sh install-athena.sh .bashrc"
+dir="/mit/benkraft/.dotfiles"
 
-cd "$HOME"
-rm -rf "$dir"
-git clone https://github.com/benjaminjkraft/dotfiles.git "$dir"
+cd /mit/benkraft
 # A little bit fragile, but it works.
 files=$(ls -A "$dir" | grep -v "^$(echo $exclude | sed 's/ /\$\\|\^/g')$")
 
@@ -17,3 +15,5 @@ for i in $files ; do
   rm -rf "$i"
   ln -s "$dir/$i"
 done
+rm -rf ".bashrc.github"
+ln -s "$dir/.bashrc" ".bashrc.github"
