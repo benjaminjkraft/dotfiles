@@ -1,0 +1,13 @@
+# Erase background with current bg color
+defbce on
+
+# # Advertise 256 color support to inner applications
+term screen-256color-bce
+
+# status bar
+hardstatus alwayslastline "%{= db}%{+b}%w"
+
+# long scrollback
+defscrollback 10000
+
+startup_message off

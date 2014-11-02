@@ -1,0 +1,38 @@
+[user]
+	email = benjaminjkraft@gmail.com #sometimes overridden by GIT_AUTHOR_EMAIL and GIT_COMMITTER_EMAIL (e.g. in khanify)
+	name = Ben Kraft
+[core]
+  excludesfile = ~/.gitignore_global
+[color]
+	ui = auto
+  status = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+[log]
+	decorate = true
+[push]
+	default = matching
+[branch]
+  # autosetupmerge auto-adds the --track flag to each git branch,
+  # autosetuprebase means that instead of merging it will rebase.
+  autosetupmerge = always
+  autosetuprebase = always
+[grep]
+  lineNumber = true
+[merge]
+  # Always show a diffstat at the end of a merge
+  stat = true
+[diff]
+  wordRegex = "\\w+|[^[:space:]]"
+  # Use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
+  mnemonicprefix = true
+  # Detect renames as well as copies
+  renames = copies
+[alias]
+  s = status
+  d = diff -w --color-words
+  a = commit --amend --no-edit
+  mit-branch = "!git checkout $(git merge-base main mit-prod) -b"
+  co = "!f() { git checkout \"$@\" && git submodule update --init --recursive; }; f"
+  p = "!f() { git pull \"$@\" && git submodule update --init --recursive; }; f"
