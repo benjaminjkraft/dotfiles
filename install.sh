@@ -7,13 +7,20 @@ set +e
 exclude="README.md .git LICENSE install.sh install-athena.sh"
 dir="${1:-.dotfiles}"
 
-cd "$HOME"
-rm -rf "$dir"
-git clone https://github.com/benjaminjkraft/dotfiles.git "$dir"
+if [ -d "$dir" ] ; then
+  cd "$dir"
+  git pull
+  cd "$HOME"
+else
+  cd "$HOME"
+  git clone https://github.com/benjaminjkraft/dotfiles.git "$dir"
+fi
 # A little bit fragile, but it works.
 files=$(ls -A "$dir" | grep -v "^$(echo $exclude | sed 's/ /\$\\|\^/g')$")
 
 for i in $files ; do
-  rm -rf "$i"
-  ln -s "$dir/$i"
+  if [ ! -L "$i" ] ; then
+    rm -rf "$i"
+    ln -s "$dir/$i"
+  fi
 done

@@ -7,13 +7,19 @@ set +e
 exclude="README.md .git LICENSE install.sh install-athena.sh .bashrc"
 dir="/mit/benkraft/.dotfiles"
 
-cd /mit/benkraft
+cd "$dir"
+git pull
+cd "$HOME"
 # A little bit fragile, but it works.
 files=$(ls -A "$dir" | grep -v "^$(echo $exclude | sed 's/ /\$\\|\^/g')$")
 
 for i in $files ; do
-  rm -rf "$i"
-  ln -s "$dir/$i"
+  if [ ! -L "$i" ] ; then
+    rm -rf "$i"
+    ln -s "$dir/$i"
+  fi
 done
-rm -rf ".bashrc.github"
-ln -s "$dir/.bashrc" ".bashrc.github"
+if [ ! -L ".bashrc" ] ; then
+  rm -rf ".bashrc.github"
+  ln -s "$dir/.bashrc" ".bashrc.github"
+fi
