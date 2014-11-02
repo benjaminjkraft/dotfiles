@@ -4,7 +4,7 @@
 
 set +e
 
-exclude="README.md .git LICENSE"
+exclude="README.md .git LICENSE install.sh"
 dir="${1:-.dotfiles}"
 
 cd "$HOME"
