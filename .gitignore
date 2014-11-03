@@ -1,3 +1,5 @@
 .vim/.netrwhist
 .vim/.VimballRecord
 .vim/haskellmode.config
+.ssh/id_*
+.ssh/known_hosts
