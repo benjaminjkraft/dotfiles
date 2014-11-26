@@ -3,3 +3,13 @@
 .vim/haskellmode.config
 .ssh/id_*
 .ssh/known_hosts
+.cabal/logs/
+.cabal/packages/
+.cabal/setup-exe-cache/
+.cabal/world
+.xmonad/history
+.xmonad/super-prompt-history
+.xmonad/xmonad-x86_64-linux
+.xmonad/xmonad.errors
+.xmonad/xmonad.hi
+.xmonad/xmonad.o
