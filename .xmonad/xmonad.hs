@@ -21,6 +21,7 @@ import XMonad hiding ((|||))
 import XMonad.Actions.CycleWS
 import qualified XMonad.Actions.FlexibleResize as Flex
 import XMonad.Actions.WindowBringer
+import XMonad.Config
 import XMonad.Config.Desktop (desktopLayoutModifiers)
 import XMonad.Config.Gnome
 import XMonad.Hooks.ManageDocks
@@ -55,6 +56,8 @@ main = xmonad $ withUrgencyHook myUrgencyHook $ gnomeConfig
         , terminal = "gnome-terminal --window-with-profile=trans"
         , layoutHook = myLayout
         , startupHook = startupHook gnomeConfig >> setWMName "LG3D"
+        -- -- for Splash
+        -- , handleEventHook = handleEventHook defaultConfig
         , manageHook = manageHook gnomeConfig <+> myManageHook
         , keys = \c -> myKeys c `M.union` myManualKeys c `M.union` keys gnomeConfig c
         , workspaces = myWorkspaces
