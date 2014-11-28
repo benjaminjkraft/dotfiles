@@ -10,10 +10,12 @@ dir="${1:-.dotfiles}"
 if [ -d "$dir" ] ; then
   cd "$dir"
   git pull
+  git submodule update --init --recursive
   cd "$HOME"
 else
   cd "$HOME"
   git clone https://github.com/benjaminjkraft/dotfiles.git "$dir"
+  git submodule update --init --recursive
 fi
 # A little bit fragile, but it works.
 files=$(ls -A "$dir" | grep -v "^$(echo $exclude | sed 's/ /\$\\|\^/g')$")
