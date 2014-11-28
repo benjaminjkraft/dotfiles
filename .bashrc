@@ -187,8 +187,12 @@ export GPG_TTY
 
 #add sipb consult outland ops esp apo rsi &>/dev/null
 
-#the best
-EDITOR=/usr/bin/vim
+if [[ -v DISPLAY ]] ; then
+  #the best
+  EDITOR='/usr/bin/gvim -f'
+else
+  EDITOR='/usr/bin/vim'
+fi
 export EDITOR
 
 khanify () {
