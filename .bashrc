@@ -187,7 +187,7 @@ export GPG_TTY
 
 #add sipb consult outland ops esp apo rsi &>/dev/null
 
-if [[ -v DISPLAY ]] ; then
+if [[ -v DISPLAY && -e /usr/bin/gvim ]] ; then
   #the best
   EDITOR='/usr/bin/gvim -f'
 else
