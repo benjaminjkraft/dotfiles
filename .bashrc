@@ -150,7 +150,6 @@ alias ssh-exit='ssh -O exit'
 alias s='git s'
 alias d='git d'
 alias htop='title htop ; htop ; title'
-alias sudoedit='EDITOR="gvim -f" sudoedit'
 
 if [ -f /usr/bin/finger.debathena ] ; then
 	alias finger='finger.debathena'
