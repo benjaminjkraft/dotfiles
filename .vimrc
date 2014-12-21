@@ -66,7 +66,7 @@ autocmd FileType markdown setlocal tw=0
 
 " Python
 autocmd FileType python setlocal ts=4 sw=4 sts=4
-let g:syntastic_python_checkers = ['pep8', 'pyflakes']
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 
 " (La)TeX
 let g:tex_flavor='latex'
