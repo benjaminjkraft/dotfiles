@@ -269,6 +269,15 @@ esp-screen () {
   screen -dmS esp
   screen -S esp -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
   screen -S esp -p 0 -X screen
+  screen -S esp -p 0 -X screen
+  screen -S esp -p 0 -X screen
+  screen -S esp -p 0 -X stuff "./manage.py shell_plus $(printf \\r)"
+  screen -S esp -p 0 -X screen
+  screen -S esp -p 0 -X stuff "title htop ; htop $(printf \\r)"
+  screen -S esp -p 0 -X screen
+  screen -S esp -p 0 -X stuff "title esp. ; mosh esp -- screen -x $(printf \\r)"
+  screen -S esp -p 0 -X screen
+  screen -S esp -p 0 -X stuff "title lu. ; mosh lu -- screen -x $(printf \\r)"
   screen -S esp -p 1 -x
 }
 
