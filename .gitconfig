@@ -9,6 +9,7 @@
   branch = auto
   diff = auto
   interactive = auto
+  grep = auto
 [log]
 	decorate = true
 [push]
