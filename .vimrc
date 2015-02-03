@@ -52,9 +52,11 @@ let g:airline_mode_map = {
     \ '' : 'S',
     \ }
 " word count from http://cromwell-intl.com/linux/vim-word-count.html
-let g:word_count="?"
 function WordCount()
-	return g:word_count
+  if !exists('w:word_count')
+    let w:word_count="?"
+  endif
+	return w:word_count
 endfunction
 function UpdateWordCount()
 	let lnum = 1
@@ -63,7 +65,7 @@ function UpdateWordCount()
 		let n = n + len(split(getline(lnum)))
 		let lnum = lnum + 1
 	endwhile
-	let g:word_count = n
+	let w:word_count = n
 endfunction
 " Update the count when cursor is idle in command or insert mode.
 " Update when idle for 1000 msec (default is 4000 msec).
