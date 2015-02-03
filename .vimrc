@@ -37,6 +37,42 @@ else
 endif
 colorscheme solarized
 
+" airline config
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n' : 'N',
+    \ 'i' : 'I',
+    \ 'R' : 'R',
+    \ 'c' : 'C',
+    \ 'v' : 'V',
+    \ 'V' : 'V',
+    \ '' : 'V',
+    \ 's': 'S',
+    \ 'S' : 'S',
+    \ '' : 'S',
+    \ }
+" word count from http://cromwell-intl.com/linux/vim-word-count.html
+let g:word_count="?"
+function WordCount()
+	return g:word_count
+endfunction
+function UpdateWordCount()
+	let lnum = 1
+	let n = 0
+	while lnum <= line('$')
+		let n = n + len(split(getline(lnum)))
+		let lnum = lnum + 1
+	endwhile
+	let g:word_count = n
+endfunction
+" Update the count when cursor is idle in command or insert mode.
+" Update when idle for 1000 msec (default is 4000 msec).
+set updatetime=1000
+augroup WordCounter
+	au! CursorHold,CursorHoldI * call UpdateWordCount()
+augroup END
+let g:airline_section_z = airline#section#create(['windowswap', '%{WordCount()}w  ', 'linenr', '/%L:%3v '])
+
 " shortcuts
 map Y y$
 cnoremap w!! w !sudo dd of=%
