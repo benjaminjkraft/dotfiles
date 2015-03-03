@@ -71,10 +71,16 @@ else
 	color_prompt=
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+if [ -n "$KRB5CCNAME" ] ; then
+  krbinst="[${KRB5CCNAME#/tmp/krb5cc_$(id -u).}]"
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  krbinst=""
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u$krbinst@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u$krbinst@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -83,7 +89,7 @@ title () { echo "can't set title here"; }
 case "$TERM" in
 xterm*|rxvt*)
 #    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \W\a\]$PS1"
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\W (\u@\h: \w)\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\W (\u$krbinst@\h: \w)\a\]$PS1"
     ;;
 *screen*)
   screen_set_window_title () {
