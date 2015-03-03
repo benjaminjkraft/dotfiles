@@ -271,13 +271,13 @@ esp-screen () {
   screen -S esp -p 0 -X screen
   screen -S esp -p 0 -X screen
   screen -S esp -p 0 -X screen
-  screen -S esp -p 0 -X stuff "./manage.py shell_plus $(printf \\r)"
+  screen -S esp -p 3 -X stuff "./manage.py shell_plus$(printf \\r)"
   screen -S esp -p 0 -X screen
-  screen -S esp -p 0 -X stuff "title htop ; htop $(printf \\r)"
+  screen -S esp -p 4 -X stuff "title htop ; htop$(printf \\r)"
   screen -S esp -p 0 -X screen
-  screen -S esp -p 0 -X stuff "title esp. ; mosh esp -- screen -x $(printf \\r)"
+  screen -S esp -p 5 -X stuff "title esp. ; mosh esp -- screen -x$(printf \\r)"
   screen -S esp -p 0 -X screen
-  screen -S esp -p 0 -X stuff "title lu. ; mosh lu -- screen -x $(printf \\r)"
+  screen -S esp -p 6 -X stuff "title lu. ; mosh lu -- screen -x$(printf \\r)"
   screen -S esp -p 1 -x
 }
 
