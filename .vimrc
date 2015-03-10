@@ -91,12 +91,15 @@ nnoremap <Leader>m :wa<CR>:make<CR><CR>
 " map  n <Plug>(easymotion-next)
 " map  N <Plug>(easymotion-prev)
 
+" sh
+autocmd FileType sh setlocal tw=0
+
 " JSON
 let g:vim_json_syntax_conceal=0
 autocmd FileType json setlocal foldmethod=syntax
 
 " HTML
-autocmd FileType html setlocal tw=0
+autocmd FileType html setlocal tw=119
 
 " Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
