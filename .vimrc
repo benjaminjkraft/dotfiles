@@ -11,6 +11,7 @@ set smartcase
 let g:EasyMotion_smartcase = 1
 set spell
 set number
+set relativenumber
 set expandtab
 set autowrite
 set autoindent
