@@ -9,8 +9,11 @@
 #umask 022
 # if running bash
 
+GOPATH=$HOME/.go
+export GOPATH
+
 # set PATH so it includes user's private bins if they exist
-for p in "$HOME/.scripts" "$HOME/bin" "$HOME/.bin" "$HOME/.cabal/bin"
+for p in "$HOME/.scripts" "$HOME/bin" "$HOME/.bin" "$HOME/.cabal/bin" "$HOME/.go/bin"
 do
 	if [ -d "$p" ] ; then
 		PATH="$PATH:$p"
