@@ -20,7 +20,7 @@ set backspace=indent,eol,start
 set nocp
 set cole=2
 set cocu=nvc
-set tw=79 sw=2 ts=2 sts=2
+set tw=79 sw=4 ts=4 sts=4
 
 " display options
 set laststatus=2
@@ -98,9 +98,6 @@ autocmd FileType sh setlocal tw=0
 " JSON
 let g:vim_json_syntax_conceal=0
 autocmd FileType json setlocal foldmethod=syntax
-
-" HTML
-autocmd FileType html setlocal tw=119
 
 " Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
