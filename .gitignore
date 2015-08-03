@@ -13,3 +13,12 @@
 .xmonad/xmonad.errors
 .xmonad/xmonad.hi
 .xmonad/xmonad.o
+*.swp
+*.pyc
+.DS_Store?
+.DS_Store
+.svn
+Thumbs.db
+Icon?
+tags
+*.class

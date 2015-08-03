@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-PATH=$PATH:/usr/bin:/usr/local/heroku/bin:$HOME/.local/share/google_appengine
+PATH=$PATH:/usr/bin:/usr/local/heroku/bin
 
 #Import various stuff, checking each for existence
 for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.bash_aliases" "$HOME/.gnupg/gpg-agent-info-BEN-PC"
@@ -298,6 +298,21 @@ main-screen () {
   screen -S main -p 0 -X screen
   screen -S main -p 1 -x
 }
+
+# Mac-specific stuff.
+if [ `uname -s` = Darwin ]; then
+    # Numpy/etc use flags clang doesn't know about.  This is only
+    # needed for mavericks and above.
+    if ! expr "`sw_vers -productVersion`" : '10\.[0-8]$' >/dev/null && \
+       ! expr "`sw_vers -productVersion`" : '10\.[0-8]\.' >/dev/null; then
+        CPPFLAGS="-Qunused-arguments $CPPFLAGS"
+        CFLAGS="-Qunused-arguments $CFLAGS"
+        # This ARCHFLAGS is needed until we have pyobjc 3.0, according to
+        #    https://bitbucket.org/ronaldoussoren/pyobjc/issue/66/cannot-locate-a-working-compiler-error
+        ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future $ARCHFLAGS"
+        export CPPFLAGS CFLAGS ARCHFLAGS
+    fi
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
