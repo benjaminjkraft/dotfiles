@@ -3,6 +3,7 @@
 .vim/haskellmode.config
 .ssh/id_*
 .ssh/known_hosts
+.ssh/internal-webserver*
 .cabal/logs/
 .cabal/packages/
 .cabal/setup-exe-cache/
