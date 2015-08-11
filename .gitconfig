@@ -51,3 +51,5 @@
   access-key = AKIAINDGZSNJIWXDPTSA
   secret-key-path = ~/git-bigfile-storage.secret
   bucket-name = git-bigfile-storage
+[kaclone]
+	email = benkraft@khanacademy.org
