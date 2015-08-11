@@ -155,6 +155,7 @@ alias less='less -i'
 alias ssh-exit='ssh -O exit'
 alias s='git s'
 alias d='git d'
+alias ad='arc diff --verbatim HEAD^'
 alias htop='title htop ; htop ; title'
 eval "$(hub alias -s)"
 
