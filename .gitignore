@@ -4,6 +4,7 @@
 .ssh/id_*
 .ssh/known_hosts
 .ssh/internal-webserver*
+.ssh/jenkins-worker*
 .cabal/logs/
 .cabal/packages/
 .cabal/setup-exe-cache/
