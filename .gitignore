@@ -5,6 +5,8 @@
 .ssh/known_hosts
 .ssh/internal-webserver*
 .ssh/jenkins-worker*
+.ssh/caching-proxy*
+.ssh/ka-backup-key*
 .cabal/logs/
 .cabal/packages/
 .cabal/setup-exe-cache/
