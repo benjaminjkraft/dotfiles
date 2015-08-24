@@ -24,7 +24,7 @@ set tw=79 sw=4 ts=4 sts=4
 
 " display options
 set laststatus=2
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
 highlight LineNr guifg=white guibg=black
 highlight Conceal guifg=black guibg=white
 set guioptions-=T

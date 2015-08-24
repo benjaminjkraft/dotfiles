@@ -22,7 +22,7 @@ import XMonad.Actions.CycleWS
 import qualified XMonad.Actions.FlexibleResize as Flex
 import XMonad.Actions.WindowBringer
 import XMonad.Config
-import XMonad.Config.Desktop (desktopLayoutModifiers)
+import XMonad.Config.Desktop
 import XMonad.Config.Gnome
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -55,7 +55,7 @@ main = xmonad $ withUrgencyHook myUrgencyHook $ gnomeConfig
 				{ modMask = mod4Mask
         , terminal = "gnome-terminal --window-with-profile=trans"
         , layoutHook = myLayout
-        , startupHook = startupHook gnomeConfig >> setWMName "LG3D"
+        , startupHook = myGnomeRegister >> startupHook desktopConfig >> setWMName "LG3D"
         -- -- for Splash
         -- , handleEventHook = handleEventHook defaultConfig
         , manageHook = manageHook gnomeConfig <+> myManageHook
@@ -68,6 +68,19 @@ modm = mod4Mask
 
 myUrgencyHook = dzenUrgencyHook
                 { args = ["-bg", "darkgreen", "-xs", "1"] }
+
+myGnomeRegister :: MonadIO m => m ()
+myGnomeRegister = io $ do
+    x <- lookup "DESKTOP_AUTOSTART_ID" `fmap` getEnvironment
+    whenJust x $ \sessionId -> safeSpawn "dbus-send"
+        [ "--session"
+        , "--print-reply=literal"
+        , "--dest=org.gnome.SessionManager"
+        , "/org/gnome/SessionManager"
+        , "org.gnome.SessionManager.RegisterClient"
+        , "string:xmonad"
+        , "string:"++sessionId
+        ]
 
 -- myEventHooks = []
 
