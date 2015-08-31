@@ -158,6 +158,7 @@ alias d='git d'
 alias ad='arc diff --verbatim HEAD^'
 alias htop='title htop ; htop ; title'
 eval "$(hub alias -s)"
+alias ggrep='git grep --no-index'
 
 if [ -f /usr/bin/finger.debathena ] ; then
 	alias finger='finger.debathena'
