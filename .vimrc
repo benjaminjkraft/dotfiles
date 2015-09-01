@@ -95,6 +95,9 @@ nnoremap <Leader>m :wa<CR>:make<CR><CR>
 " sh
 autocmd FileType sh setlocal tw=0
 
+" make
+autocmd FileType make setlocal noet
+
 " JSON
 let g:vim_json_syntax_conceal=0
 autocmd FileType json setlocal foldmethod=syntax
