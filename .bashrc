@@ -71,7 +71,9 @@ else
 	color_prompt=
 fi
 
-if [ -n "$KRB5CCNAME" ] ; then
+if [ -n "$KRB5CCNAME" ] && [ -n "$KRBTKFILE" ] ; then
+  # krbroot sets $KRB5CCNAME and $KRBTKFILE.  This wants the format that
+  # krbroot uses, but some other things use $KRB5CCNAME, so we check for both.
   krbinst="[${KRB5CCNAME#/tmp/krb5cc_$(id -u).}]"
 else
   krbinst=""
