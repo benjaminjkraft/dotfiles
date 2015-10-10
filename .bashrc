@@ -157,7 +157,7 @@ alias s='git s'
 alias d='git d'
 alias ad='arc diff --verbatim HEAD^'
 alias htop='title htop ; htop ; title'
-eval "$(hub alias -s)"
+which hub >/dev/null && eval "$(hub alias -s)"
 alias ggrep='git grep --no-index'
 which bd >/dev/null && alias bd='. bd -s'
 
