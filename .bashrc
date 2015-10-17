@@ -204,8 +204,8 @@ export EDITOR
 khanify () {
   KHAN=1
   export KHAN
-  FORCE_COMMIT=1 #fuck the linter
-  export FORCE_COMMIT
+  # FORCE_COMMIT=1 #fuck the linter
+  # export FORCE_COMMIT
   GIT_AUTHOR_EMAIL="benkraft@khanacademy.org"
   export GIT_AUTHOR_EMAIL
   GIT_COMMITTER_EMAIL="benkraft@khanacademy.org"
