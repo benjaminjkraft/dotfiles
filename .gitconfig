@@ -2,7 +2,7 @@
 	email = benjaminjkraft@gmail.com #sometimes overridden by GIT_AUTHOR_EMAIL and GIT_COMMITTER_EMAIL (e.g. in khanify)
 	name = Ben Kraft
 [core]
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore_global
 [color]
 	ui = auto
   status = auto

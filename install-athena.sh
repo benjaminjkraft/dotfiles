@@ -4,7 +4,7 @@
 
 set +e
 
-exclude="README.md .git LICENSE install.sh install-athena.sh .bashrc"
+exclude="README.md .git .gitignore LICENSE install.sh install-athena.sh .bashrc"
 dir="/mit/benkraft/.dotfiles"
 
 cd "$dir"
