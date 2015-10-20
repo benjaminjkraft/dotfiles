@@ -53,6 +53,8 @@ let g:airline_mode_map = {
     \ '' : 'S',
     \ }
 " word count from http://cromwell-intl.com/linux/vim-word-count.html
+" TODO: once https://github.com/bling/vim-airline/pull/866/ is merged and
+" works, replace this with that.
 function WordCount()
   if !exists('w:word_count')
     let w:word_count="?"
