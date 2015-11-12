@@ -21,6 +21,7 @@ set nocp
 set cole=2
 set cocu=nvc
 set tw=79 sw=4 ts=4 sts=4
+set colorcolumn=+1
 
 " display options
 set laststatus=2
