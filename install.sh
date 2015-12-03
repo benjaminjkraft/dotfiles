@@ -15,6 +15,7 @@ if [ -d "$dir" ] ; then
 else
   cd "$HOME"
   git clone https://github.com/benjaminjkraft/dotfiles.git "$dir"
+  cd "$dir"
   git submodule update --init --recursive
 fi
 # A little bit fragile, but it works.
