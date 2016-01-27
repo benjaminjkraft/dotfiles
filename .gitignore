@@ -3,6 +3,7 @@
 .vim/haskellmode.config
 .ssh/id_*
 .ssh/known_hosts
+.ssh/known_hosts.old
 .ssh/ka
 .ssh/google_compute_engine*
 .cabal/logs/
