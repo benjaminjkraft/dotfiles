@@ -39,6 +39,10 @@ else
 endif
 colorscheme solarized
 
+"emmet.vim
+let g:user_emmet_mode='nv'
+let g:user_emmet_leader_key=',e'
+
 " airline config
 let g:airline_mode_map = {
     \ '__' : '-',
