@@ -201,6 +201,12 @@ export GPG_TTY
 EDITOR='/usr/bin/vim'
 export EDITOR
 
+if [ "$(hostname)" = "quaternion" ] ; then
+    srcdir="$HOME/Documents"
+else
+    srcdir="$HOME/src"
+fi
+
 khanify () {
   KHAN=1
   export KHAN
@@ -232,14 +238,18 @@ if [ -n "$KHAN" ] ; then
 fi
 
 zscoreify () {
-  ZSCORE=1
-  export ZSCORE
-  source "$HOME/Documents/zscore/env/bin/activate"
+    ZSCORE=1
+    export ZSCORE
+    if [ -f "$srcdir/zscore/env" ] ; then
+        source "$srcdir/zscore/env/bin/activate"
+    else
+        source "$HOME/.virtualenv/zscore/bin/activate"
+    fi
 }
 
 zscore-screen () {
   zscoreify
-  cd "$HOME/Documents/zscore"
+  cd "$srcdir/zscore"
   screen -dmS zscore
   screen -S zscore -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
   screen -S zscore -p 0 -X screen
@@ -258,7 +268,7 @@ asadbify () {
 
 asadb-screen () {
   asadbify
-  cd "$HOME/Documents/asa-db/asadb"
+  cd "$srcdir/asa-db/asadb"
   screen -dmS asadb
   screen -S asadb -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
   screen -S asadb -p 0 -X screen
@@ -272,12 +282,12 @@ fi
 espify () {
   ESP=1
   export ESP
-  source "$HOME/Documents/esp-website/env/bin/activate"
+  source "$srcdir/esp-website/env/bin/activate"
 }
 
 esp-screen () {
   espify
-  cd "$HOME/Documents/esp-website/esp/esp"
+  cd "$srcdir/esp-website/esp/esp"
   screen -dmS esp
   screen -S esp -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
   screen -S esp -p 0 -X screen
