@@ -22,6 +22,9 @@ set cole=2
 set cocu=nvc
 set tw=79 sw=4 ts=4 sts=4
 set colorcolumn=+1
+set wildmenu
+set scrolloff=1
+set display+=lastline
 
 " display options
 set laststatus=2
