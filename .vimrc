@@ -42,6 +42,12 @@ else
 endif
 colorscheme solarized
 
+" rainbow parens
+au VimEnter * RainbowParenthesesActivate
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 "emmet.vim
 let g:user_emmet_mode='nv'
 let g:user_emmet_leader_key=',e'
