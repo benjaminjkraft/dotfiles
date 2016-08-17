@@ -48,6 +48,11 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" indentLine
+let g:indentLine_color_term = 235 " solarized base02
+let g:indentLine_color_gui = '#eee8d5' "solarized base2
+let g:indentLine_char = '│'
+
 "emmet.vim
 let g:user_emmet_mode='nv'
 let g:user_emmet_leader_key=',e'
