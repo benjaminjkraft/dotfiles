@@ -40,6 +40,7 @@
   recommit = "!git commit -F \"`git rev-parse --git-dir`\"/commit.save"
   weekly = "!git log --author=$USER --since=`date -d last\\ monday +%Y/%m/%d`"
   rc = rebase --continue
+  rc = rebase --interactive
   pp = "!f() { git p && git push \"$@\"; }; f"
   # Commands for manipulating deploy tags.
   # what-deploy: in what deploy did this commit first go out?
