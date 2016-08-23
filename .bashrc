@@ -223,6 +223,7 @@ khanify () {
 }
 
 khan-screen () {
+  screen -x khan || true
   khanify
   cd "$HOME/khan/webapp"
   screen -dmS khan
@@ -248,6 +249,7 @@ zscoreify () {
 }
 
 zscore-screen () {
+  screen -x zscore || true
   zscoreify
   cd "$srcdir/zscore"
   screen -dmS zscore
@@ -267,6 +269,7 @@ asadbify () {
 }
 
 asadb-screen () {
+  screen -x asadb || true
   asadbify
   cd "$srcdir/asa-db/asadb"
   screen -dmS asadb
@@ -286,6 +289,7 @@ espify () {
 }
 
 esp-screen () {
+  screen -x esp || true
   espify
   cd "$srcdir/esp-website/esp/esp"
   screen -dmS esp
@@ -308,6 +312,7 @@ if [ -n "$ESP" ] ; then
 fi
 
 main-screen () {
+  screen -x main || true
   screen -dmS main
   screen -S main -p 0 -X stuff "title z ; zm$(printf \\r)"
   screen -S main -p 0 -X screen

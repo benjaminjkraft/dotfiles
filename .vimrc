@@ -131,6 +131,7 @@ autocmd FileType markdown setlocal tw=0
 autocmd FileType python setlocal ts=4 sw=4 sts=4
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_args = '--config third_party/khan-linter-src/eslintrc'
 let g:syntastic_jsx_checkers = ['eslint']
 
 " (La)TeX
