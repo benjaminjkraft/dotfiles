@@ -223,15 +223,16 @@ khanify () {
 }
 
 khan-screen () {
-  screen -x khan || true
-  khanify
-  cd "$HOME/khan/webapp"
-  screen -dmS khan
-  screen -S khan -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
-  screen -S khan -p 0 -X screen
-  screen -S khan -p 0 -X screen
-  screen -S khan -p 2 -X stuff "title htop ; htop$(printf \\r)"
-  screen -S khan -p 1 -x
+  if ! screen -x khan ; then
+    khanify
+    cd "$HOME/khan/webapp"
+    screen -dmS khan
+    screen -S khan -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
+    screen -S khan -p 0 -X screen
+    screen -S khan -p 0 -X screen
+    screen -S khan -p 2 -X stuff "title htop ; htop$(printf \\r)"
+    screen -S khan -p 1 -x
+  fi
 }
 
 if [ -n "$KHAN" ] ; then
@@ -249,13 +250,14 @@ zscoreify () {
 }
 
 zscore-screen () {
-  screen -x zscore || true
-  zscoreify
-  cd "$srcdir/zscore"
-  screen -dmS zscore
-  screen -S zscore -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
-  screen -S zscore -p 0 -X screen
-  screen -S zscore -p 1 -x
+  if ! screen -x zscore ; then
+    zscoreify
+    cd "$srcdir/zscore"
+    screen -dmS zscore
+    screen -S zscore -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
+    screen -S zscore -p 0 -X screen
+    screen -S zscore -p 1 -x
+  fi
 }
 
 if [ -n "$ZSCORE" ] ; then
@@ -269,13 +271,14 @@ asadbify () {
 }
 
 asadb-screen () {
-  screen -x asadb || true
-  asadbify
-  cd "$srcdir/asa-db/asadb"
-  screen -dmS asadb
-  screen -S asadb -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
-  screen -S asadb -p 0 -X screen
-  screen -S asadb -p 1 -x
+  if ! screen -x asadb ; then
+    asadbify
+    cd "$srcdir/asa-db/asadb"
+    screen -dmS asadb
+    screen -S asadb -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
+    screen -S asadb -p 0 -X screen
+    screen -S asadb -p 1 -x
+  fi
 }
 
 if [ -n "$ASADB" ] ; then
@@ -289,22 +292,23 @@ espify () {
 }
 
 esp-screen () {
-  screen -x esp || true
-  espify
-  cd "$srcdir/esp-website/esp/esp"
-  screen -dmS esp
-  screen -S esp -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
-  screen -S esp -p 0 -X screen
-  screen -S esp -p 0 -X screen
-  screen -S esp -p 0 -X screen
-  screen -S esp -p 3 -X stuff "./manage.py shell_plus$(printf \\r)"
-  screen -S esp -p 0 -X screen
-  screen -S esp -p 4 -X stuff "title htop ; htop$(printf \\r)"
-  screen -S esp -p 0 -X screen
-  screen -S esp -p 5 -X stuff "title esp. ; mosh esp -- screen -x$(printf \\r)"
-  screen -S esp -p 0 -X screen
-  screen -S esp -p 6 -X stuff "title lu. ; mosh lu -- screen -x$(printf \\r)"
-  screen -S esp -p 1 -x
+  if ! screen -x esp ; then
+    espify
+    cd "$srcdir/esp-website/esp/esp"
+    screen -dmS esp
+    screen -S esp -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
+    screen -S esp -p 0 -X screen
+    screen -S esp -p 0 -X screen
+    screen -S esp -p 0 -X screen
+    screen -S esp -p 3 -X stuff "./manage.py shell_plus$(printf \\r)"
+    screen -S esp -p 0 -X screen
+    screen -S esp -p 4 -X stuff "title htop ; htop$(printf \\r)"
+    screen -S esp -p 0 -X screen
+    screen -S esp -p 5 -X stuff "title esp. ; mosh esp -- screen -x$(printf \\r)"
+    screen -S esp -p 0 -X screen
+    screen -S esp -p 6 -X stuff "title lu. ; mosh lu -- screen -x$(printf \\r)"
+    screen -S esp -p 1 -x
+  fi
 }
 
 if [ -n "$ESP" ] ; then
@@ -312,11 +316,12 @@ if [ -n "$ESP" ] ; then
 fi
 
 main-screen () {
-  screen -x main || true
-  screen -dmS main
-  screen -S main -p 0 -X stuff "title z ; zm$(printf \\r)"
-  screen -S main -p 0 -X screen
-  screen -S main -p 1 -x
+  if ! screen -x main ; then
+    screen -dmS main
+    screen -S main -p 0 -X stuff "title z ; zm$(printf \\r)"
+    screen -S main -p 0 -X screen
+    screen -S main -p 1 -x
+  fi
 }
 
 # Mac-specific stuff.
