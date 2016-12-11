@@ -285,35 +285,17 @@ if [ -n "$ASADB" ] ; then
   asadbify
 fi
 
-espify () {
-  ESP=1
-  export ESP
-  source "$srcdir/esp-website/env/bin/activate"
-}
-
 esp-screen () {
+  title esp
   if ! screen -x esp ; then
-    espify
-    cd "$srcdir/esp-website/esp/esp"
+    cd "$srcdir/ESP-Website/esp/esp" || cd "$srcdir/esp-website/esp/esp"
+    sleep 3
     screen -dmS esp
-    screen -S esp -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
+    screen -S esp -p 0 -X stuff "title serve ; vagrant up ; fab runserver$(printf \\r)"
     screen -S esp -p 0 -X screen
-    screen -S esp -p 0 -X screen
-    screen -S esp -p 0 -X screen
-    screen -S esp -p 3 -X stuff "./manage.py shell_plus$(printf \\r)"
-    screen -S esp -p 0 -X screen
-    screen -S esp -p 4 -X stuff "title htop ; htop$(printf \\r)"
-    screen -S esp -p 0 -X screen
-    screen -S esp -p 5 -X stuff "title esp. ; mosh esp -- screen -x$(printf \\r)"
-    screen -S esp -p 0 -X screen
-    screen -S esp -p 6 -X stuff "title lu. ; mosh lu -- screen -x$(printf \\r)"
     screen -S esp -p 1 -x
   fi
 }
-
-if [ -n "$ESP" ] ; then
-  espify
-fi
 
 main-screen () {
   if ! screen -x main ; then
