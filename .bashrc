@@ -320,7 +320,11 @@ main-screen () {
     screen -dmS main
     screen -S main -p 0 -X stuff "title z ; zm$(printf \\r)"
     screen -S main -p 0 -X screen
-    screen -S main -p 1 -x
+    screen -S main -p 0 -X screen
+    screen -S main -p 0 -X screen
+    screen -S main -p 2 -X stuff "title htop ; htop$(printf \\r)"
+    screen -S main -p 3 -X stuff "title mtr ; mtr google.com$(printf \\r)"
+    screen -S main -p 0 -x
   fi
 }
 
