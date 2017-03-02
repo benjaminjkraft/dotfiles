@@ -50,7 +50,7 @@
   prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 gae-\"$1\" | head -n 1 | sed 's/gae-//'; }; f"
   next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 gae-\"$1\" | tail -n 1 | sed 's/gae-//'; }; f"
   when-deploy = "!f() { git cat-file -p gae-\"$1\" | perl -nle 'print scalar localtime $1 if /^tagger .* (\\d+) \\S+$/'; }; f"
-  gred = "!f() { gvim -o $(git grep -l \"$@\") ; }; f"
+  gred = "!f() { gvim -o $(git grep -l \"$@\" | grep -vF tools/tests_for.json) ; }; f"
 
 [filter "bigfile"]
   clean = git-bigfile filter-clean
