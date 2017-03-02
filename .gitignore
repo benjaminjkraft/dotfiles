@@ -5,7 +5,7 @@
 .ssh/known_hosts
 .ssh/known_hosts.old
 .ssh/ka
-.ssh/google_compute_engine*
+.ssh/google_compute*
 .cabal/logs/
 .cabal/packages/
 .cabal/setup-exe-cache/
