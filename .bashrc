@@ -182,6 +182,10 @@ catpdf () {
   shift
   gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="$out" "$@"
 }
+brightness () {
+  sudo setpci -v -H1 -s 00:01.00 BRIDGE_CONTROL=0
+  echo $1 | sudo tee /sys/class/backlight/gmux_backlight/brightness
+}
 
 #import and process aliases shared with dmenu
 if [ -f $HOME/.aliases ] ; then
