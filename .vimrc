@@ -130,6 +130,7 @@ autocmd FileType markdown setlocal tw=0
 
 " Python
 autocmd FileType python setlocal ts=4 sw=4 sts=4
+autocmd FileType python setlocal foldmethod=indent
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_args = '--config third_party/khan-linter-src/eslintrc'

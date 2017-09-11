@@ -65,3 +65,5 @@
   bucket-name = git-bigfile-storage
 [kaclone]
 	email = benkraft@khanacademy.org
+[interactive]
+	singleKey = true
