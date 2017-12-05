@@ -25,11 +25,11 @@ import XMonad.Actions.WindowBringer
 import XMonad.Config
 import XMonad.Config.Desktop
 import XMonad.Config.Gnome
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Place
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Combo
 import XMonad.Layout.Column
 import XMonad.Layout.DwmStyle
@@ -52,13 +52,12 @@ import XMonad.Util.Run
 import XMonad.Util.Paste
 
 -- Run xmonad with the specified conifguration
-main = xmonad $ withUrgencyHook myUrgencyHook $ gnomeConfig
+main = xmonad $ ewmh $ gnomeConfig
 				{ modMask = mod4Mask
         , terminal = "gnome-terminal --window-with-profile=trans"
         , layoutHook = myLayout
         , startupHook = myGnomeRegister >> startupHook desktopConfig >> setWMName "LG3D"
         -- -- for Splash
-        -- , handleEventHook = handleEventHook defaultConfig
         , manageHook = manageHook gnomeConfig <+> myManageHook
         , keys = \c -> myKeys c `M.union` myManualKeys c `M.union` keys gnomeConfig c
         , workspaces = myWorkspaces
@@ -66,9 +65,6 @@ main = xmonad $ withUrgencyHook myUrgencyHook $ gnomeConfig
 				} `additionalMouseBindings` myMouse
 
 modm = mod4Mask
-
-myUrgencyHook = dzenUrgencyHook
-                { args = ["-bg", "darkgreen", "-xs", "1"] }
 
 myGnomeRegister :: MonadIO m => m ()
 myGnomeRegister = io $ do
@@ -134,6 +130,8 @@ myKeys = \conf -> mkKeymap conf $
 	,	("M-p p", spawn "exec system-config-printer")
 	,	("M-p s", spawn "exec gnome-session-properties")
 	,	("M-p t", spawn "exec gnome-tweak-tool")
+	,	("M-p e", spawn "emoji-keyboard -s")
+	,	("M-p k", spawn "emoji-keyboard -k")
 	-- , ("M-b", spawn "~/.bin/boinc")
 	-- , ("M-S-b", spawn "~/.bin/boinc off")
 	-- , ("M-r", spawn "~/.bin/acrokill")
