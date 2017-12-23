@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-PATH=$PATH:/usr/bin:/usr/local/heroku/bin
+PATH=$PATH:/usr/bin:/usr/local/heroku/bin:/usr/local/go/bin
 
 #Import various stuff, checking each for existence
 for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.bash_aliases" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/google-cloud-sdk/path.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc" "$HOME/.local/share/google-cloud-sdk/path.bash.inc" "$HOME/.local/share/google-cloud-sdk/completion.bash.inc" "$HOME/.travis/travis.sh"
