@@ -5,6 +5,7 @@
 .ssh/known_hosts
 .ssh/known_hosts.old
 .ssh/ka
+.ssh/lu_ec2
 .ssh/google_compute*
 .cabal/logs/
 .cabal/packages/
@@ -16,6 +17,7 @@
 .xmonad/xmonad.errors
 .xmonad/xmonad.hi
 .xmonad/xmonad.o
+.xmonad/xmonad.state
 *.swp
 *.pyc
 .DS_Store?
