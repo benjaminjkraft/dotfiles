@@ -156,3 +156,6 @@ let g:haddock_browser="/usr/bin/firefox"
 let g:ghc="/usr/bin/local/ghc"
 au BufEnter *.hs compiler ghc
 autocmd FileType haskell setlocal tw=0
+
+" Groovy
+autocmd Filetype groovy setlocal tabstop=3 shiftwidth=3 softtabstop=3
