@@ -304,7 +304,6 @@ esp-screen () {
 main-screen () {
   if ! screen -x main ; then
     screen -dmS main
-    screen -S main -p 0 -X stuff "title z ; zm$(printf \\r)"
     screen -S main -p 0 -X screen
     screen -S main -p 0 -X screen
     screen -S main -p 0 -X screen
