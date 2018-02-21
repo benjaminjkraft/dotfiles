@@ -2,55 +2,56 @@
 	email = ben@benkraft.org #sometimes overridden by GIT_AUTHOR_EMAIL and GIT_COMMITTER_EMAIL (e.g. in khanify)
 	name = Ben Kraft
 [core]
-  excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
 [color]
 	ui = auto
-  status = auto
-  branch = auto
-  diff = auto
-  interactive = auto
-  grep = auto
+    status = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    grep = auto
 [log]
 	decorate = true
 [push]
 	default = matching
 [branch]
-  # autosetupmerge auto-adds the --track flag to each git branch,
-  # autosetuprebase means that instead of merging it will rebase.
-  autosetupmerge = always
-  autosetuprebase = always
+    # autosetupmerge auto-adds the --track flag to each git branch,
+    # autosetuprebase means that instead of merging it will rebase.
+    autosetupmerge = always
+    autosetuprebase = always
 [grep]
-  lineNumber = true
+    lineNumber = true
 [merge]
-  # Always show a diffstat at the end of a merge
-  stat = true
+    # Always show a diffstat at the end of a merge
+    stat = true
+	conflictstyle = diff3
 [diff]
-  wordRegex = "\\w+|[^[:space:]]"
-  # Use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
-  mnemonicprefix = true
-  # Detect renames as well as copies
-  renames = copies
+    wordRegex = "\\w+|[^[:space:]]"
+    # Use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
+    mnemonicprefix = true
+    # Detect renames as well as copies
+    renames = copies
 [alias]
-  s = status
-  d = diff -w --color-words
-  a = commit --amend --no-edit
-  mit-branch = "!git checkout $(git merge-base main mit-prod) -b"
-  co = "!f() { git checkout \"$@\" && git submodule update --init --recursive; }; f"
-  p = "!f() { git pull \"$@\" && git submodule update --init --recursive; }; f"
-  recommit = "!git commit -F \"`git rev-parse --git-dir`\"/commit.save"
-  weekly = "!git log --author=$USER --since=`date -d last\\ monday +%Y/%m/%d`"
-  rc = rebase --continue
-  ri = rebase --interactive
-  pp = "!f() { git p && git push \"$@\"; }; f"
-  # Commands for manipulating deploy tags.
-  # what-deploy: in what deploy did this commit first go out?
-  # prev-deploy and next-deploy: what deploys came before and after this one?
-  # when-deploy: when was this deploy completed?
-  which-deploy = "!f() { git tag --contains \"$@\" | grep '^gae-' | grep -v bad | head -n 1 | sed 's/gae-//'; }; f"
-  prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 gae-\"$1\" | head -n 1 | sed 's/gae-//'; }; f"
-  next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 gae-\"$1\" | tail -n 1 | sed 's/gae-//'; }; f"
-  when-deploy = "!f() { git cat-file -p gae-\"$1\" | perl -nle 'print scalar localtime $1 if /^tagger .* (\\d+) \\S+$/'; }; f"
-  gred = "!f() { git grep -l \"$@\" | grep -vF tests_for.json | xargs gvim -o; }; f"
+    s = status
+    d = diff -w --color-words
+    a = commit --amend --no-edit
+    mit-branch = "!git checkout $(git merge-base main mit-prod) -b"
+    co = "!f() { git checkout \"$@\" && git submodule update --init --recursive; }; f"
+    p = "!f() { git pull \"$@\" && git submodule update --init --recursive; }; f"
+    recommit = "!git commit -F \"`git rev-parse --git-dir`\"/commit.save"
+    weekly = "!git log --author=$USER --since=`date -d last\\ monday +%Y/%m/%d`"
+    rc = rebase --continue
+    ri = rebase --interactive
+    pp = "!f() { git p && git push \"$@\"; }; f"
+    # Commands for manipulating deploy tags.
+    # what-deploy: in what deploy did this commit first go out?
+    # prev-deploy and next-deploy: what deploys came before and after this one?
+    # when-deploy: when was this deploy completed?
+    which-deploy = "!f() { git tag --contains \"$@\" | grep '^gae-' | grep -v bad | head -n 1 | sed 's/gae-//'; }; f"
+    prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 gae-\"$1\" | head -n 1 | sed 's/gae-//'; }; f"
+    next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 gae-\"$1\" | tail -n 1 | sed 's/gae-//'; }; f"
+    when-deploy = "!f() { git cat-file -p gae-\"$1\" | perl -nle 'print scalar localtime $1 if /^tagger .* (\\d+) \\S+$/'; }; f"
+    gred = "!f() { git grep -l \"$@\" | grep -vF tests_for.json | xargs gvim -o; }; f"
 [kaclone]
 	email = benkraft@khanacademy.org
 [interactive]
