@@ -25,6 +25,7 @@ set colorcolumn=+1
 set wildmenu
 set scrolloff=1
 set display+=lastline
+set tags=./tags;
 
 " display options
 set laststatus=2
