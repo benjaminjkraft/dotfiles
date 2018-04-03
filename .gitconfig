@@ -36,7 +36,7 @@
     d = diff -w --color-words
     a = commit --amend --no-edit
     mit-branch = "!git checkout $(git merge-base main mit-prod) -b"
-    co = "!f() { git checkout \"$@\" && git submodule update --init --recursive; }; f"
+    co = "!f() { if [ -n \"$1\" -a -z \"$2\" ]; then git checkout "`revisionid-to-diffid.sh --tag \"$@\"`"; else git checkout \"$@\"; fi && git submodule update --init --recursive; }; f"
     p = "!f() { git pull \"$@\" && git submodule update --init --recursive; }; f"
     recommit = "!git commit -F \"`git rev-parse --git-dir`\"/commit.save"
     weekly = "!git log --author=$USER --since=`date -d last\\ monday +%Y/%m/%d`"
