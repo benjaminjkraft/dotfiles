@@ -228,7 +228,8 @@ khanify () {
 
 khan-screen () {
   if ! screen -x khan ; then
-    khanify
+    KHAN=1
+    export KHAN
     cd "$HOME/khan/webapp"
     screen -dmS khan
     screen -S khan -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
@@ -255,7 +256,8 @@ zscoreify () {
 
 zscore-screen () {
   if ! screen -x zscore ; then
-    zscoreify
+    ZSCORE=1
+    export ZSCORE
     cd "$srcdir/zscore"
     screen -dmS zscore
     screen -S zscore -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
@@ -276,7 +278,8 @@ asadbify () {
 
 asadb-screen () {
   if ! screen -x asadb ; then
-    asadbify
+    ASADB=1
+    export ASADB
     cd "$srcdir/asa-db/asadb"
     screen -dmS asadb
     screen -S asadb -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
