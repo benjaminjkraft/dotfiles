@@ -8,12 +8,19 @@
 PATH=$PATH:/usr/bin:/usr/local/heroku/bin:/usr/local/go/bin:$HOME/.cargo/bin
 
 #Import various stuff, checking each for existence
-for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.bash_aliases" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/google-cloud-sdk/path.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc" "$HOME/.local/share/google-cloud-sdk/path.bash.inc" "$HOME/.local/share/google-cloud-sdk/completion.bash.inc" "$HOME/.travis/travis.sh"
+for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.bash_aliases" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/.travis/travis.sh" "$HOME/khan/devtools/google-cloud-sdk/completion.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc"
+
 do
 	if [ -f "$f" ] ; then
 		. "$f"
 	fi
 done
+
+if which pyenv &>/dev/null; then
+    export PYENV_ROOT="$HOME/src/pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
