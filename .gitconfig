@@ -32,26 +32,23 @@
     # Detect renames as well as copies
     renames = copies
 [alias]
+    # My stuff
     s = "!f() { git status ; echo ; git log --oneline origin/HEAD.. ; echo ; git diff --stat; }; f"
     d = diff -w --color-words
     a = commit --amend --no-edit
-    mit-branch = "!git checkout $(git merge-base main mit-prod) -b"
-    co = "!f() { if [ -n \"$1\" -a -z \"$2\" ]; then git checkout "`revisionid-to-diffid.sh --tag \"$@\"`"; else git checkout \"$@\"; fi && git submodule update --init --recursive; }; f"
-    p = "!f() { git pull \"$@\" && git submodule update --init --recursive; }; f"
     recommit = "!git commit -F \"`git rev-parse --git-dir`\"/commit.save"
-    weekly = "!git log --author=$USER --since=`date -d last\\ monday +%Y/%m/%d`"
     rc = rebase --continue
     ri = rebase --interactive
     pp = "!f() { git p && git push \"$@\"; }; f"
-    # Commands for manipulating deploy tags.
-    # what-deploy: in what deploy did this commit first go out?
-    # prev-deploy and next-deploy: what deploys came before and after this one?
-    # when-deploy: when was this deploy completed?
+    gred = "!f() { git grep -l \"$@\" | grep -vF tests_for.json | xargs gvim -o; }; f"
+    # Standard khan stuff
+    co = "!f() { if [ -n \"$1\" -a -z \"$2\" ]; then git checkout "`revisionid-to-diffid.sh --tag \"$@\"`"; else git checkout \"$@\"; fi && git submodule update --init --recursive; }; f"
+    p = "!f() { git pull \"$@\" && git submodule update --init --recursive && if [ -s tools/hook-check.sh ]; then tools/hook-check.sh --fast; fi; }; f"
+    m = "!f() { git merge \"$@\" && git submodule update --init --recursive && if [ -s tools/hook-check.sh ]; then tools/hook-check.sh --fast; fi; }; f"
     which-deploy = "!f() { git tag --contains \"$@\" | grep '^gae-' | grep -v bad | head -n 1 | sed 's/gae-//'; }; f"
     prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 gae-\"$1\" | head -n 1 | sed 's/gae-//'; }; f"
     next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 gae-\"$1\" | tail -n 1 | sed 's/gae-//'; }; f"
     when-deploy = "!f() { git cat-file -p gae-\"$1\" | perl -nle 'print scalar localtime $1 if /^tagger .* (\\d+) \\S+$/'; }; f"
-    gred = "!f() { git grep -l \"$@\" | grep -vF tests_for.json | xargs gvim -o; }; f"
 [kaclone]
 	email = benkraft@khanacademy.org
 [interactive]
