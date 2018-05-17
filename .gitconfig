@@ -32,7 +32,7 @@
     # Detect renames as well as copies
     renames = copies
 [alias]
-    s = status
+    s = "!f() { git status ; echo ; git log --oneline origin/HEAD.. ; echo ; git diff --stat; }; f"
     d = diff -w --color-words
     a = commit --amend --no-edit
     mit-branch = "!git checkout $(git merge-base main mit-prod) -b"
