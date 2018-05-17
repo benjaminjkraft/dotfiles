@@ -13,7 +13,7 @@
 [log]
 	decorate = true
 [push]
-	default = matching
+	default = current
 [branch]
     # autosetupmerge auto-adds the --track flag to each git branch,
     # autosetuprebase means that instead of merging it will rebase.
