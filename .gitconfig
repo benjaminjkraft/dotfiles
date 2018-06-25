@@ -33,7 +33,6 @@
     renames = copies
 [alias]
     # My stuff
-    s = "!f() { git status ; echo ; git log --oneline origin/HEAD.. -n 10 ; echo ; git diff --stat; }; f"
     d = diff -w --color-words
     a = commit --amend --no-edit
     recommit = "!git commit -F \"`git rev-parse --git-dir`\"/commit.save"
