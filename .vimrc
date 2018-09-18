@@ -26,6 +26,9 @@ set wildmenu
 set scrolloff=1
 set display+=lastline
 set tags=./tags;
+let g:ale_fixers = {}   " defined below
+let g:ale_fix_on_save = 1
+" TODO: ale completion?
 
 " display options
 set laststatus=2
@@ -96,6 +99,7 @@ set updatetime=1000
 augroup WordCounter
 	au! CursorHold,CursorHoldI * call UpdateWordCount()
 augroup END
+let g:airline#extensions#ale#enabled = 1
 let g:airline_section_z = airline#section#create(['windowswap', '%{WordCount()}w  ', 'linenr', '/%L:%3v '])
 
 " shortcuts
@@ -132,10 +136,16 @@ autocmd FileType markdown setlocal tw=0
 " Python
 autocmd FileType python setlocal ts=4 sw=4 sts=4
 autocmd FileType python setlocal foldmethod=indent
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_args = '--config third_party/khan-linter-src/eslintrc'
-let g:syntastic_jsx_checkers = ['eslint']
+let g:ale_fixers.python = ['autopep8']
+" autopep8 is too aggressive about things not fixed by pycodestyle, so we have
+" to turn off all of E301 and E303 autofixes :(
+" TODO: remove if autopep8#431 gets fixed.
+let g:ale_python_autopep8_options = '--ignore E301,E303'
+
+" JS(X)
+let g:ale_fixers.javascript = ['eslint']
+autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_executable = $HOME."/khan/devtools/khan-linter/node_modules/.bin/eslint"
+autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_use_global = 1
 
 " (La)TeX
 let g:tex_flavor='latex'
