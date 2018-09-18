@@ -62,6 +62,7 @@ let g:user_emmet_mode='nv'
 let g:user_emmet_leader_key=',e'
 
 " airline config
+let g:airline_theme='solarized'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n' : 'N',
@@ -75,32 +76,25 @@ let g:airline_mode_map = {
     \ 'S' : 'S',
     \ '' : 'S',
     \ }
-" word count from http://cromwell-intl.com/linux/vim-word-count.html
-" TODO: once https://github.com/bling/vim-airline/pull/866/ is merged and
-" works, replace this with that.
-function WordCount()
-  if !exists('w:word_count')
-    let w:word_count="?"
-  endif
-	return w:word_count
-endfunction
-function UpdateWordCount()
-	let lnum = 1
-	let n = 0
-	while lnum <= line('$')
-		let n = n + len(split(getline(lnum)))
-		let lnum = lnum + 1
-	endwhile
-	let w:word_count = n
-endfunction
-" Update the count when cursor is idle in command or insert mode.
-" Update when idle for 1000 msec (default is 4000 msec).
-set updatetime=1000
-augroup WordCounter
-	au! CursorHold,CursorHoldI * call UpdateWordCount()
-augroup END
+
+let g:airline_detect_paste=0
+let g:airline_detect_spell=0
+let g:airline_detect_crypt=0
+let g:airline_skip_empty_sections=1
+
+let g:airline_section_x = airline#section#create([])
+let g:airline_section_y = airline#section#create(['filetype'])
+call airline#parts#define('pct', {'raw': '%3p%% '})
+call airline#parts#define('linenr', {'raw': '%3l', 'accent': 'bold'})
+call airline#parts#define('colnr', {'raw': ': %2v'})
+call airline#parts#define('maxlinenr', {'raw': '/%L', 'accent': 'none'})
+let g:airline_section_z = airline#section#create(['pct', 'linenr', 'maxlinenr', 'colnr'])
+
 let g:airline#extensions#ale#enabled = 1
-let g:airline_section_z = airline#section#create(['windowswap', '%{WordCount()}w  ', 'linenr', '/%L:%3v '])
+let g:airline#extensions#wordcount#enabled = 1
+let g:airline#extensions#wordcount#filetypes = '.*'
+let g:airline#extensions#wordcount#formatter#default#fmt = '%sw'  " always short!
+let g:airline#extensions#wordcount#formatter#default#fmt_short = '%sw'
 
 " shortcuts
 map Y y$
