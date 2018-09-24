@@ -26,8 +26,11 @@ set wildmenu
 set scrolloff=1
 set display+=lastline
 set tags=./tags;
+
+" ALE -- turn on fixers, but not for 3rd party code.
 let g:ale_fixers = {}   " defined below
 let g:ale_fix_on_save = 1
+autocmd BufRead,BufNewFile */google/appengine/* let b:ale_fix_on_save = 0
 " TODO: ale completion?
 
 " display options
