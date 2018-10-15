@@ -135,9 +135,10 @@ autocmd FileType python setlocal ts=4 sw=4 sts=4
 autocmd FileType python setlocal foldmethod=indent
 let g:ale_fixers.python = ['autopep8']
 " autopep8 is too aggressive about things not fixed by pycodestyle, so we have
-" to turn off all of E301 and E303 autofixes :(
+" to turn off all of E301 and E303 autofixes :(.  Sadly that also means we have
+" to duplicate webapp's .flake8 setting for --ignore.
 " TODO: remove if autopep8#431 gets fixed.
-let g:ale_python_autopep8_options = '--ignore E301,E303'
+let g:ale_python_autopep8_options = '--ignore E301,E303,W503,E266,E402,E501,E712,E731,E741'
 
 " JS(X)
 let g:ale_fixers.javascript = ['eslint']
