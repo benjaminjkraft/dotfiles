@@ -8,7 +8,7 @@
 PATH=$PATH:/usr/bin:/usr/local/heroku/bin:/usr/local/go/bin:$HOME/.cargo/bin
 
 #Import various stuff, checking each for existence
-for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.bash_aliases" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/.travis/travis.sh" "$HOME/khan/devtools/google-cloud-sdk/completion.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc"
+for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/.travis/travis.sh" "$HOME/khan/devtools/google-cloud-sdk/completion.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc"
 
 do
 	if [ -f "$f" ] ; then
@@ -150,18 +150,12 @@ alias la='ls -A'
 alias l='ls -CF'
 
 #MORE ALIASES THAN YOUR BODY HAS ROOM FOR
-alias hoogle='hoogle search --link --color --count=10'
-alias reswap='sudo swapoff -a && sudo swapon -a'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias e='evince'
-alias a='acroread'
 alias pd='pushd'
-alias wallpaper='gconftool-2 -s /desktop/gnome/background/picture_filename -t string'
-alias blanche='blanche -t'
 alias less='less -iR'
-alias ssh-exit='ssh -O exit'
 alias s='git s'
 alias d='git d'
 alias ad='arc diff --verbatim --allow-untracked HEAD^'
@@ -169,10 +163,6 @@ alias htop='title htop ; htop ; title'
 which hub >/dev/null && eval "$(hub alias -s)"
 alias ggrep='git grep --no-index'
 which bd >/dev/null && alias bd='. bd -s'
-
-if [ -f /usr/bin/finger.debathena ] ; then
-	alias finger='finger.debathena'
-fi
 
 #some little utility functions
 snip () {
@@ -182,23 +172,6 @@ snip () {
     ln -s "$HOME/.snip/$1"
   fi
 }
-wp () { export WINEPREFIX="$1" ; env WINEPREFIX="$1" ; }
-cpdr () { cp "$@" "$HOME/Dropbox/Share with Ben/" ; }
-catpdf () {
-  out="$1"
-  shift
-  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="$out" "$@"
-}
-brightness () {
-  sudo setpci -v -H1 -s 00:01.00 BRIDGE_CONTROL=0
-  echo $1 | sudo tee /sys/class/backlight/gmux_backlight/brightness
-}
-
-#import and process aliases shared with dmenu
-if [ -f $HOME/.aliases ] ; then
-	AL=`sed 's/\([^ ]*\) \(.*\)/alias \1=\2/' $HOME/.aliases`
-	eval "$AL"
-fi
 
 #set up gpg-agent stuff
 export GPG_AGENT_INFO
@@ -322,21 +295,6 @@ main-screen () {
     screen -S main -p 0 -x
   fi
 }
-
-# Mac-specific stuff.
-if [ `uname -s` = Darwin ]; then
-    # Numpy/etc use flags clang doesn't know about.  This is only
-    # needed for mavericks and above.
-    if ! expr "`sw_vers -productVersion`" : '10\.[0-8]$' >/dev/null && \
-       ! expr "`sw_vers -productVersion`" : '10\.[0-8]\.' >/dev/null; then
-        CPPFLAGS="-Qunused-arguments $CPPFLAGS"
-        CFLAGS="-Qunused-arguments $CFLAGS"
-        # This ARCHFLAGS is needed until we have pyobjc 3.0, according to
-        #    https://bitbucket.org/ronaldoussoren/pyobjc/issue/66/cannot-locate-a-working-compiler-error
-        ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future $ARCHFLAGS"
-        export CPPFLAGS CFLAGS ARCHFLAGS
-    fi
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

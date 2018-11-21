@@ -292,18 +292,6 @@ pathCommands = do
       commandMap = M.fromListWith const $ map (\(d,cmd) -> (cmd, spawn $ "exec "++(d </> cmd))) commands
   return commandMap
 
-commandsFromFile :: FilePath -> IO CommandMap
-commandsFromFile path = do
-  file <- readFile path `catch` const (return "")
-  let commandMap = M.fromList (mapMaybe mapper $ lines file)
-  return commandMap
-  where mapper line = let (name, cmd) = span (/=' ') line
-                      in if null cmd
-                            then Nothing
-                            else if (and $ zipWith (==) "term" $ tail cmd)
-                                    then Just (name, spawn $ "exec gnome-terminal --window-with-profile=trans --working-directory=\""++(drop 6 cmd)++"\"")
-                                    else Just (name, spawn $ tail cmd)
-
 getBashOutput :: (MonadIO m) => [String] -> String -> m String
 --getBashOutput args s = runProcessWithInput "bash" args ( s++"\n" )
 getBashOutput args s = io $ runProcessWithInput "bash" (args++["-c",s]) []
@@ -314,18 +302,6 @@ split c (x:xs) = if c==x then []:split c xs else let ys = split c xs in if null 
 
 myPrompt :: XPConfig -> X ()
 myPrompt conf = do
-  cmdMaps <- io $ sequence [pathCommands, commandsFromFile "/home/ben/.aliases", commandsFromFile "/home/ben/.aliases_dmenu"]
-  let cmds = M.unions cmdMaps
+  cmdMap <- io $ pathCommands
   file <- io $ fmap (++"/super-prompt-history") $ getAppUserDataDirectory "xmonad"
-  superPrompt 51 file cmds conf
-
---myInputPrompt :: XPConfig -> X ()
---myInputPrompt conf = inputPrompt conf "$" ?+ \cmd -> do
---  out <- getBashOutput ["-l"] $ cmd++" 2>&1"
---  if not (null out)
---     then do
---       let truncatedOut = init $ unlines $ map (\l -> if length l > 40 then take 47 l ++ "..." else l) $ if length (lines out) > 10 then (take 9 $ lines out)++["..."] else lines out
---       safeSpawn "notify-send" ["-i","gnome-utilities-terminal","\""++cmd++"\" returned:", out]
---     else return ()
-  
-
+  superPrompt 51 file cmdMap conf
