@@ -118,3 +118,6 @@
 [submodule ".vim/bundle/vim-airline-themes"]
 	path = .vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
+[submodule ".vim/bundle/vader.vim"]
+	path = .vim/bundle/vader.vim
+	url = git@github.com:junegunn/vader.vim.git
