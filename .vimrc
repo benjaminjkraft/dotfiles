@@ -28,6 +28,7 @@ set display+=lastline
 set tags=./tags;
 
 " ALE -- turn on fixers, but not for 3rd party code.
+let g:ale_linters = {}  " defined below
 let g:ale_fixers = {}   " defined below
 let g:ale_fix_on_save = 1
 autocmd BufRead,BufNewFile */google/appengine/* let b:ale_fix_on_save = 0
@@ -169,3 +170,8 @@ autocmd FileType haskell setlocal tw=0
 
 " Groovy
 autocmd Filetype groovy setlocal tabstop=3 shiftwidth=3 softtabstop=3
+
+" Kotlin
+autocmd BufRead,BufNewFile */khan/* let g:ale_kotlin_ktlint_executable = $HOME."/khan/devtools/khan-linter/vendor/ktlint"
+" turn off kotlinc -- it tries to do too much, spins, and crashes.
+let g:ale_linters.kotlin = ['ktlint', 'languageserver']

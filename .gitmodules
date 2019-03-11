@@ -121,3 +121,6 @@
 [submodule ".vim/bundle/vader.vim"]
 	path = .vim/bundle/vader.vim
 	url = git@github.com:junegunn/vader.vim.git
+[submodule ".vim/bundle/kotlin-vim"]
+    path = .vim/bundle/kotlin-vim
+    url = git@github.com:udalov/kotlin-vim.git
