@@ -110,6 +110,7 @@ nnoremap <C-k> <C-W>W
 nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <Leader>m :wa<CR>:make<CR><CR>
 nnoremap <C-\> :ALEGoToDefinitionInSplit<CR>
+nnoremap <C-[> :ALEGoToDefinitionInVSplit<CR>
 nnoremap <C-]> :ALEGoToDefinition<CR>
 
 " easymotion
