@@ -40,7 +40,7 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
 highlight LineNr guifg=white guibg=black
 highlight Conceal guifg=black guibg=white
 set guioptions-=T
-set formatoptions+=t
+set formatoptions+=tro
 if has('gui_running')
     set background=light
     let g:airline_powerline_fonts = 1
