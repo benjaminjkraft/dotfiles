@@ -212,7 +212,8 @@ myLayoutModifiers = dwmStyle shrinkText myTheme . smartBorders . desktopLayoutMo
 
 myTheme = defaultTheme --doesn't appear to do anything?
 
-myXPConfig = defaultXPConfig { font = "xft:Ubuntu Mono-10" 
+myXPConfig = defaultXPConfig { font = "xft:Ubuntu Mono-11" 
+                             , height = 30
                              , promptBorderWidth = 0
                              , position = Top
                              , bgColor = "#303030"
