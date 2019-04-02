@@ -2,7 +2,7 @@
 
 #run with wget -O - <url> | bash
 
-set +e
+set -e
 
 exclude="README.md .git .gitignore LICENSE install.sh install-athena.sh"
 dir="${1:-.dotfiles}"
@@ -10,14 +10,15 @@ dir="${1:-.dotfiles}"
 if [ -d "$dir" ] ; then
   cd "$dir"
   git pull
-  git submodule update --init --recursive
-  cd "$HOME"
 else
   cd "$HOME"
   git clone https://github.com/benjaminjkraft/dotfiles.git "$dir"
   cd "$dir"
-  git submodule update --init --recursive
 fi
+
+git submodule update --init --recursive
+cd "$HOME"
+
 # A little bit fragile, but it works.
 files=$(ls -A "$dir" | grep -v "^$(echo $exclude | sed 's/ /\$\\|\^/g')$")
 
