@@ -176,3 +176,7 @@ autocmd Filetype groovy setlocal tabstop=3 shiftwidth=3 softtabstop=3
 autocmd BufRead,BufNewFile */khan/* let g:ale_kotlin_ktlint_executable = $HOME."/khan/devtools/khan-linter/vendor/ktlint"
 " turn off kotlinc -- it tries to do too much, spins, and crashes.
 let g:ale_linters.kotlin = ['ktlint', 'languageserver']
+
+" Go
+autocmd FileType go setlocal noexpandtab
+let g:ale_fixers.go = ['gofmt', 'goimports']
