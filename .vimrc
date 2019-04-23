@@ -136,6 +136,7 @@ autocmd FileType markdown setlocal tw=0
 " Python
 autocmd FileType python setlocal ts=4 sw=4 sts=4
 autocmd FileType python setlocal foldmethod=indent
+autocmd BufRead,BufNewFile */google/appengine/* setlocal ts=2 sw=2 sts=2
 let g:ale_fixers.python = ['autopep8']
 " autopep8 is too aggressive about things not fixed by pycodestyle, so we have
 " to turn off all of E301 and E303 autofixes :(.  Sadly that also means we have
