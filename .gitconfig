@@ -45,8 +45,8 @@
     gsu = submodule update --init --recursive
     hc = "!f() { if [ -s tools/hook-check.sh]; then tools/hook-check.sh --fast; }; f"
     co = "!f() { if [ -n \"$1\" -a -z \"$2\" ]; then git checkout "`revisionid-to-diffid.sh --tag \"$@\"`"; else git checkout \"$@\"; fi && git gsu; }; f"
-    p = "!f() { git pull \"$@\" && git gsu && git hc }; f"
-    m = "!f() { git merge \"$@\" && git gsu && git hc }; f"
+    p = "!f() { git pull \"$@\" && git gsu && git hc; }; f"
+    m = "!f() { git merge \"$@\" && git gsu && git hc; }; f"
     which-deploy = "!f() { git tag --contains \"$@\" | grep '^gae-' | grep -v bad | head -n 1 | sed 's/gae-//'; }; f"
     prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 gae-\"$1\" | head -n 1 | sed 's/gae-//'; }; f"
     next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 gae-\"$1\" | tail -n 1 | sed 's/gae-//'; }; f"
