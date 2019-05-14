@@ -43,7 +43,7 @@
     ramend = rebase -x 'git gsu' -x 'arc amend'
     # Standard khan stuff
     gsu = submodule update --init --recursive
-    hc = "!f() { if [ -s tools/hook-check.sh]; then tools/hook-check.sh --fast; fi; }; f"
+    hc = "!f() { if [ -s tools/hook-check.sh ]; then tools/hook-check.sh --fast; fi; }; f"
     co = "!f() { if [ -n \"$1\" -a -z \"$2\" ]; then git checkout "`revisionid-to-diffid.sh --tag \"$@\"`"; else git checkout \"$@\"; fi && git gsu; }; f"
     p = "!f() { git pull \"$@\" && git gsu && git hc; }; f"
     m = "!f() { git merge \"$@\" && git gsu && git hc; }; f"
