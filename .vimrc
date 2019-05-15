@@ -31,7 +31,11 @@ set tags=./tags;
 let g:ale_linters = {}  " defined below
 let g:ale_fixers = {}   " defined below
 let g:ale_fix_on_save = 1
+" TODO: cleaner way to handle these various kinds of third-party-ness
 autocmd BufRead,BufNewFile */google/appengine/* let b:ale_fix_on_save = 0
+autocmd BufRead,BufNewFile */frankenserver/* let b:ale_fix_on_save = 0
+autocmd BufRead,BufNewFile */frankenserver-khansrc/* let b:ale_fix_on_save = 0
+autocmd BufRead,BufNewFile */third_party/* let b:ale_fix_on_save = 0
 " TODO: ale completion?
 
 " display options
@@ -137,6 +141,8 @@ autocmd FileType markdown setlocal tw=0
 autocmd FileType python setlocal ts=4 sw=4 sts=4
 autocmd FileType python setlocal foldmethod=indent
 autocmd BufRead,BufNewFile */google/appengine/* setlocal ts=2 sw=2 sts=2
+autocmd BufRead,BufNewFile */frankenserver/* setlocal ts=2 sw=2 sts=2
+autocmd BufRead,BufNewFile */frankenserver-khansrc/* setlocal ts=2 sw=2 sts=2
 let g:ale_fixers.python = ['autopep8']
 " autopep8 is too aggressive about things not fixed by pycodestyle, so we have
 " to turn off all of E301 and E303 autofixes :(.  Sadly that also means we have
