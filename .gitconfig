@@ -47,10 +47,10 @@
     co = "!f() { if [ -n \"$1\" -a -z \"$2\" ]; then git checkout "`revisionid-to-diffid.sh --tag \"$@\"`"; else git checkout \"$@\"; fi && git gsu; }; f"
     p = "!f() { git pull \"$@\" && git gsu && git hc; }; f"
     m = "!f() { git merge \"$@\" && git gsu && git hc; }; f"
-    which-deploy = "!f() { git tag --contains \"$@\" | grep '^gae-' | grep -v bad | head -n 1 | sed 's/gae-//'; }; f"
-    prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 gae-\"$1\" | head -n 1 | sed 's/gae-//'; }; f"
-    next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 gae-\"$1\" | tail -n 1 | sed 's/gae-//'; }; f"
-    when-deploy = "!f() { git cat-file -p gae-\"$1\" | perl -nle 'print scalar localtime $1 if /^tagger .* (\\d+) \\S+$/'; }; f"
+    which-deploy = "!f() { git tag --contains \"$@\" | grep '^gae-' | grep -v bad | head -n 1; }; f"
+    prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 \"$1\" | head -n 1; }; f"
+    next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 \"$1\" | tail -n 1; }; f"
+    when-deploy = "!f() { git cat-file -p \"$1\" | perl -nle 'print scalar localtime $1 if /^tagger .* (\\d+) \\S+$/'; }; f"
 [kaclone]
 	email = benkraft@khanacademy.org
 [interactive]
