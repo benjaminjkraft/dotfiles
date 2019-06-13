@@ -116,6 +116,7 @@ nnoremap <Leader>m :wa<CR>:make<CR><CR>
 nnoremap <C-\> :ALEGoToDefinitionInSplit<CR>
 nnoremap <C-[> :ALEGoToDefinitionInVSplit<CR>
 nnoremap <C-]> :ALEGoToDefinition<CR>
+vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
 " easymotion
 " map  / <Plug>(easymotion-sn)
