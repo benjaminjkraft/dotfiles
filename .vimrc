@@ -31,12 +31,13 @@ set tags=./tags;
 let g:ale_linters = {}  " defined below
 let g:ale_fixers = {}   " defined below
 let g:ale_fix_on_save = 1
+" TODO: figure out ALE completion (may require getting pyls living beyond the
+" vim session, so it's not super slow)
 " TODO: cleaner way to handle these various kinds of third-party-ness
 autocmd BufRead,BufNewFile */google/appengine/* let b:ale_fix_on_save = 0
 autocmd BufRead,BufNewFile */frankenserver/* let b:ale_fix_on_save = 0
 autocmd BufRead,BufNewFile */frankenserver-khansrc/* let b:ale_fix_on_save = 0
 autocmd BufRead,BufNewFile */third_party/* let b:ale_fix_on_save = 0
-" TODO: ale completion?
 
 " display options
 set laststatus=2
@@ -134,9 +135,12 @@ autocmd FileType make setlocal noet
 let g:vim_json_syntax_conceal=0
 autocmd FileType json setlocal foldmethod=syntax
 
-" Markdown
+" Markdown, text, etc.
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd FileType markdown setlocal tw=0
+autocmd FileType markdown setlocal linebreak
+autocmd FileType text setlocal tw=0
+autocmd FileType text setlocal linebreak
 
 " Python
 autocmd FileType python setlocal ts=4 sw=4 sts=4
@@ -144,6 +148,7 @@ autocmd FileType python setlocal foldmethod=indent
 autocmd BufRead,BufNewFile */google/appengine/* setlocal ts=2 sw=2 sts=2
 autocmd BufRead,BufNewFile */frankenserver/* setlocal ts=2 sw=2 sts=2
 autocmd BufRead,BufNewFile */frankenserver-khansrc/* setlocal ts=2 sw=2 sts=2
+" let g:ale_linters.python = ['flake8', 'pyls']
 let g:ale_fixers.python = ['autopep8']
 " autopep8 is too aggressive about things not fixed by pycodestyle, so we have
 " to turn off all of E301 and E303 autofixes :(.  Sadly that also means we have
@@ -187,4 +192,5 @@ let g:ale_linters.kotlin = ['ktlint', 'languageserver']
 
 " Go
 autocmd FileType go setlocal noexpandtab
+let g:ale_linters.go = ['gofmt', 'golint', 'govet', 'gopls']
 let g:ale_fixers.go = ['gofmt', 'goimports']
