@@ -174,12 +174,8 @@ myKeys = \conf -> mkKeymap conf $
 --  , ("M-C-c", sendMessage $ escape ToggleLayout)
   , ("M-c f", sendMessage $ JumpToLayout "No Borders Full")
   , ("M-c S-f", sendMessage $ JumpToLayout "Full")
-  , ("M-c t", sendMessage $ JumpToLayout "Tall 2")
-  , ("M-c S-t", sendMessage $ JumpToLayout "Tall 1.5")
-  , ("M-c s", sendMessage $ JumpToLayout "Spiral")
-  , ("M-c c", sendMessage $ JumpToLayout "Vertical Chat")
-  , ("M-c p", sendMessage $ JumpToLayout "PSet")
-  , ("M-c m", sendMessage $ JumpToLayout "Mirror Tall")
+  , ("M-c S-t", sendMessage $ JumpToLayout "Tall")
+  , ("M-c c", sendMessage $ JumpToLayout "Chat")
   , ("M-<Print>", spawn "gnome-screenshot")
   , ("M-S-<Print>", spawn "gnome-screenshot --window")
   , ("M-C-<Print>", spawn "gnome-screenshot --area")
@@ -195,17 +191,10 @@ myKeys = \conf -> mkKeymap conf $
 		]
 	]
 
-myLayout = tiled15 ||| tiled2 ||| verticalChat ||| pset ||| mirrorTiled ||| spir ||| noBordersFull ||| full
-         where tall2 = ResizableTall 1 0.03 (5/8) [1,1.95]
-               tall15 = ResizableTall 1 0.03 (5/8) [1,1.5]
-               tiled2 = renamed [Replace "Tall 2"] $ myLayoutModifiers $ tall2
-               tiled15 = renamed [Replace "Tall 1.5"] $ myLayoutModifiers $ tall15
-               mirrorTiled = renamed [Replace "Mirror Tall"] $ myLayoutModifiers $ Mirror tall15
-               spir = renamed [Replace "Spiral"] $ myLayoutModifiers $ mastered 0.03 (5/8) $ spiralWithDir South CCW 0.8
+myLayout = tiled ||| verticalChat ||| noBordersFull ||| full
+         where tiled = renamed [Replace "Tall"] $ myLayoutModifiers $ ResizableTall 1 0.03 (2/3) [1,1.5]
                noBordersFull = renamed [Replace "No Borders Full"] $ noBorders Full
-               verticalChat = renamed [Replace "Vertical Chat"] $ myLayoutModifiers $ mastered 0.03 (3/5) $ Mirror $ Tall 1 0.05 (1/2) --GridRatio (1.7) True
-               --newMain = renamed [Replace "Main"] $ myLayoutModifiers $ mastered 0.03 0.5 $ ((Mirror $ Tall 1 0.05 (1/2)) ****|* Full) --GridRatio (1.7) True
-               pset = renamed [Replace "PSet"] $ myLayoutModifiers $ ResizableTall 2 0.03 (5/8) [1.5,1.9,1.9,1.8]
+               verticalChat = renamed [Replace "Chat"] $ myLayoutModifiers $ mastered 0.03 (3/5) $ Mirror $ Tall 1 0.05 (1/2) --GridRatio (1.7) True
                full = renamed [Replace "Full"] $ myLayoutModifiers $ Full
 
 myLayoutModifiers = dwmStyle shrinkText myTheme . smartBorders . desktopLayoutModifiers . layoutHintsToCenter
