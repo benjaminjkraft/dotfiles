@@ -124,3 +124,6 @@
 [submodule ".vim/bundle/kotlin-vim"]
     path = .vim/bundle/kotlin-vim
     url = git@github.com:udalov/kotlin-vim.git
+[submodule ".vim/bundle/vim-graphql"]
+	path = .vim/bundle/vim-graphql
+	url = git@github.com:jparise/vim-graphql.git
