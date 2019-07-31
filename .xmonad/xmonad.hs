@@ -53,7 +53,7 @@ import XMonad.Util.Paste
 
 -- Run xmonad with the specified conifguration
 main = xmonad $ ewmh $ gnomeConfig
-				{ modMask = mod4Mask
+        { modMask = mod4Mask
         , terminal = "gnome-terminal --window-with-profile=trans"
         , layoutHook = myLayout
         , startupHook = myGnomeRegister >> startupHook desktopConfig >> setWMName "LG3D"
@@ -62,7 +62,7 @@ main = xmonad $ ewmh $ gnomeConfig
         , keys = \c -> myKeys c `M.union` myManualKeys c `M.union` keys gnomeConfig c
         , workspaces = myWorkspaces
         -- , handleEventHook = mappend myEventHooks (handleEventHook gnomeConfig)
-				} `additionalMouseBindings` myMouse
+        } `additionalMouseBindings` myMouse
 
 modm = mod4Mask
 
@@ -82,14 +82,14 @@ myGnomeRegister = io $ do
 -- myEventHooks = []
 
 myManageHook = composeAll $
-	[ className =? "Do" --> doIgnore
-	, className =? "Googleearth-bin" --> doFloat
-	, className =? "Glade" --> doFloat
-	, className =? "Pidgin" --> doF (W.focusUp . W.swapDown)
+  [ className =? "Do" --> doIgnore
+  , className =? "Googleearth-bin" --> doFloat
+  , className =? "Glade" --> doFloat
+  , className =? "Pidgin" --> doF (W.focusUp . W.swapDown)
   , className =? "Gnome-terminal" --> doF (W.focusUp . W.swapDown)
   , className =? "Zenity" --> doFloat
   , className =? "Grhino" --> doFloat
-	, isFullscreen --> doFullFloat
+  , isFullscreen --> doFullFloat
   , resource =? "RCT.EXE" --> doRectFloat (W.RationalRect (155/1680) (30/1050) (1270/1680) (990/1050))
   , resource =? "explorer.exe" <&&> title =? "EVETQ - Wine desktop" --> doFullFloat
   , className =? "Spotify" --> doShift "0"
@@ -100,7 +100,7 @@ myManageHook = composeAll $
   , className =? "Gnome-system-monitor" --> doShift "0"
   , className =? "Boincmgr" --> doShift "0"
   --, fmap not isDialog --> doF avoidMaster
-	-- ,	className =? "Firefox" <&&> resource =? "Download" --> doF (W.swapDown)
+  -- ,  className =? "Firefox" <&&> resource =? "Download" --> doF (W.swapDown)
   -- , className =? "Firefox" <&&> resource =? "Addons" --> doRectFloat (W.RationalRect (1/4) (1/6) (3/4) (2/3))
   ]
 
@@ -122,56 +122,33 @@ myManualKeys = \conf -> M.fromList $
 
 myKeys = \conf -> mkKeymap conf $
   [ ("M-C-q", spawn "gnome-screensaver-command --lock")
-	,	("M-f", spawn "exec firefox")
-	,	("M-g", spawn "exec google-chrome")
-	,	("M-p a", spawn "exec gnome-control-center")
-	,	("M-p n", spawn "exec gnome-control-center network")
-	,	("M-p d", spawn "exec gnome-control-center display")
-	,	("M-p p", spawn "exec system-config-printer")
-	,	("M-p s", spawn "exec gnome-session-properties")
-	,	("M-p t", spawn "exec gnome-tweak-tool")
-	,	("M-p e", spawn "emoji-keyboard -s")
-	,	("M-p k", spawn "emoji-keyboard -k")
-	-- , ("M-b", spawn "~/.bin/boinc")
-	-- , ("M-S-b", spawn "~/.bin/boinc off")
-	-- , ("M-r", spawn "~/.bin/acrokill")
-	-- , ("M-S-r", spawn "~/.bin/rotate")
-	-- , ("M-p", sendMessage ToggleStruts)
-  , ("M-m", spawn "killall -f MathKernel || killall -f gap.real || killall -f math || killall -f ghc || killall -f sage-ipython")
-  -- , ("<XF86AudioPlay>", spawn "~/.bin/spotify-remote playpause")
-  -- , ("<XF86AudioPrev>", spawn "~/.bin/spotify-remote previous")
-  -- , ("<XF86AudioNext>", spawn "~/.bin/spotify-remote next")
-  , ("M-S-s", spawn "killall spotify && spotify")
-  , ("M-s", spawn "~/.bin/spotify-remote nowplaying || spotify")
---  , ("<XF86AudioPlay>", spawn "~/.bin/spotify --playpause")
---  , ("<XF86AudioPrev>", spawn "~/.bin/spotify --prev")
---  , ("<XF86AudioNext>", spawn "~/.bin/spotify --next")
---  , ("M-S-s", spawn "~/.bin/spotify")
---  , ("M-s", spawn "~/.bin/spotify --now-playing || ~/.bin/spotify")
+  ,  ("M-f", spawn "exec firefox")
+  ,  ("M-g", spawn "exec google-chrome")
+  ,  ("M-p a", spawn "exec gnome-control-center")
+  ,  ("M-p n", spawn "exec gnome-control-center network")
+  ,  ("M-p d", spawn "exec gnome-control-center display")
+  ,  ("M-p p", spawn "exec system-config-printer")
+  ,  ("M-p s", spawn "exec gnome-session-properties")
+  ,  ("M-p t", spawn "exec gnome-tweak-tool")
+  ,  ("M-p e", spawn "emoji-keyboard -s")
+  , ("M-p k", spawn "emoji-keyboard -k")
   , ("M-z", myPrompt myXPConfig)
-	-- , ("M-C-z d", spawn "~/.bin/dmenu")
   , ("M-C-S-z", inputPrompt myXPConfig "$" ?+ (spawn . ("~/.bin/send --no-send-0 "++)))
   , ("M-C-z p", inputPrompt myXPConfig ">>>" ?+ (spawn . (\expr -> "~/.bin/send --title '"++expr++"' python -c 'print "++expr++"'")))
   , ("M-C-z h", inputPrompt myXPConfig "λ>" ?+ (spawn . (\expr -> "~/.bin/send --title '"++expr++"' ghc -e '"++expr++"'")))
   , ("M-C-z m", inputPrompt myXPConfig "stalk" ?+ (spawn . (\expr -> "~/.bin/send --title 'stalk "++expr++"' ~/.bin/stalk "++expr)))
   , ("M-C-z o", inputPromptWithCompl myXPConfig "gnome-open" getDirectoryCompletions ?+ (spawn . (\expr -> "gnome-open '"++expr++"'")))
   , ("M-C-z g", gnomeRun)
-  --("M-S-z", gnome-do)  --this isn't necessary here b/c gnome-do does its own activation shortcut
   , ("M-n", spawn "~/.bin/reminder")
---  , ("M-a", spawn "keepass2 --auto-type")
-	, ("M-S-h", sendMessage MirrorShrink)
-	, ("M-S-l", sendMessage MirrorExpand)
-  -- , ("M-e", gotoMenu)
-  -- , ("M-S-e", bringMenu)
+  , ("M-S-h", sendMessage MirrorShrink)
+  , ("M-S-l", sendMessage MirrorExpand)
   , ("M-\\", windows W.focusMaster)
-	, ("M-<Left>",    prevWS )
-	, ("M-<Right>",   nextWS )
-	, ("M-S-<Left>",  shiftToPrev )
-	, ("M-S-<Right>", shiftToNext )
-	, ("M-C-<Left>",  shiftToPrev >> prevWS)
-	, ("M-C-<Right>", shiftToNext >> nextWS)
---  , ("M-S-t", sendMessage ToggleLayout)
---  , ("M-C-c", sendMessage $ escape ToggleLayout)
+  , ("M-<Left>",    prevWS )
+  , ("M-<Right>",   nextWS )
+  , ("M-S-<Left>",  shiftToPrev )
+  , ("M-S-<Right>", shiftToNext )
+  , ("M-C-<Left>",  shiftToPrev >> prevWS)
+  , ("M-C-<Right>", shiftToNext >> nextWS)
   , ("M-c f", sendMessage $ JumpToLayout "No Borders Full")
   , ("M-c S-f", sendMessage $ JumpToLayout "Full")
   , ("M-c S-t", sendMessage $ JumpToLayout "Tall")
@@ -180,16 +157,16 @@ myKeys = \conf -> mkKeymap conf $
   , ("M-S-<Print>", spawn "gnome-screenshot --window")
   , ("M-C-<Print>", spawn "gnome-screenshot --area")
   , ("M-S-C-<Print>", spawn "gnome-screenshot --interactive")
-	]
-	++
-	[ ("M-" ++ m ++ k, f i)
-	| (i,k) <- zip (cycle $ reverse $ XMonad.workspaces conf) $ reverse (XMonad.workspaces conf)++["`"]
-	, (f,m) <-
-		[ (windows . W.view, "")
-		, (windows . W.shift, "S-")
-		, (\w -> (windows $ W.shift w) >> (windows $ W.view w), "C-")
-		]
-	]
+  ]
+  ++
+  [ ("M-" ++ m ++ k, f i)
+  | (i,k) <- zip (cycle $ reverse $ XMonad.workspaces conf) $ reverse (XMonad.workspaces conf)++["`"]
+  , (f,m) <-
+    [ (windows . W.view, "")
+    , (windows . W.shift, "S-")
+    , (\w -> (windows $ W.shift w) >> (windows $ W.view w), "C-")
+    ]
+  ]
 
 myLayout = tiled ||| verticalChat ||| noBordersFull ||| full
          where tiled = renamed [Replace "Tall"] $ myLayoutModifiers $ ResizableTall 1 0.03 (2/3) [1,1.5]
