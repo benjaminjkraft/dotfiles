@@ -169,7 +169,7 @@ myKeys = \conf -> mkKeymap conf $
   ]
 
 myLayout = tiled ||| verticalChat ||| noBordersFull ||| full
-         where tiled = renamed [Replace "Tall"] $ myLayoutModifiers $ ResizableTall 1 0.03 (2/3) [1,1.5]
+         where tiled = renamed [Replace "Tall"] $ myLayoutModifiers $ ResizableTall 1 0.03 0.7 [1,1.5]
                noBordersFull = renamed [Replace "No Borders Full"] $ noBorders Full
                verticalChat = renamed [Replace "Chat"] $ myLayoutModifiers $ mastered 0.03 (3/5) $ Mirror $ Tall 1 0.05 (1/2) --GridRatio (1.7) True
                full = renamed [Replace "Full"] $ myLayoutModifiers $ Full
