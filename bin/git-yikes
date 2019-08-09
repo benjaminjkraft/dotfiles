@@ -1,0 +1,17 @@
+#!/bin/sh -e
+# Hard-resets to the last reflog entry (on this branch, if
+# applicable, and distinct from the current commit).
+# For example, this will undo an amend, or an entire rebase -i.
+
+# If this fails, it still returns HEAD, which is good enough;
+# and the next error is probably more useful (e.g. "your
+# current branch 'master' does not have any commits yet").
+head_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+head_sha="$(git log -n1 --pretty=format:%H)"
+prev_sha="$(git reflog --pretty=format:%H "$head_branch" "$@" | grep -vF "$head_sha" | head -n1)"
+if [ -n "$prev_sha" ]; then
+    git reset --hard "$prev_sha"
+else
+    echo "extra yikes, couldn't find a reflog entry to go back to!"
+    exit 1
+fi
