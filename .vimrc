@@ -114,9 +114,17 @@ nnoremap <C-j> <C-W>w
 nnoremap <C-k> <C-W>W
 nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <Leader>m :wa<CR>:make<CR><CR>
-nnoremap <C-\> :ALEGoToDefinitionInSplit<CR>
-nnoremap <C-[> :ALEGoToDefinitionInVSplit<CR>
-nnoremap <C-]> :ALEGoToDefinition<CR>
+nnoremap <C-\><C-\> :ALEGoToDefinitionInSplit<CR>
+nnoremap <C-\>\ :ALEGoToDefinitionInSplit<CR>
+nnoremap <C-\>s :ALEGoToDefinitionInSplit<CR>
+nnoremap <C-\>v :ALEGoToDefinitionInVSplit<CR>
+nnoremap <C-\>e :ALEGoToDefinition<CR>
+nnoremap <C-]><C-]> :ALEGoToTypeDefinitionInSplit<CR>
+nnoremap <C-]>] :ALEGoToTypeDefinitionInSplit<CR>
+nnoremap <C-]>s :ALEGoToTypeDefinitionInSplit<CR>
+nnoremap <C-]>v :ALEGoToDefinitionInVSplit<CR>
+nnoremap <C-]>e :ALEGoToDefinition<CR>
+nnoremap <C-t> <C-^>
 vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
 " easymotion
