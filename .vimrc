@@ -142,6 +142,7 @@ hi def link bonusTodo Todo
 autocmd FileType sh setlocal tw=0
 
 " make
+autocmd BufNewFile,BufReadPost Makefile.* set filetype=make
 autocmd FileType make setlocal noet
 
 " JSON
