@@ -133,6 +133,11 @@ vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 " map  n <Plug>(easymotion-next)
 " map  N <Plug>(easymotion-prev)
 
+" highlight STOPSHIPs
+autocmd Syntax * syn keyword bonusTodo STOPSHIP containedin=.*Comment.*
+hi def link bonusTodo Todo
+
+
 " sh
 autocmd FileType sh setlocal tw=0
 
