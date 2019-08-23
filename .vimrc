@@ -15,7 +15,9 @@ set relativenumber
 set expandtab
 set autowrite
 set autoindent
-set nofoldenable
+" in principle nofoldenable DTRT, but it means the first zc will enable folds
+" and thus close them all.  instead, enable folds, but set them all open.
+set foldlevel=99
 set backspace=indent,eol,start
 set nocp
 set cole=2
@@ -206,5 +208,6 @@ let g:ale_linters.kotlin = ['ktlint', 'languageserver']
 
 " Go
 autocmd FileType go setlocal noexpandtab
+autocmd FileType go setlocal foldmethod=indent
 let g:ale_linters.go = ['gofmt', 'golint', 'govet', 'gopls']
 let g:ale_fixers.go = ['gofmt', 'goimports']
