@@ -173,6 +173,7 @@ let g:ale_fixers.python = ['autopep8']
 let g:ale_python_autopep8_options = '--ignore E301,E303,W503,E266,E402,E501,E712,E731,E741'
 
 " JS(X)
+autocmd BufNewFile,BufReadPost *.ts set filetype=javascript
 let g:ale_fixers.javascript = ['eslint']
 autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_executable = $HOME."/khan/devtools/khan-linter/node_modules/.bin/eslint"
 autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_use_global = 1
