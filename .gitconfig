@@ -51,6 +51,7 @@
     prev-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -B 1 \"$1\" | head -n 1; }; f"
     next-deploy = "!f() { git tag | grep '^gae-' | grep -v bad | grep -A 1 \"$1\" | tail -n 1; }; f"
     when-deploy = "!f() { git cat-file -p \"$1\" | perl -nle 'print scalar localtime $1 if /^tagger .* (\\d+) \\S+$/'; }; f"
+    squash = "!f() { EDITOR=\"sed -i '2,$ s/^pick/squash/'\" git rebase -i \"$@\"; }; f"
 [kaclone]
 	email = benkraft@khanacademy.org
 [interactive]
