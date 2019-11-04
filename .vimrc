@@ -177,6 +177,7 @@ autocmd BufNewFile,BufReadPost *.ts set filetype=javascript
 let g:ale_fixers.javascript = ['eslint']
 autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_executable = $HOME."/khan/devtools/khan-linter/node_modules/.bin/eslint"
 autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_use_global = 1
+autocmd BufRead,BufNewFile */src/apollo* let b:ale_fixers = {'javascript': ['prettier']}
 
 " (La)TeX
 let g:tex_flavor='latex'
