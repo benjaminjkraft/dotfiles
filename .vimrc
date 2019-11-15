@@ -213,3 +213,4 @@ autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal foldmethod=indent
 let g:ale_linters.go = ['gofmt', 'golint', 'govet', 'gopls']
 let g:ale_fixers.go = ['gofmt', 'goimports']
+autocmd BufRead,BufNewFile */khan/webapp* let g:ale_go_goimports_options = '-local github.com/Khan/webapp'
