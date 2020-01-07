@@ -174,9 +174,13 @@ snip () {
 }
 
 gvimr () {
-    f="$(realpath "$1")"
-    shift
-    gvim --remote-send "<C-\\><C-n>:split $f<CR>" "$@"
+    if [ -z "$(gvim --serverlist)" ]; then
+        gvim "$@"
+    else
+        f="$(realpath "$1")"
+        shift
+        gvim --remote-send "<C-\\><C-n>:split $f<CR>" "$@"
+    fi
 }
 
 #set up gpg-agent stuff
