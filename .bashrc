@@ -173,6 +173,12 @@ snip () {
   fi
 }
 
+gvimr () {
+    f="$(realpath "$1")"
+    shift
+    gvim --remote-send "<C-\\><C-n>:split $f<CR>" "$@"
+}
+
 #set up gpg-agent stuff
 export GPG_AGENT_INFO
 GPGKEY=9BA12CEB
