@@ -8,7 +8,7 @@
 PATH=$PATH:/usr/bin:/usr/local/heroku/bin:/usr/local/go/bin:$HOME/.cargo/bin
 
 #Import various stuff, checking each for existence
-for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/.travis/travis.sh" "$HOME/khan/devtools/google-cloud-sdk/completion.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc" "$HOME/.autojump/etc/profile.d/autojump.sh" "$HOME/.fzf.bash"
+for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/.travis/travis.sh" "$HOME/khan/devtools/google-cloud-sdk/completion.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc" "$HOME/.autojump/etc/profile.d/autojump.sh" "$HOME/.fzf.bash" "$HOME/.config/broot/launcher/bash/br"
 
 do
 	if [ -f "$f" ] ; then
