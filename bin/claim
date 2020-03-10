@@ -1,0 +1,16 @@
+#!/bin/bash
+
+diff="$1"
+if [ -z "$diff" ]; then
+    echo "usage: claim D12345"
+    exit 1
+fi
+
+gov_phid="$(echo '{"constraints": {"name": "go-vernors"}}' | arc call-conduit owners.search | jq -er .response.data[0].phid)"
+indiv_phid="$(printf '{"constraints": {"slugs": ["go-verner_%s"]}}' "$USER" | arc call-conduit project.search | jq -er .response.data[0].phid)"
+if [ -z "$gov_phid" ] || [ -z "$indiv_phid" ]; then
+    echo "something wasn't found!"
+    exit 1
+fi
+
+printf '{"objectIdentifier": "%s", "transactions": [{"type": "reviewers.add", "value": ["%s"]}, {"type": "reviewers.remove", "value": ["%s"]}]}' "$diff" "$gov_phid" "$indiv_phid" | arc call-conduit differential.revision.edit
