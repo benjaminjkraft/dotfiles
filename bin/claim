@@ -13,4 +13,4 @@ if [ -z "$gov_phid" ] || [ -z "$indiv_phid" ]; then
     exit 1
 fi
 
-printf '{"objectIdentifier": "%s", "transactions": [{"type": "reviewers.add", "value": ["%s"]}, {"type": "reviewers.remove", "value": ["%s"]}]}' "$diff" "$gov_phid" "$indiv_phid" | arc call-conduit differential.revision.edit
+printf '{"objectIdentifier": "%s", "transactions": [{"type": "reviewers.add", "value": ["%s"]}, {"type": "reviewers.remove", "value": ["%s"]}]}' "$diff" "$indiv_phid" "$gov_phid" | arc call-conduit differential.revision.edit | jq '.error,.errorMessage'
