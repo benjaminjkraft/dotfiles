@@ -299,7 +299,6 @@ main-screen () {
     screen -dmS main
     screen -S main -p 0 -X screen
     screen -S main -p 0 -X screen
-    screen -S main -p 0 -X screen
     screen -S main -p 2 -X stuff "title htop ; htop$(printf \\r)"
     screen -S main -p 0 -x
   fi
