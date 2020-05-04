@@ -164,7 +164,7 @@ autocmd FileType python setlocal foldmethod=indent
 autocmd BufRead,BufNewFile */google/appengine/* setlocal ts=2 sw=2 sts=2
 autocmd BufRead,BufNewFile */frankenserver/* setlocal ts=2 sw=2 sts=2
 autocmd BufRead,BufNewFile */frankenserver-khansrc/* setlocal ts=2 sw=2 sts=2
-" let g:ale_linters.python = ['flake8', 'pyls']
+let g:ale_linters.python = ['flake8', 'pyls']
 let g:ale_fixers.python = ['autopep8']
 " autopep8 is too aggressive about things not fixed by pycodestyle, so we have
 " to turn off all of E301 and E303 autofixes :(.  Sadly that also means we have
