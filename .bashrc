@@ -209,11 +209,7 @@ khanify () {
   GIT_COMMITTER_EMAIL="benkraft@khanacademy.org"
   export GIT_COMMITTER_EMAIL
   # .bashrc.khan imports ~/.profile, which is not the khan one; we just source both.
-  for f in "$HOME/.bashrc.khan" "$HOME/.profile.khan"; do
-    if [ -f "$f" ] ; then
-      . "$f"
-    fi
-  done
+  . "$HOME/.bashrc.khan"
 }
 
 khan-screen () {
