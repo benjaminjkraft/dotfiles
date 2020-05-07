@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# TODO: put the sed script inline, avoid SOURCE garbage
+# TODO: document
+
+# get real source file
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+# get ka-root (if we're in one)
+KA_ROOT="$PWD"
+while [ "$KA_ROOT" != "/" ] && ! [ -f "$KA_ROOT/.ka_root" ]; do
+    KA_ROOT="$(dirname "$PWD")"
+done
+
+if [ "$KA_ROOT" != "/" ]; then
+    # run sed script (over arguments, or unmerged files if unspecified)
+    # TODO: figure out how to put args in a var to avoid duplication
+    if [ "$#" -gt 0 ]; then
+        sed -Esi -f "$DIR/_merge-sync-tags.sed" "$@"
+    else
+        git diff -z --name-only --diff-filter=U | xargs -0 sed -Esi -f "$DIR/_merge-sync-tags.sed"
+    fi
+    # figure out how to fix up the sync tags
+    results="$("$KA_ROOT/tools/runlint.py" -l "$KA_ROOT/dev/linters/code_syncing_lint.py")"
+    # actually fix them up
+    echo -n "$results" | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh -x
+
+    # check if that solved all our problems
+    bad="$(echo -n "$results" | grep -q "appears to be malformed")"
+    # TODO: also check for conflict markers!
+    if [ -z "$bad" ]; then
+        # we were able to resolve all conflicts
+        # print the diff, for the user's inspection
+        git diff
+
+        read -p "Look good [y]? " -n 1 -r
+        echo
+
+        if [[ $REPLY =~ ^[yY]*$ ]]; then
+            if [ "$#" -gt 0 ]; then
+                git add "$@"
+            else
+                git diff -z --name-only --diff-filter=U | xargs -0 git add
+            fi
+            exit 0
+        fi
+    fi
+fi
+
+exit 1
