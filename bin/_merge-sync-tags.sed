@@ -20,14 +20,14 @@
         # consider the first line of the local section.  if not a sync-tag,
         # or does not match the first line of the remote section, give up.
         # (regexp has unused groups to precisely match the one below)
-        /(<{7}[^\n]*)\n(#|\/\/) (sync-start:[^ ]*) ([0-9]*) ([^\n]*)\n(.*)(={7}[^\n]*\n)(\2 \3 [0-9]* \5)\n/! {
+        /(<{7}[^\n]*)\n([ \t\r\n]*#|\/\/) (sync-start:[^ ]*) ([0-9]*) ([^\n]*)\n(.*)(={7}[^\n]*\n)(\2 \3 [0-9]* \5)\n/! {
             x
             b
         }
 
         # otherwise, move the local version above the conflict marker,
         # and delete any copies of it.
-        s/(<{7}[^\n]*)\n(#|\/\/) (sync-start:[^ ]*) ([0-9]*) ([^\n]*)\n(.*)(={7}[^\n]*\n)(\2 \3 [0-9]* \5)\n/\2 \3 \4 \5\n\1\n\6\7/
+        s/(<{7}[^\n]*)\n([ \t\r\n]*#|\/\/) (sync-start:[^ ]*) ([0-9]*) ([^\n]*)\n(.*)(={7}[^\n]*\n)(\2 \3 [0-9]* \5)\n/\2 \3 \4 \5\n\1\n\6\7/
 
         b resolve
     }
