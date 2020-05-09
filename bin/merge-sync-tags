@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# TODO: document
+# Usage:
+#   merge-sync-tags [files]
+# fixes any merge-conflicts resulting from sync tags in the given files (or, by
+# default, all conflicted files).  Automatically adds any files where all
+# conflicts were resolved.
 
 sedscript="$(tempfile -p merge-sync-tags- -s .sed)"
 # \ in heredoc-opening means don't escape anything within the heredoc
@@ -71,23 +75,12 @@ if [ "$KA_ROOT" != "/" ]; then
     # actually fix them up
     echo -n "$lint" | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh -x
 
+    for file in "${files[@]}"; do
     # check if that solved all our problems
-    if echo -n "$lint" | grep -q "appears to be malformed" || grep -q '[<>|=]{7}'; then
-        echo "unable to resolve all conflicts :("
-        exit 1
-    fi
-
-    # we were able to resolve all conflicts
-    # print the diff, for the user's inspection
-    git diff
-
-    read -p "Look good [y]? " -n 1 -r
-    echo
-
-    if [[ $REPLY =~ ^[yY]*$ ]]; then
-        git add "${files[@]}"
-        exit 0
-    fi
+        if echo -n "$lint" | grep -q "$file" | grep -q "appears to be malformed" || grep -q '[<>|=]{7}' "$file"; then
+            echo "unable to resolve conflicts in $file :("
+        else
+            git add "$file"
+        fi
+    done
 fi
-
-exit 1
