@@ -56,13 +56,13 @@ while [ "$KA_ROOT" != "/" ] && ! [ -f "$KA_ROOT/.ka_root" ]; do
     KA_ROOT="$(cd -P "$(dirname "$KA_ROOT")" && pwd)"
 done
 
-if [ "$#" -gt 0 ]; then
-    files=("$@")
-else
-    files=()
-    git diff -z --name-only --diff-filter=U | while read -r -d ''; do
-        files+=("$REPLY")
-    done
+files=("$@")
+if [ "$#" -eq 0 ]; then
+    # can't do git diff | read, because scoping problems;
+    # and read doesn't play nice with <(git diff)
+    filelist="$(tempfile -p merge-sync-tags- -s .txt)"
+    git diff -z --name-only --diff-filter=U >"$filelist"
+    read -a files -r -d '' <"$filelist"
 fi
 
 # TODO: use ancesdir instead, to avoid needing ka-root?
@@ -73,7 +73,7 @@ if [ "$KA_ROOT" != "/" ]; then
     # figure out how to fix up the sync tags
     lint="$("$KA_ROOT/tools/runlint.py" -l "$KA_ROOT/dev/linters/code_syncing_lint.py")"
     # actually fix them up
-    echo -n "$lint" | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh -x
+    echo -n "$lint" | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh
 
     for file in "${files[@]}"; do
     # check if that solved all our problems
