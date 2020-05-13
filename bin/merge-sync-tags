@@ -4,7 +4,8 @@
 #   merge-sync-tags [files]
 # fixes any merge-conflicts resulting from sync tags in the given files (or, by
 # default, all conflicted files).  Automatically adds any files where all
-# conflicts were resolved.
+# conflicts were resolved.  In theory, it should leave non-sync-tag changes
+# untouched.
 
 sedscript="$(tempfile -p merge-sync-tags- -s .sed)"
 # \ in heredoc-opening means don't escape anything within the heredoc
