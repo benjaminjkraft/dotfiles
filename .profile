@@ -14,7 +14,7 @@ export GOPATH
 PYENV_ROOT="$HOME/src/pyenv"
 
 # set PATH so it includes user's private bins if they exist
-for p in "$HOME/.scripts" "$HOME/bin" "$HOME/.bin" "$HOME/.cabal/bin" "$HOME/.go/bin" "$HOME/.local/bin" "$PYENV_ROOT/bin" "$HOME/.yarn/bin" "$HOME/.local/share/node_modules/bin" "$HOME/khan/devtools/arcanist/khan-bin" "$HOME/khan/devtools/git-workflow/bin" "$HOME/khan/devtools/ka-clone/khan-linter/bin" "$HOME/khan/devtools/google-cloud-sdk/bin" "$HOME/genfiles/go/bin"
+for p in "$HOME/.scripts" "$HOME/bin" "$HOME/.bin" "$HOME/.cabal/bin" "$HOME/.go/bin" "$HOME/.local/bin" "$PYENV_ROOT/bin" "$HOME/.yarn/bin" "$HOME/.local/share/node_modules/bin" "$HOME/khan/devtools/arcanist/khan-bin" "$HOME/khan/devtools/git-workflow/bin" "$HOME/khan/devtools/ka-clone/khan-linter/bin" "$HOME/khan/devtools/google-cloud-sdk/bin" "$HOME/khan/webapp/genfiles/go/bin"
 do
 	if [ -d "$p" ] ; then
 		PATH="$PATH:$p"
