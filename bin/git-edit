@@ -1,0 +1,14 @@
+#!/bin/sh
+# h/t Mark Sandstrom for the idea
+# TODO: dedupe with git-amend
+if [ $# -eq 0 ]; then
+    echo "usage: git edit <commit> [command]"
+fi
+
+commit="$(git rev-parse "$1" | head -c7)"
+
+if [ $? -gt 0 ] || [ "$(echo "$commit" | wc -l)" -gt 1 ]; then
+    echo "unknown revision '$1'"
+fi
+
+EDITOR="sed -i 's/^pick $commit/edit $commit/'" git rebase -i "$commit^"
