@@ -6,7 +6,7 @@ echo
 add_diffs () {
     while read line; do
         sha="$(echo "$line" | sed 's/\x1b\[[0-9;]*m//g' | cut -d ' ' -f1)"
-        diff="$(git rev-list --max-count=1 --format=%B "$sha" | grep "Differential Revision:" | sed 's_.*/__')"
+        diff="$(git rev-list --max-count=1 --format=%B "$sha" | grep -e "Differential Revision:" -e "Issue:" | sort | sed 's_.*/__' | paste -d',' -s - | sed 's/,/, /')"
         if [ -n "$diff" ]; then
             echo "$line ($diff)"
         else
