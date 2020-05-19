@@ -3,19 +3,21 @@
 git status
 echo
 
+add_diffs () {
+    while read line; do
+        sha="$(echo "$line" | sed 's/\x1b\[[0-9;]*m//g' | cut -d ' ' -f1)"
+        diff="$(git rev-list --max-count=1 --format=%B "$sha" | grep "Differential Revision:" | sed 's_.*/__')"
+        if [ -n "$diff" ]; then
+            echo "$line ($diff)"
+        else
+            echo "$line"
+        fi
+    done
+}
+
 for head in origin/HEAD origin/master ; do
     if git rev-parse "$head" &>/dev/null; then
-        git log --oneline "$head.." -n 10 --color | {
-            while read line; do
-                sha="$(echo "$line" | sed 's/\x1b\[[0-9;]*m//g' | cut -d ' ' -f1)"
-                diff="$(git rev-list --max-count=1 --format=%B "$sha" | grep "Differential Revision:" | sed 's_.*/__')"
-                if [ -n "$diff" ]; then
-                    echo "$line ($diff)"
-                else
-                    echo "$line"
-                fi
-            done
-        }
+        git log --oneline "$head.." -n 10 --color | add_diffs
         break
     fi
 done
