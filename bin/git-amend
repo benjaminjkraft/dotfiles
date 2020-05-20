@@ -1,9 +1,12 @@
 #!/bin/bash
 # h/t Mark Sandstrom for the idea
-commit="$(git super-rev-parse "$1")"
+commits="$(git super-rev-parse "$@")"
 if [ $? -gt 0 ]; then
     echo "usage: git amend <commit>"
     exit $?
 fi
 
-EDITOR="sed -i '/^pick $commit/a x git gsu\nx arc amend'" git rebase -i "$commit^"
+commit_regexp="($(echo "$commits" | paste -s -d'|' -))"
+base="$(git merge-base --octopus $commits)^"
+
+EDITOR="sed -Ei '/^pick $commit_regexp/a x git gsu\nx arc amend'" git rebase -i "$base"

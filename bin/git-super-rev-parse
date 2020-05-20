@@ -5,19 +5,24 @@ if [ $# -eq 0 ] || [ -z "$1" ]; then
     exit 1
 fi
 
-if [[ "$1" =~ ^D[0-9]*$ ]]; then
-    commit="$(git log --format=%h -n1 --grep "^Differential Revision: https://phabricator\.khanacademy\.org/$1")"
-    # TODO: maybe call revision-to-diffid?  (or move this there!)
-else
-    commit="$(git rev-parse --short "$1" 2>/dev/null)"
-fi
+rc=0
+while [ $# -gt 0 ]; do
+    if [[ "$1" =~ ^D[0-9]*$ ]]; then
+        commit="$(git log --format=%h -n1 --grep "^Differential Revision: https://phabricator\.khanacademy\.org/$1")"
+        # TODO: maybe call revision-to-diffid?  (or move this there!)
+    else
+        commit="$(git rev-parse --short "$1" 2>/dev/null)"
+    fi
 
-if [ $? -gt 0 ] || [ "$(echo "$commit" | wc -l)" -ne 1 ]; then
-    # do it again to print error
-    git rev-parse "$1" >/dev/null
-    echo >&2 "unknown revision '$1' (or diff not in branch)"
-    exit 1
-else
-    echo "$commit"
-    exit 0
-fi
+    if [ $? -gt 0 ] || [ "$(echo "$commit" | wc -l)" -ne 1 ]; then
+        # do it again to print error
+        git rev-parse "$1" >/dev/null
+        echo >&2 "unknown revision '$1' (or diff not in branch)"
+        rc=1
+    else
+        echo "$commit"
+    fi
+
+    shift
+done
+exit $rc
