@@ -9,3 +9,5 @@ command VSplitTest call TestFor("vsplit")
 command VSPT VSplitTest
 command SplitTest call TestFor("split")
 command SPT SplitTest
+command EditTest call TestFor("edit")
+command ET EditTest
