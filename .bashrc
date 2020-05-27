@@ -300,6 +300,8 @@ main-screen () {
   fi
 }
 
+export CLOUDSDK_PYTHON=/usr/bin/python3
+
 if which pyenv >/dev/null ; then
     eval "$(pyenv init -)"
 fi
