@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # Usage:
 #   merge-sync-tags [files]
@@ -72,13 +72,13 @@ if [ "$KA_ROOT" != "/" ]; then
     sed -Esi -f "$sedscript" "${files[@]}"
 
     # figure out how to fix up the sync tags
-    lint="$("$KA_ROOT/tools/runlint.py" -l "$KA_ROOT/dev/linters/code_syncing_lint.py")"
+    lint="$("$KA_ROOT/tools/runlint.py" -l "$KA_ROOT/dev/linters/code_syncing_lint.py" "${files[@]}")"
     # actually fix them up
-    echo -n "$lint" | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh
+    echo -n "$lint" | grep 'running:' | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh -x
 
     for file in "${files[@]}"; do
     # check if that solved all our problems
-        if echo -n "$lint" | grep -q "$file" | grep -q "appears to be malformed" || grep -q '[<>|=]{7}' "$file"; then
+        if echo -n "$lint" | grep -q "$file" | grep -v "running:" || grep -q -E '[<>|=]{7}' "$file"; then
             echo "unable to resolve conflicts in $file :("
         else
             git add "$file"

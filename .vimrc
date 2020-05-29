@@ -175,7 +175,9 @@ let g:ale_python_autopep8_options = '--ignore E301,E303,W503,E266,E402,E501,E712
 " JS(X)
 autocmd BufNewFile,BufReadPost *.ts set filetype=javascript
 let g:ale_fixers.javascript = ['eslint']
-autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_executable = $HOME."/khan/devtools/khan-linter/node_modules/.bin/eslint"
+" TODO: figure out if we can use a relative path here somehow (and if so update
+" webapp .vimrc likewise)
+autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_executable = $HOME."/khan/webapp/node_modules/.bin/eslint"
 autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_use_global = 1
 autocmd BufRead,BufNewFile */src/apollo* let b:ale_fixers = {'javascript': ['prettier']}
 
@@ -204,7 +206,7 @@ autocmd FileType haskell setlocal tw=0
 autocmd Filetype groovy setlocal tabstop=3 shiftwidth=3 softtabstop=3
 
 " Kotlin
-autocmd BufRead,BufNewFile */khan/* let g:ale_kotlin_ktlint_executable = $HOME."/khan/devtools/khan-linter/vendor/ktlint"
+autocmd BufRead,BufNewFile */khan/* let g:ale_kotlin_ktlint_executable = $HOME."/khan/webapp/testing/ktlint"
 " turn off kotlinc -- it tries to do too much, spins, and crashes.
 let g:ale_linters.kotlin = ['ktlint', 'languageserver']
 
