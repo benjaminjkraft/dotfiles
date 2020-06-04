@@ -6,10 +6,10 @@ if [ -z "$diff" ]; then
     exit 1
 fi
 
-my_phid="$(echo {} | arc call-conduit user.whoami | jq -er .response.phid)"
+my_phid="$(echo {} | arc call-conduit -- user.whoami | jq -er .response.phid)"
 if [ -z "$my_phid" ]; then
     echo "who *ARE* you?"
     exit 1
 fi
 
-printf '{"objectIdentifier": "%s", "transactions": [{"type": "subscribers.remove", "value": ["%s"]}]}' "$diff" "$my_phid" | arc call-conduit differential.revision.edit | jq '.error,.errormessage'
+printf '{"objectIdentifier": "%s", "transactions": [{"type": "subscribers.remove", "value": ["%s"]}]}' "$diff" "$my_phid" | arc call-conduit -- differential.revision.edit | jq '.error,.errormessage'

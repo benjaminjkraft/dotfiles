@@ -6,12 +6,13 @@ if [ -z "$diff" ]; then
     exit 1
 fi
 
-my_username="$(echo {} | arc call-conduit user.whoami | jq -er .response.userName)"
-gov_phid="$(echo '{"constraints": {"name": "go-vernors"}}' | arc call-conduit owners.search | jq -er .response.data[0].phid)"
-indiv_phid="$(printf '{"constraints": {"slugs": ["go-verner_%s"]}}' "$my_username" | arc call-conduit project.search | jq -er .response.data[0].phid)"
+my_username="$(echo {} | arc call-conduit -- user.whoami | jq -er .response.userName)"
+gov_phid="$(echo '{"constraints": {"name": "go-vernors"}}' | arc call-conduit -- owners.search | jq -er .response.data[0].phid)"
+gov_pkg_phid="$(echo '{"constraints": {"name": "go-vernors (pkg/)"}}' | arc call-conduit -- owners.search | jq -er .response.data[0].phid)"
+indiv_phid="$(printf '{"constraints": {"slugs": ["go-verner_%s"]}}' "$my_username" | arc call-conduit -- project.search | jq -er .response.data[0].phid)"
 if [ -z "$gov_phid" ] || [ -z "$indiv_phid" ]; then
     echo "something wasn't found!"
     exit 1
 fi
 
-printf '{"objectIdentifier": "%s", "transactions": [{"type": "reviewers.add", "value": ["%s"]}, {"type": "reviewers.remove", "value": ["%s"]}]}' "$diff" "$indiv_phid" "$gov_phid" | arc call-conduit differential.revision.edit | jq '.error,.errorMessage'
+printf '{"objectIdentifier": "%s", "transactions": [{"type": "reviewers.add", "value": ["%s"]}, {"type": "reviewers.remove", "value": ["%s"]}, {"type": "reviewers.remove", "value": ["%s"]}]}' "$diff" "$indiv_phid" "$gov_phid" "$gov_pkg_phid" | arc call-conduit -- differential.revision.edit | jq '.error,.errorMessage'
