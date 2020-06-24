@@ -9,7 +9,7 @@ add_diffs () {
         #   \eP\e]8;;<url>\a\e\\<text>\eP\e]8;;\a\e\
         # although subject to the discussion there it does not survive
         # a redraw :(
-        diff="$(git rev-list --max-count=1 --format=%B "$sha" | grep -e "Differential Revision:" -e "Issue:" | sort | sed 's_^[^:]*: \(.*/\)\([^/]*\)$_\x1bP\x1b]8;;\1\2\a\x1b\\\2\x1b\P\x1b]8;;\a\x1b\\_' | paste -d',' -s - | sed 's/,/, /')"
+        diff="$(git rev-list --max-count=1 --format=%B "$sha" | grep -e "Differential Revision:" -e "Issue:" | sort | sed 's_^[^:]*: \(.*/\)\([^/]*\)$_\x1bP\x1b]8;;\1\2\a\x1b\\\2\x1b\P\x1b]8;;\a\x1b\\_' | paste -d',' -s - | sed 's/,/, /g')"
         if [ -n "$diff" ]; then
             echo "$line ($diff)"
         else
