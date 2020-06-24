@@ -52,10 +52,18 @@ cat >"$sedscript" <<\EOF
 EOF
 
 # get ka-root (if we're in one)
+# TODO: use ancesdir/checksync instead, to avoid needing ka-root?
 KA_ROOT="$PWD"
 while [ "$KA_ROOT" != "/" ] && ! [ -f "$KA_ROOT/.ka_root" ]; do
     KA_ROOT="$(cd -P "$(dirname "$KA_ROOT")" && pwd)"
 done
+
+if [ "$KA_ROOT" == "/" ]; then
+    echo "not in ka-root :("
+    exit 1
+fi
+
+cd "$KA_ROOT"   # various things break elsewhere
 
 files=("$@")
 if [ "$#" -eq 0 ]; then
@@ -66,22 +74,19 @@ if [ "$#" -eq 0 ]; then
     readarray -t -d '' files <"$filelist"
 fi
 
-# TODO: use ancesdir instead, to avoid needing ka-root?
-if [ "$KA_ROOT" != "/" ]; then
-    # run sed script (over arguments, or unmerged files if unspecified)
-    sed -Esi -f "$sedscript" "${files[@]}"
+# run sed script (over arguments, or unmerged files if unspecified)
+sed -Esi -f "$sedscript" "${files[@]}"
 
-    # figure out how to fix up the sync tags
-    lint="$("$KA_ROOT/tools/runlint.py" -l "$KA_ROOT/dev/linters/code_syncing_lint.py" "${files[@]}")"
-    # actually fix them up
-    echo -n "$lint" | grep 'running:' | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh
+# figure out how to fix up the sync tags
+lint="$("tools/runlint.py" -l "dev/linters/code_syncing_lint.py" "${files[@]}")"
+# actually fix them up
+echo -n "$lint" | grep 'running:' | sed -e 's/.*running: //' -e 's/ (dev.linters.*//' | sh
 
-    for file in "${files[@]}"; do
-    # check if that solved all our problems
-        if echo -n "$lint" | grep -q "$file" | grep -v "running:" || grep -q -E '[<>|=]{7}' "$file"; then
-            echo "unable to resolve conflicts in $file :("
-        else
-            git add "$file"
-        fi
-    done
-fi
+for file in "${files[@]}"; do
+# check if that solved all our problems
+    if echo -n "$lint" | grep -q "$file" | grep -v "running:" || grep -q -E '[<>|=]{7}' "$file"; then
+        echo "unable to resolve conflicts in $file :("
+    else
+        git add "$file"
+    fi
+done
