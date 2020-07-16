@@ -3,7 +3,7 @@
 git status
 echo
 
-for head in origin/HEAD origin/master ; do
+for head in origin/HEAD origin/main origin/master ; do
     if git rev-parse "$head" &>/dev/null; then
         git l "$head.." -n 10
         break
