@@ -11,7 +11,11 @@ add_diffs () {
         # a redraw :(
         diff="$(git rev-list --max-count=1 --format=%B "$sha" | grep -e "Differential Revision:" -e "Issue:" | sort | sed 's_^[^:]*: \(.*/\)\([^/]*\)$_\x1bP\x1b]8;;\1\2\a\x1b\\\2\x1b\P\x1b]8;;\a\x1b\\_' | paste -d',' -s - | sed 's/,/, /g')"
         if [ -n "$diff" ]; then
-            echo "$line ($diff)"
+            if git rev-list --max-count=1 --format=%B "$sha" | grep -q "^Reviewed By:"; then
+                echo "$line (✅ $diff)"
+            else
+                echo "$line ($diff)"
+            fi
         else
             echo "$line"
         fi
