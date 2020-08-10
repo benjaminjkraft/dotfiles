@@ -59,3 +59,5 @@
 	singleKey = true
 [http]
 	cookiefile = /home/benkraft/.gitcookies
+[init]
+	defaultBranch = main
