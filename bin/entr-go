@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+main() {
+    case "$1" in
+    test)
+        shift
+        do_test "$@"
+        ;;
+    *)
+        echo "usage: $0 test packages..."
+        exit 1
+        ;;
+    esac
+}
+
+do_test () {
+    go list -find -f '{{range .GoFiles}}{{$.Dir}}/{{.}}{{"\n"}}{{end}}{{range .TestGoFiles}}{{$.Dir}}/{{.}}{{"\n"}}{{end}}' "$@" | entr -c go test "$@"
+}
+
+main "$@"
