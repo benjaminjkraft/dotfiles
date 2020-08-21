@@ -29,6 +29,11 @@ set scrolloff=1
 set display+=lastline
 set tags=./tags;
 
+" xdg-open exits before opening the URL at which point vim kills its process
+" group -- setsid works around this (so would xdg-open <url> & but that's
+" harder to get netrw to do)
+let g:netrw_browsex_viewer = "setsid xdg-open"
+
 " ALE -- turn on fixers, but not for 3rd party code.
 let g:ale_linters = {}  " defined below
 let g:ale_fixers = {}   " defined below
