@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+args=
+if [[ -f "$PWD/.ka_root" ]]; then
+    args="--nolint --nounit"
+    if [[ ! "$@" =~ "--nolint" ]]; then
+        if [[ "$@" =~ "--nounit" ]]; then
+            make quicklinc UPSTREAM=HEAD^
+        else
+            make quicktesc UPSTREAM=HEAD^
+        fi
+    fi
+fi
+
+
+exec arc diff --verbatim --allow-untracked HEAD^ "$@"

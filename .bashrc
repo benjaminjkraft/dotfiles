@@ -158,7 +158,6 @@ alias pd='pushd'
 alias less='less -iR'
 alias s='git s'
 alias d='git d'
-alias ad='arc diff --verbatim --allow-untracked HEAD^'
 alias htop='title htop ; htop ; title'
 which hub >/dev/null && eval "$(hub alias -s)"
 alias ggrep='git grep --no-index'
