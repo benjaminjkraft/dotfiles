@@ -12,5 +12,4 @@ if [[ -f "$PWD/.ka_root" ]]; then
     fi
 fi
 
-
-exec arc diff --verbatim --allow-untracked HEAD^ "$@"
+exec arc diff --verbatim --allow-untracked $args HEAD^ "$@"
