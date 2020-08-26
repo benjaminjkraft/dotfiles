@@ -1,8 +1,7 @@
 #!/bin/bash -e
 
-args=
 if [[ -f "$PWD/.ka_root" ]]; then
-    args="--nolint --nounit"
+    export ARC_LINT=no ARC_UNIT=no
     if [[ ! "$@" =~ "--nolint" ]]; then
         if [[ "$@" =~ "--nounit" ]]; then
             make quicklinc UPSTREAM=HEAD^
@@ -12,4 +11,4 @@ if [[ -f "$PWD/.ka_root" ]]; then
     fi
 fi
 
-exec arc diff --verbatim --allow-untracked $args HEAD^ "$@"
+exec arc diff --verbatim --allow-untracked HEAD^ "$@"
