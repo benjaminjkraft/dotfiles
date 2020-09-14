@@ -4,9 +4,9 @@ if [[ -f "$PWD/.ka_root" ]]; then
     export ARC_LINT=no ARC_TEST=no
     if [[ ! "$@" =~ "--nolint" ]]; then
         if [[ "$@" =~ "--nounit" ]]; then
-            make quicklinc UPSTREAM=HEAD^
+            make linc UPSTREAM=HEAD^
         else
-            make quicktesc UPSTREAM=HEAD^
+            make tesc UPSTREAM=HEAD^
         fi
     fi
 fi
