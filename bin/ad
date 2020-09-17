@@ -1,14 +1,14 @@
 #!/bin/bash -e
 
 if [[ -f "$PWD/.ka_root" ]]; then
-    export ARC_LINT=no ARC_TEST=no
-    if [[ ! "$@" =~ "--nolint" ]]; then
-        if [[ "$@" =~ "--nounit" ]]; then
+    if [ "$ARC_LINT" != "no"]; then
+        if [ "$ARC_UNIT" != "no"]; then
             make linc UPSTREAM=HEAD^
         else
             make tesc UPSTREAM=HEAD^
         fi
     fi
+    export ARC_LINT=no ARC_TEST=no
 fi
 
 exec arc diff --verbatim --allow-untracked HEAD^ "$@"
