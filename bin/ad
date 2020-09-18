@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 if [[ -f "$PWD/.ka_root" ]]; then
-    if [ "$ARC_LINT" != "no"]; then
-        if [ "$ARC_UNIT" != "no"]; then
+    if [ "$ARC_LINT" != "no" ]; then
+        if [ "$ARC_UNIT" != "no" ]; then
             make linc UPSTREAM=HEAD^
         else
             make tesc UPSTREAM=HEAD^
