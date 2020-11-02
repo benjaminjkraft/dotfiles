@@ -1,6 +1,6 @@
 " TODO(benkraft): put this in khan-dotfiles
 function TestFor(cmd)
-  let filenames = system(expand("~/khan/webapp/tools/test_for.py") . " -f " . bufname("%"))
+  let filenames = system(expand("~/khan/webapp/tools/test_for.py") . " -a " . bufname("%"))
   for filename in split(filenames, "\n")
       execute a:cmd . " " . filename
     endfor
