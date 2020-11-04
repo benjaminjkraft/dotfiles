@@ -217,7 +217,7 @@ khan-screen () {
     export KHAN
     cd "$HOME/khan/webapp"
     screen -dmS khan
-    screen -S khan -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
+    screen -S khan -p 0 -X screen
     screen -S khan -p 0 -X screen
     screen -S khan -p 0 -X screen
     screen -S khan -p 2 -X stuff "title htop ; htop$(printf \\r)"
