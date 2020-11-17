@@ -121,15 +121,15 @@ nnoremap <C-j> <C-W>w
 nnoremap <C-k> <C-W>W
 nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <Leader>m :wa<CR>:make<CR><CR>
-nnoremap <C-\><C-\> :ALEGoToDefinitionInSplit<CR>
-nnoremap <C-\>\ :ALEGoToDefinitionInSplit<CR>
-nnoremap <C-\>s :ALEGoToDefinitionInSplit<CR>
-nnoremap <C-\>v :ALEGoToDefinitionInVSplit<CR>
+nnoremap <C-\><C-\> :ALEGoToDefinition -split<CR>
+nnoremap <C-\>\ :ALEGoToDefinition -split<CR>
+nnoremap <C-\>s :ALEGoToDefinition -split<CR>
+nnoremap <C-\>v :ALEGoToDefinition -vsplit<CR>
 nnoremap <C-\>e :ALEGoToDefinition<CR>
-nnoremap <C-]><C-]> :ALEGoToTypeDefinitionInSplit<CR>
-nnoremap <C-]>] :ALEGoToTypeDefinitionInSplit<CR>
-nnoremap <C-]>s :ALEGoToTypeDefinitionInSplit<CR>
-nnoremap <C-]>v :ALEGoToDefinitionInVSplit<CR>
+nnoremap <C-]><C-]> :ALEGoToTypeDefinition -split<CR>
+nnoremap <C-]>] :ALEGoToTypeDefinition -split<CR>
+nnoremap <C-]>s :ALEGoToTypeDefinition -split<CR>
+nnoremap <C-]>v :ALEGoToDefinition -vsplit<CR>
 nnoremap <C-]>e :ALEGoToDefinition<CR>
 nnoremap <C-t> <C-^>
 vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
