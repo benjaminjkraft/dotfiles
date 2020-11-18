@@ -210,6 +210,8 @@ khanify () {
   export GIT_COMMITTER_EMAIL
   # .bashrc.khan imports ~/.profile, which is not the khan one; we just source both.
   . "$HOME/.bashrc.khan"
+  # Hack: force GOPATH to stay ahead of genfiles/go/bin so I can override things.
+  PATH="$HOME/.go/bin:$PATH"
 }
 
 khan-screen () {
