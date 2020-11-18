@@ -162,6 +162,7 @@ alias htop='title htop ; htop ; title'
 which hub >/dev/null && eval "$(hub alias -s)"
 alias ggrep='git grep --no-index'
 which bd >/dev/null && alias bd='. bd -s'
+alias gd='go doc'
 
 #some little utility functions
 snip () {
