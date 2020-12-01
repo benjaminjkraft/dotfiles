@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+
+# TODO: fix up git-edit and git-amend to call this (or extend it so they can
+# use it directly?  figure out how to do rev-parsing)
+# TODO: add a "hoist" to move a commit n up the stack, and similar
+# TODO: document
+
+import argparse
+import collections
+import os
+import shlex
+import subprocess
+import sys
+
+USAGE = '''\
+TODO
+
+All COMMIT arguments are short-hashes and must match exactly.  Most arguments
+may be repeated; if so they happen in rebase-order, then in the order passed.
+For example, if we are rebasing commits a, b, and c in that order, and the
+arguments are
+    --edit b --exec-after c 1 --edit a --exec-after c 2 --exec-after b 3
+we will end up with
+    edit a
+    edit b
+    exec 3
+    pick c
+    exec 1
+    exec 2
+'''
+
+
+def run_editor(filename, exec_after, edit, delete):
+    with open(filename) as f:
+        lines = list(f)
+
+    exec_after_by_commit = collections.defaultdict(list)
+    for commit, command in exec_after:
+        exec_after_by_commit[commit].append(command)
+
+    for i, line in reversed(list(enumerate(lines))):
+        if not line.startswith('pick '):
+            continue
+
+        commit = line.split()[1]
+        if commit in edit:
+            lines[i] = 'edit %s\n' % commit
+            continue
+        elif commit in delete:
+            del lines[i]
+            continue
+
+        lines[i:i] = [
+            'exec %s\n' % command
+            for command in exec_after_by_commit[commit]]
+
+    with open(filename, 'w') as f:
+        for line in lines:
+            f.write(line)
+
+
+def rebase(ourargv, gitargv):
+    editor = ' '.join([sys.executable, __file__]
+                      + list(map(shlex.quote, ourargv)))
+
+    env = os.environ.copy()
+    env['EDITOR'] = editor
+    env['GIT_LIR_EDIT_MODE'] = 'true'
+
+    return subprocess.call(["git", "rebase", "-i"] + gitargv, env=env)
+
+
+def main():
+    parser = argparse.ArgumentParser(description='TODO(benkraft)')
+    parser.add_argument('--exec-after',
+                        nargs=2, metavar=('COMMIT', 'COMMAND'),
+                        action='append',
+                        help="exec the given command after the given commit")
+    parser.add_argument('--edit', metavar='COMMIT', action='append',
+                        help="edit the given commit")
+    parser.add_argument('--delete', metavar='COMMIT', action='append',
+                        help="remove the given commit")
+
+    if os.environ.get('GIT_LIR_EDIT_MODE'):
+        parser.add_argument('filename')
+        args = parser.parse_args()
+
+        edit = set(args.edit or [])
+        delete = set(args.delete or [])
+        if edit & delete:
+            parser.error("can't edit and delete the same commit: %s"
+                         % ' '.join(edit & delete))
+
+        run_editor(args.filename, args.exec_after or [], edit, delete)
+    else:
+        parser.add_argument('gitargs', nargs='*')
+        args = parser.parse_args()
+        sys.exit(
+            rebase(
+                sys.argv[1:len(sys.argv)-len(args.gitargs)],
+                args.gitargs))
+
+
+if __name__ == '__main__':
+    main()
