@@ -1,0 +1,9 @@
+#!/bin/sh
+
+name="$(xdotool getwindowname $(xdotool getactivewindow))"
+
+if [ "${name#*Meet*Firefox}" != "$name" ]; then
+    xdotool key ctrl+d
+elif [ "${name#*Zoom}" ]; then
+    xdotool key alt+a
+fi
