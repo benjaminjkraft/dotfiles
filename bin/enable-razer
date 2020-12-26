@@ -88,7 +88,7 @@ def main():
     off     = '0303 0301 0400'
 
     bw = blackwidow()
-    bw.send(off)
+    bw.send(init_old)
 
 if __name__ == '__main__':
     main()
