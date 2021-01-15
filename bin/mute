@@ -4,6 +4,8 @@ name="$(xdotool getwindowname $(xdotool getactivewindow))"
 
 if [ "${name#*Meet*Firefox}" != "$name" ]; then
     xdotool key ctrl+d
-elif [ "${name#*Zoom}" ]; then
+elif [ "${name#*Zoom}" != "$name" ]; then
     xdotool key alt+a
+elif [ "${name#*Discord}" != "$name" ]; then
+    xdotool key ctrl+shift+m
 fi
