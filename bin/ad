@@ -2,7 +2,7 @@
 
 if [[ -f "$PWD/.ka_root" ]]; then
     if [ "$ARC_LINT" != "no" ]; then
-        if [ "$ARC_UNIT" != "no" ]; then
+        if [ "$ARC_TEST" != "no" ]; then
             make tesc UPSTREAM=HEAD^
         else
             make linc UPSTREAM=HEAD^
