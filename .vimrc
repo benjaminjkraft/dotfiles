@@ -185,6 +185,10 @@ let g:ale_fixers.javascript = ['eslint']
 autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_executable = $HOME."/khan/webapp/node_modules/.bin/eslint"
 autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_use_global = 1
 autocmd BufRead,BufNewFile */src/apollo* let b:ale_fixers = {'javascript': ['prettier']}
+autocmd BufRead,BufNewFile *.ts let g:ale_linters.javascript = ['eslint', 'tsserver']
+autocmd BufRead,BufNewFile *.tsx let g:ale_linters.javascript = ['eslint', 'tsserver']
+autocmd BufRead,BufNewFile *.js let g:ale_linters.javascript = ['eslint', 'flow-language-server']
+autocmd BufRead,BufNewFile *.jsx let g:ale_linters.javascript = ['eslint', 'flow-language-server']
 
 " (La)TeX
 let g:tex_flavor='latex'
