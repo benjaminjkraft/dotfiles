@@ -202,12 +202,10 @@ else
 fi
 
 khanify () {
-  KHAN=1
-  export KHAN
-  GIT_AUTHOR_EMAIL="benkraft@khanacademy.org"
-  export GIT_AUTHOR_EMAIL
-  GIT_COMMITTER_EMAIL="benkraft@khanacademy.org"
-  export GIT_COMMITTER_EMAIL
+  export KHAN=1
+  export GIT_AUTHOR_EMAIL="benkraft@khanacademy.org"
+  export GIT_COMMITTER_EMAIL="benkraft@khanacademy.org"
+  export UPSTREAM=HEAD^
   # .bashrc.khan imports ~/.profile, which is not the khan one; we just source both.
   . "$HOME/.bashrc.khan"
   # Hack: force GOPATH to stay ahead of genfiles/go/bin so I can override things.
