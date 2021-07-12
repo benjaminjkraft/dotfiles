@@ -51,7 +51,6 @@ import XMonad.Util.NamedWindows
 import XMonad.Util.Run
 import XMonad.Util.Paste
 
--- Run xmonad with the specified conifguration
 main = xmonad $ ewmh $ gnomeConfig
         { modMask = mod4Mask
         , terminal = "gnome-terminal --window-with-profile=trans"
@@ -59,9 +58,8 @@ main = xmonad $ ewmh $ gnomeConfig
         , startupHook = myGnomeRegister >> startupHook desktopConfig >> setWMName "LG3D"
         -- -- for Splash
         , manageHook = manageHook gnomeConfig <+> myManageHook
-        , keys = \c -> myKeys c `M.union` myManualKeys c `M.union` keys gnomeConfig c
+        , keys = \c -> myKeys c `M.union` keys gnomeConfig c
         , workspaces = myWorkspaces
-        -- , handleEventHook = mappend myEventHooks (handleEventHook gnomeConfig)
         } `additionalMouseBindings` myMouse
 
 modm = mod4Mask
@@ -83,63 +81,23 @@ myGnomeRegister = io $ do
 
 myManageHook = composeAll $
   [ className =? "Do" --> doIgnore
-  , className =? "Googleearth-bin" --> doFloat
-  , className =? "Glade" --> doFloat
   , className =? "Pidgin" --> doF (W.focusUp . W.swapDown)
   , className =? "Gnome-terminal" --> doF (W.focusUp . W.swapDown)
-  , className =? "Zenity" --> doFloat
-  , className =? "Grhino" --> doFloat
   , isFullscreen --> doFullFloat
-  , resource =? "RCT.EXE" --> doRectFloat (W.RationalRect (155/1680) (30/1050) (1270/1680) (990/1050))
-  , resource =? "explorer.exe" <&&> title =? "EVETQ - Wine desktop" --> doFullFloat
-  , className =? "Spotify" --> doShift "0"
-  , className =? "Pithos" --> doShift "0"
-  , resource =? "steam.exe" --> doShift "0"
-  , resource =? "portal2.exe" --> doFullFloat
-  , className =? "Transmission-gtk" <&&> title =? "Transmission" --> doShift "0"
-  , className =? "Gnome-system-monitor" --> doShift "0"
-  , className =? "Boincmgr" --> doShift "0"
-  --, fmap not isDialog --> doF avoidMaster
-  -- ,  className =? "Firefox" <&&> resource =? "Download" --> doF (W.swapDown)
-  -- , className =? "Firefox" <&&> resource =? "Addons" --> doRectFloat (W.RationalRect (1/4) (1/6) (3/4) (2/3))
   ]
-
-
-avoidMaster = W.modify' $ \c -> case c of
-     W.Stack t [] (r:rs) -> W.Stack r [] (t:rs)
-     otherwise           -> c
 
 myMouse =
   [ ((modm, button3), (\w -> focus w >> Flex.mouseResizeWindow w))
-  --, ((modm, button1), (\w -> focus w >> placeFocused simpleSmart)) --placeFocused seems broken
   ]
 
 myWorkspaces = map show ([1..9]++[0])
-
-myManualKeys = \conf -> M.fromList $
-  [ ((0, 0x1008ffa9), spawn "~/.bin/touchpad") --XF86TouchpadToggle
-  ]
 
 myKeys = \conf -> mkKeymap conf $
   [ ("M-C-q", spawn "gnome-screensaver-command --lock")
   ,  ("M-f", spawn "exec firefox")
   ,  ("M-g", spawn "exec google-chrome")
-  ,  ("M-p a", spawn "exec gnome-control-center")
-  ,  ("M-p n", spawn "exec gnome-control-center network")
-  ,  ("M-p d", spawn "exec gnome-control-center display")
-  ,  ("M-p p", spawn "exec system-config-printer")
-  ,  ("M-p s", spawn "exec gnome-session-properties")
-  ,  ("M-p t", spawn "exec gnome-tweak-tool")
-  ,  ("M-p e", spawn "emoji-keyboard -s")
-  , ("M-p k", spawn "emoji-keyboard -k")
   , ("M-z", myPrompt myXPConfig)
   , ("M-C-S-z", inputPrompt myXPConfig "$" ?+ (spawn . ("~/.bin/send --no-send-0 "++)))
-  , ("M-C-z p", inputPrompt myXPConfig ">>>" ?+ (spawn . (\expr -> "~/.bin/send --title '"++expr++"' python -c 'print "++expr++"'")))
-  , ("M-C-z h", inputPrompt myXPConfig "λ>" ?+ (spawn . (\expr -> "~/.bin/send --title '"++expr++"' ghc -e '"++expr++"'")))
-  , ("M-C-z m", inputPrompt myXPConfig "stalk" ?+ (spawn . (\expr -> "~/.bin/send --title 'stalk "++expr++"' ~/.bin/stalk "++expr)))
-  , ("M-C-z o", inputPromptWithCompl myXPConfig "gnome-open" getDirectoryCompletions ?+ (spawn . (\expr -> "gnome-open '"++expr++"'")))
-  , ("M-C-z g", gnomeRun)
-  , ("M-n", spawn "~/.bin/reminder")
   , ("M-S-h", sendMessage MirrorShrink)
   , ("M-S-l", sendMessage MirrorExpand)
   , ("M-\\", windows W.focusMaster)
@@ -187,36 +145,6 @@ myXPConfig = defaultXPConfig { font = "xft:Ubuntu Mono-11"
                              , bgHLight = "#e0e0e0"
                              , fgHLight = "#000000"
                              }
-
-expandHomeTilde :: String -> IO String
-expandHomeTilde "~" = getEnv "HOME"
-expandHomeTilde ('~':'/':xs) = fmap (</> xs) $ getEnv "HOME"
-expandHomeTilde xs = return xs
-
-getDirectoryCompletions :: String -> IO [String]
-getDirectoryCompletions "" = getDirectoryCompletions "~"
-getDirectoryCompletions path = do
-    expath <- expandHomeTilde path
-    exists <- doesDirectoryExist expath
-    if exists && ('.'/=last expath)
-      then do
-        cont <- getDirectoryContentsWithSlashes expath 
-        return $ map (path </>) $ filter ((/='.') . head) cont
-      else do
-        cont <- getDirectoryContentsWithSlashes $ dropFileName expath
-        return $ map (dropFileName path </>) $ filter (takeFileName expath `isPrefixOf`) cont
-
-getDirectoryContentsWithSlashes :: String -> IO [String]
-getDirectoryContentsWithSlashes path = getDirectoryContents path >>= mapM addSlash
-  where addSlash :: String -> IO String
-        addSlash x = do
-          exists <- doesDirectoryExist $ path </> x
-          return $ if exists then x++"/" else x
-
-complMatches :: String -> String -> Bool
-complMatches "" ('.':ys) = False
-complMatches "" _ = True
-complMatches xs ys = xs `isPrefixOf` ys
 
 data SuperPrompt = SuperPrompt
 
