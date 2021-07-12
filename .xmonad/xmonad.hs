@@ -80,8 +80,7 @@ myGnomeRegister = io $ do
 -- myEventHooks = []
 
 myManageHook = composeAll $
-  [ className =? "Do" --> doIgnore
-  , className =? "Pidgin" --> doF (W.focusUp . W.swapDown)
+  [ className =? "Pidgin" --> doF (W.focusUp . W.swapDown)
   , className =? "Gnome-terminal" --> doF (W.focusUp . W.swapDown)
   , isFullscreen --> doFullFloat
   ]
