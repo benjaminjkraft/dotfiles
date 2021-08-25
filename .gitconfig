@@ -55,6 +55,15 @@
     squash = "!f() { EDITOR=\"sed -i '2,$ s/^pick/squash/'\" git rebase -i \"$@\"; }; f"
 [kaclone]
 	email = benkraft@khanacademy.org
+[ka "olc"]
+	autoupdate = false
+    abortOnUntrackedFiles = never
+    abortOnBehindUpstream = never
+    noJira = true
+[ka "pr"]
+    preserveTracking = true
+    allowRemotesAsBase = true
+    browse = never
 [interactive]
 	singleKey = true
 [http]
