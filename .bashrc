@@ -8,7 +8,7 @@
 PATH=$PATH:/usr/bin:/usr/local/heroku/bin:/usr/local/go/bin:$HOME/.cargo/bin
 
 #Import various stuff, checking each for existence
-for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/.gnupg/gpg-agent-info-BEN-PC" "$HOME/.travis/travis.sh" "$HOME/khan/devtools/google-cloud-sdk/completion.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc" "$HOME/.autojump/etc/profile.d/autojump.sh" "$HOME/.fzf.bash" "$HOME/.config/broot/launcher/bash/br"
+for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/khan/devtools/google-cloud-sdk/completion.bash.inc" "$HOME/google-cloud-sdk/completion.bash.inc" "$HOME/.autojump/etc/profile.d/autojump.sh" "$HOME/.fzf.bash"
 
 do
 	if [ -f "$f" ] ; then
@@ -159,9 +159,6 @@ alias less='less -iR'
 alias s='git s'
 alias d='git d'
 alias htop='title htop ; htop ; title'
-which hub >/dev/null && eval "$(hub alias -s)"
-alias ggrep='git grep --no-index'
-which bd >/dev/null && alias bd='. bd -s'
 alias gd='go doc'
 
 #some little utility functions
@@ -183,122 +180,8 @@ gvimr () {
     fi
 }
 
-#set up gpg-agent stuff
-export GPG_AGENT_INFO
-GPGKEY=9BA12CEB
-export GPGKEY
-GPG_TTY=`tty`
-export GPG_TTY
-
-#add sipb consult outland ops esp apo rsi &>/dev/null
-
 EDITOR='/usr/bin/vim'
 export EDITOR
-
-if [ "$(hostname)" = "quaternion" ] ; then
-    srcdir="$HOME/Documents"
-else
-    srcdir="$HOME/src"
-fi
-
-khanify () {
-  export KHAN=1
-  export GIT_AUTHOR_EMAIL="benkraft@khanacademy.org"
-  export GIT_COMMITTER_EMAIL="benkraft@khanacademy.org"
-  export UPSTREAM=HEAD^
-  # .bashrc.khan imports ~/.profile, which is not the khan one; we just source both.
-  . "$HOME/.bashrc.khan"
-  # Hack: force GOPATH to stay ahead of genfiles/go/bin so I can override things.
-  PATH="$HOME/.go/bin:$PATH"
-}
-
-khan-screen () {
-  if ! screen -x khan ; then
-    KHAN=1
-    export KHAN
-    cd "$HOME/khan/webapp"
-    screen -dmS khan
-    screen -S khan -p 0 -X screen
-    screen -S khan -p 0 -X screen
-    screen -S khan -p 0 -X screen
-    screen -S khan -p 2 -X stuff "title htop ; htop$(printf \\r)"
-    screen -S khan -p 1 -x
-  fi
-}
-
-if [ -n "$KHAN" ] ; then
-  khanify
-fi
-
-zscoreify () {
-    ZSCORE=1
-    export ZSCORE
-    if [ -f "$srcdir/zscore/env" ] ; then
-        source "$srcdir/zscore/env/bin/activate"
-    else
-        source "$HOME/.virtualenv/zscore/bin/activate"
-    fi
-}
-
-zscore-screen () {
-  if ! screen -x zscore ; then
-    ZSCORE=1
-    export ZSCORE
-    cd "$srcdir/zscore"
-    screen -dmS zscore
-    screen -S zscore -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
-    screen -S zscore -p 0 -X screen
-    screen -S zscore -p 1 -x
-  fi
-}
-
-if [ -n "$ZSCORE" ] ; then
-  zscoreify
-fi
-
-asadbify () {
-  ASADB=1
-  export ASADB
-  source "$HOME/.virtualenv/asadb/bin/activate"
-}
-
-asadb-screen () {
-  if ! screen -x asadb ; then
-    ASADB=1
-    export ASADB
-    cd "$srcdir/asa-db/asadb"
-    screen -dmS asadb
-    screen -S asadb -p 0 -X stuff "title serve ; clear ; echo ; make serve$(printf \\r)"
-    screen -S asadb -p 0 -X screen
-    screen -S asadb -p 1 -x
-  fi
-}
-
-if [ -n "$ASADB" ] ; then
-  asadbify
-fi
-
-esp-screen () {
-  title esp
-  if ! screen -x esp ; then
-    cd "$srcdir/ESP-Website/esp/esp" || cd "$srcdir/esp-website/esp/esp"
-    sleep 3
-    screen -dmS esp
-    screen -S esp -p 0 -X stuff "title serve ; vagrant up ; fab runserver$(printf \\r)"
-    screen -S esp -p 0 -X screen
-    screen -S esp -p 1 -x
-  fi
-}
-
-main-screen () {
-  if ! screen -x main ; then
-    screen -dmS main
-    screen -S main -p 0 -X screen
-    screen -S main -p 0 -X screen
-    screen -S main -p 2 -X stuff "title htop ; htop$(printf \\r)"
-    screen -S main -p 0 -x
-  fi
-}
 
 export CLOUDSDK_PYTHON=/usr/bin/python3
 

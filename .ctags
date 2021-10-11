@@ -1,5 +1,0 @@
---python-kinds=-iv
---exclude=genfiles
---exclude=node_modules
---exclude=third_party/*.js
---exclude=*.sql
