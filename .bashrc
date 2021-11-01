@@ -17,7 +17,6 @@ do
 done
 
 if which pyenv &>/dev/null; then
-    export PYENV_ROOT="$HOME/src/pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
@@ -184,10 +183,6 @@ EDITOR='/usr/bin/vim'
 export EDITOR
 
 export CLOUDSDK_PYTHON=/usr/bin/python3
-
-if which pyenv >/dev/null ; then
-    eval "$(pyenv init -)"
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

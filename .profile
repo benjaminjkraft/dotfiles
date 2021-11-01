@@ -20,3 +20,5 @@ do
 		PATH="$PATH:$p"
 	fi
 done
+
+export PATH="$PYENV_ROOT/shims:$PATH"
