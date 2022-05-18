@@ -44,7 +44,7 @@
     ramend = rebase -x 'git gsu' -x 'arc amend'
     squash = "!f() { EDITOR=\"sed -i '2,$ s/^pick/squash/'\" git rebase -i \"$@\"; }; f"
     gsu = submodule update --init --recursive
-    co = "!f() { if [ -n \"$1\" -a -z \"$2\" ]; then git checkout "`revisionid-to-diffid.sh --tag \"$@\"`"; else git checkout \"$@\"; fi && git gsu; }; f"
+    co = "!f() { git checkout \"$@\" && git gsu; }; f"
     p = "!f() { git pull \"$@\" && git gsu; }; f"
     m = "!f() { git merge \"$@\" && git gsu; }; f"
 [kaclone]
