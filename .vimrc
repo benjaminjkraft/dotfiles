@@ -222,16 +222,9 @@ let g:ale_linters.kotlin = ['ktlint', 'languageserver']
 " Go
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal foldmethod=indent
-let g:ale_linters.go = ['gofmt', 'golint', 'govet', 'gopls']
-let g:ale_fixers.go = ['gofmt', 'goimports']
-let g:ale_go_gofmt_executable = "gofumpt"
-let g:ale_go_gofmt_options = "-s"
-let g:ale_go_goimports_executable = "gofumports"
+let g:ale_linters.go = ['gofumpt', 'govet', 'gopls']
+let g:ale_fixers.go = ['gofumpt', 'goimports']
+let g:ale_go_go_executable = "gotip"
+let g:ale_go_gofumpt_executable = "gofumpt"
 autocmd BufRead,BufNewFile */khan/webapp* let g:ale_go_goimports_options = '-local github.com/Khan/webapp'
 autocmd BufRead,BufNewFile *.go2 set filetype=go
-autocmd BufRead,BufNewFile *.go2 let g:ale_go_go_executable = "go.go2go"
-autocmd BufRead,BufNewFile *.go2 let g:ale_go_gofmt_executable = "gofmt.go2go"
-autocmd BufRead,BufNewFile *.go2 let g:ale_go_goimports_executable = "goimports.go2go"
-autocmd BufRead,BufNewFile *.go2 let g:ale_go_gopls_executable = "gopls.go2go"
-autocmd BufRead,BufNewFile *.go2 let g:ale_linters.go = ['gopls']
-autocmd BufRead,BufNewFile *.go2 let g:ale_fixers.go = ['goimports']
