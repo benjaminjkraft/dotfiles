@@ -119,9 +119,9 @@ myKeys = \conf -> mkKeymap conf $
   [ ("M-" ++ m ++ k, f i)
   | (i,k) <- zip (cycle $ reverse $ XMonad.workspaces conf) $ reverse (XMonad.workspaces conf)++["`"]
   , (f,m) <-
-    [ (windows . W.view, "")
+    [ (windows . W.greedyView, "")
     , (windows . W.shift, "S-")
-    , (\w -> (windows $ W.shift w) >> (windows $ W.view w), "C-")
+    , (\w -> (windows $ W.shift w) >> (windows $ W.greedyView w), "C-")
     ]
   ]
 
