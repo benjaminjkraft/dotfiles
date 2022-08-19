@@ -184,6 +184,8 @@ export EDITOR
 
 export CLOUDSDK_PYTHON=/usr/bin/python3
 
+export GEM_HOME=$HOME/.gem
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).

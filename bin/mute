@@ -1,6 +1,7 @@
 #!/bin/sh
 
-name="$(xdotool getwindowname $(xdotool getactivewindow))"
+# match either name or process name
+name="$(xdotool getwindowname $(xdotool getactivewindow)) $(ps -o command= p $(xdotool getwindowpid $(xdotool getactivewindow)))"
 
 if [ "${name#*Meet*Firefox}" != "$name" ] || [ "${name#*Meet*Chrome}" != "$name" ]; then
     xdotool key ctrl+d
