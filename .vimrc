@@ -48,7 +48,11 @@ autocmd BufRead,BufNewFile */third_party/* let b:ale_fix_on_save = 0
 
 " display options
 set laststatus=2
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
+if has('gui_macvim')
+    set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
+else
+    set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
+endif
 highlight LineNr guifg=white guibg=black
 highlight Conceal guifg=black guibg=white
 set guioptions-=T
