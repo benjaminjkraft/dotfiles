@@ -56,7 +56,7 @@ esac
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|xterm-256color) color_prompt=yes;;
+    xterm-color|xterm-256color|tmux-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -131,17 +131,11 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+# enable color support for ls/grep
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # some more ls aliases
 alias ll='ls -ahlF'
@@ -159,6 +153,16 @@ alias s='git s'
 alias d='git d'
 alias htop='title htop ; htop ; title'
 alias gd='go doc'
+if which -s gvim && ! which -s mvim; then
+    alias gvim=mvim
+fi
+
+case "$(hostname)" in
+homotopy)
+    export GIT_AUTHOR_EMAIL=benkraft@makenotion.com
+    export GIT_COMMITTER_EMAIL=benkraft@makenotion.com
+    ;;
+esac
 
 #some little utility functions
 snip () {
@@ -185,6 +189,9 @@ export EDITOR
 export CLOUDSDK_PYTHON=/usr/bin/python3
 
 export GEM_HOME=$HOME/.gem
+
+# why does mac not 
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
