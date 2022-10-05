@@ -69,13 +69,15 @@
       "homebrew/cask"
     ];
     casks = [
-      "alacritty" # nix alacritty doesn't seem to play nice with the dock :(
-      "docker"    # TODO: can't figure get nix docker to start its daemon
+      "alacritty"         # nix alacritty doesn't play nice with the dock :(
+      "docker"            # TODO: how to get nix docker to start its daemon?
       "firefox"
       # installed by kandji:
       # "google-chrome"
       # "slack"
-      "macvim" # nix macvim requires full xcode :(
+      "macvim"            # nix macvim requires full xcode :(
+      "openvpn-connect"   # nix version doesn't have GUI?
+      "stats"
       "vlc"
     ];
   };
