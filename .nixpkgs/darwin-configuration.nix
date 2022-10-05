@@ -20,22 +20,45 @@
   system.activationScripts.postActivation.text = ''
     # Actually set shell:
     # https://shaunsingh.github.io/nix-darwin-dotfiles/#orgb26c90e
-    chsh -s ${lib.getBin pkgs.bash}/bin/bash ${config.users.users.benkraft.name}
+    # chsh -s "${lib.getBin pkgs.bash}/bin/bash" "${config.users.users.benkraft.name}"
+    # except that borks something with terminfo. Use system bash for now.
+    # TODO: figure out what's up with nix bash.
+    chsh -s "/bin/bash" "${config.users.users.benkraft.name}"
+
+    # Allow npm install -g, as a concession to reality
+    # (have to sudo to me to avoid permission errors later)
+    # XXX: but this doesn't make sense here anymore probably?
+    sudo -u ${config.users.users.benkraft.name} mkdir -p "${config.users.users.benkraft.home}/.local"
+    # TODO: this is somehow trying to access .Trash which it doesn't have
+    # permission to. No idea why; ran it manually for now.
+    # npm set prefix "${config.users.users.benkraft.home}/.local"
   '';
 
   networking.computerName = "homotopy";
   networking.hostName = "homotopy";
 
+  nixpkgs.config.allowUnfree = true;
+
   # installed for all users
   environment.systemPackages = [
     pkgs.coreutils
-    pkgs.gnused
+    pkgs.gnused      # BSD sed is terrible
     pkgs.htop
     pkgs.jq
     pkgs.tmux
     pkgs.vim
     pkgs.xcode-install # note: doesn't seem to actually install xcode?
+
+    # from notion setup but generally useful
+    pkgs.awscli2
+    pkgs.ssm-session-manager-plugin   # some related AWS thing
+    pkgs.pandoc
+    pkgs.ripgrep
   ];
+  # Needed so that the node package libpq can find the libpq headers (installed
+  # by postgresql_13). Might not be needed if I set things up in the proper
+  # build env?
+  # environment.pathsToLink = ["/include"];
 
   # the one, the only, love it, hate it...
   homebrew = {
@@ -47,6 +70,7 @@
     ];
     casks = [
       "alacritty" # nix alacritty doesn't seem to play nice with the dock :(
+      "docker"    # TODO: can't figure get nix docker to start its daemon
       "firefox"
       # installed by kandji:
       # "google-chrome"
@@ -58,6 +82,10 @@
 
   # auto-update nix itself(?)
   services.nix-daemon.enable = true;
+
+  nix.extraOptions = ''
+    experimental-features = nix-command
+  '';
 
   # put nix in rc file, I think?
   programs.bash.enable = true;
@@ -101,7 +129,7 @@
       NSAutomaticQuoteSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
       "com.apple.keyboard.fnState" = true;
-
+      "com.apple.sound.beep.volume" = 0.0;
     };
   };
 

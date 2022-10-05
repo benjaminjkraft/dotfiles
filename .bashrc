@@ -119,7 +119,11 @@ xterm*|rxvt*)
     else
       HPWD="$TITLE"
     fi
-    printf '\ek%s\e\\' "$HPWD"
+    if [ -z "$TMUX" ]; then
+        printf '\ek%s\e\\' "$HPWD"
+    else  # tmux pretends to be screen in $TERM but sets $TMUX
+        tmux rename-window "$HPWD"
+    fi
   }
   title () {
     TITLE="$1"
@@ -199,3 +203,4 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+eval "$(notion completion --install)"
