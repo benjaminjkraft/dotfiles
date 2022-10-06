@@ -42,6 +42,7 @@
   # installed for all users
   environment.systemPackages = [
     pkgs.coreutils
+    pkgs.gh
     pkgs.gnused      # BSD sed is terrible
     pkgs.htop
     pkgs.jq
@@ -131,6 +132,7 @@
       NSAutomaticQuoteSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
       "com.apple.keyboard.fnState" = true;
+      "com.apple.trackpad.scaling" = 2.5;
       "com.apple.sound.beep.volume" = 0.0;
     };
   };

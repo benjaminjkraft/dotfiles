@@ -199,6 +199,8 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # TODO: I'm not on node 17+, why is this needed?? what does it even mean???
 export NODE_OPTIONS=--openssl-legacy-provider
 
+export NOTION_NO_PREPUSH=true
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
