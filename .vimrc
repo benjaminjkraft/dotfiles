@@ -34,17 +34,13 @@ set tags=./tags;
 " harder to get netrw to do)
 let g:netrw_browsex_viewer = "setsid xdg-open"
 
+" notion uses noet
+autocmd BufRead,BufNewFile */notion-next* set noet
+
 " ALE -- turn on fixers, but not for 3rd party code.
 let g:ale_linters = {}  " defined below
 let g:ale_fixers = {}   " defined below
 let g:ale_fix_on_save = 1
-" TODO: figure out ALE completion (may require getting pyls living beyond the
-" vim session, so it's not super slow)
-" TODO: cleaner way to handle these various kinds of third-party-ness
-autocmd BufRead,BufNewFile */google/appengine/* let b:ale_fix_on_save = 0
-autocmd BufRead,BufNewFile */frankenserver/* let b:ale_fix_on_save = 0
-autocmd BufRead,BufNewFile */frankenserver-khansrc/* let b:ale_fix_on_save = 0
-autocmd BufRead,BufNewFile */third_party/* let b:ale_fix_on_save = 0
 
 " display options
 set laststatus=2
@@ -146,6 +142,7 @@ vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
 " highlight STOPSHIPs
 autocmd Syntax * syn keyword bonusTodo STOPSHIP containedin=.*Comment.*
+autocmd Syntax * syn keyword bonusTodo nocommit containedin=.*Comment.*
 hi def link bonusTodo Todo
 
 
@@ -170,9 +167,6 @@ autocmd FileType text setlocal linebreak
 " Python
 autocmd FileType python setlocal ts=4 sw=4 sts=4
 autocmd FileType python setlocal foldmethod=indent
-autocmd BufRead,BufNewFile */google/appengine/* setlocal ts=2 sw=2 sts=2
-autocmd BufRead,BufNewFile */frankenserver/* setlocal ts=2 sw=2 sts=2
-autocmd BufRead,BufNewFile */frankenserver-khansrc/* setlocal ts=2 sw=2 sts=2
 let g:ale_linters.python = ['flake8', 'pyls']
 let g:ale_fixers.python = ['autopep8']
 " autopep8 is too aggressive about things not fixed by pycodestyle, so we have
@@ -181,18 +175,11 @@ let g:ale_fixers.python = ['autopep8']
 " TODO: remove if autopep8#431 gets fixed.
 let g:ale_python_autopep8_options = '--ignore E301,E303,W503,E266,E402,E501,E712,E731,E741'
 
-" JS(X)
-autocmd BufNewFile,BufReadPost *.ts set filetype=javascript
-let g:ale_fixers.javascript = ['eslint']
-" TODO: figure out if we can use a relative path here somehow (and if so update
-" webapp .vimrc likewise)
-autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_executable = $HOME."/khan/webapp/node_modules/.bin/eslint"
-autocmd BufRead,BufNewFile */khan/webapp* let b:ale_javascript_eslint_use_global = 1
-autocmd BufRead,BufNewFile */src/apollo* let b:ale_fixers = {'javascript': ['prettier']}
-autocmd BufRead,BufNewFile *.ts let g:ale_linters.javascript = ['eslint', 'tsserver']
-autocmd BufRead,BufNewFile *.tsx let g:ale_linters.javascript = ['eslint', 'tsserver']
-autocmd BufRead,BufNewFile *.js let g:ale_linters.javascript = ['eslint', 'flow-language-server']
-autocmd BufRead,BufNewFile *.jsx let g:ale_linters.javascript = ['eslint', 'flow-language-server']
+" JS/TS
+let g:ale_linters.typescript = ['eslint', 'tsserver']
+" eslint is too slow for a fixer (and runs before prettier) :(
+let g:ale_fixers.javascript = ['prettier']
+let g:ale_fixers.typescript = ['prettier']
 
 " (La)TeX
 let g:tex_flavor='latex'
@@ -219,7 +206,6 @@ autocmd FileType haskell setlocal tw=0
 autocmd Filetype groovy setlocal tabstop=3 shiftwidth=3 softtabstop=3
 
 " Kotlin
-autocmd BufRead,BufNewFile */khan/* let g:ale_kotlin_ktlint_executable = $HOME."/khan/webapp/testing/ktlint"
 " turn off kotlinc -- it tries to do too much, spins, and crashes.
 let g:ale_linters.kotlin = ['ktlint', 'languageserver']
 
@@ -230,5 +216,4 @@ let g:ale_linters.go = ['gofumpt', 'govet', 'gopls']
 let g:ale_fixers.go = ['gofumpt', 'goimports']
 let g:ale_go_go_executable = "gotip"
 let g:ale_go_gofumpt_executable = "gofumpt"
-autocmd BufRead,BufNewFile */khan/webapp* let g:ale_go_goimports_options = '-local github.com/Khan/webapp'
 autocmd BufRead,BufNewFile *.go2 set filetype=go
