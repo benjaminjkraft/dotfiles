@@ -11,7 +11,7 @@ PATH=$PATH:/usr/bin:/usr/local/heroku/bin:/usr/local/go/bin:$HOME/.cargo/bin
 NIX_CURRENT_SYSTEM=/run/current-system/sw
 
 # Import various stuff, checking each for existence
-for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/google-cloud-sdk/completion.bash.inc" "$HOME/.autojump/etc/profile.d/autojump.sh" "$NIX_CURRENT_SYSTEM/etc/profile.d/autojump.sh" "$HOME/.fzf.bash"
+for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/google-cloud-sdk/completion.bash.inc" "/Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash" "$HOME/.autojump/etc/profile.d/autojump.sh" "$NIX_CURRENT_SYSTEM/etc/profile.d/autojump.sh" "$HOME/.fzf.bash"
 
 do
 	if [ -f "$f" ] ; then
