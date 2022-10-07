@@ -10,8 +10,14 @@ PATH=$PATH:/usr/bin:/usr/local/heroku/bin:/usr/local/go/bin:$HOME/.cargo/bin
 # TODO: probably there's a better way to get this
 NIX_CURRENT_SYSTEM=/run/current-system/sw
 
+# mac /etc/profile really wants to put /usr/bin etc. before Nix stuff, which I, for one, do not want.
+# TODO: this whole profile/bashrc dance is a hot mess
+if ! which -s nix; then
+	. /etc/profile
+fi
+
 # Import various stuff, checking each for existence
-for f in "/etc/profile" "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/google-cloud-sdk/completion.bash.inc" "/Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash" "$HOME/.autojump/etc/profile.d/autojump.sh" "$NIX_CURRENT_SYSTEM/etc/profile.d/autojump.sh" "$HOME/.fzf.bash"
+for f in "$HOME/.profile" "$HOME/.bin/j.sh" "/usr/share/autojump/autojump.bash" "$HOME/.config/autopackage/paths-bash" "$HOME/.bashrc_local" "$HOME/google-cloud-sdk/completion.bash.inc" "/Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash" "$HOME/.autojump/etc/profile.d/autojump.sh" "$NIX_CURRENT_SYSTEM/etc/profile.d/autojump.sh" "$HOME/.fzf.bash"
 
 do
 	if [ -f "$f" ] ; then

@@ -44,6 +44,7 @@
     pkgs.autojump
     pkgs.coreutils
     pkgs.gh
+    pkgs.gnugrep     # tfenv requires GNU grep and who can blame them
     pkgs.gnused      # BSD sed is terrible
     pkgs.htop
     pkgs.lesspipe    # the "read a tar file in less" thing
