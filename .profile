@@ -22,11 +22,10 @@ do
 done
 
 # need precedence for reasons.
-# .bin: so my notion shim wins over npm's symlink
 # .local/bin: so npm install -g npm wins over nix
 # pyenv shims: ???
 # TODO: more principled.
-for p in "$HOME/.local/bin" "$HOME/.bin" "$PYENV_ROOT/shims"
+for p in "$HOME/.local/bin" "$PYENV_ROOT/shims"
 do
 	if [ -d "$p" ] ; then
 		PATH="$p:$PATH"

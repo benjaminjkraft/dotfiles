@@ -169,13 +169,6 @@ if which -s gvim && ! which -s mvim; then
     alias gvim=mvim
 fi
 
-case "$(hostname)" in
-homotopy)
-    export GIT_AUTHOR_EMAIL=benkraft@makenotion.com
-    export GIT_COMMITTER_EMAIL=benkraft@makenotion.com
-    ;;
-esac
-
 #some little utility functions
 snip () {
   if [ -n "$2" ] ; then
@@ -206,6 +199,39 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # TODO: I'm not on node 17+, why is this needed?? what does it even mean???
 export NODE_OPTIONS=--openssl-legacy-provider
+
+# ------------- Notion-specific --------------
+
+# ehehehe
+notion () {
+    notion_root="$HOME/src/notion-next"
+    case "$1" in
+    tmux)
+        if ! tmux attach; then
+            cd "$notion_root"
+            nix-shell --run tmux
+        fi
+        ;;
+    *)
+        if [ -n "$NOTION_IN_NIX" ]; then
+            # just use regular notion, avoid recursive alias
+            "$(which notion)" "$@"
+        else
+            # TODO: this is basically just calling notion via nix-shell,
+            # there should be a better way to do that
+            nix-notion "$@"
+        fi
+        ;;
+    esac
+}
+
+
+case "$(hostname)" in
+homotopy)
+    export GIT_AUTHOR_EMAIL=benkraft@makenotion.com
+    export GIT_COMMITTER_EMAIL=benkraft@makenotion.com
+    ;;
+esac
 
 export NOTION_NO_PREPUSH=true
 
