@@ -45,6 +45,7 @@
     pkgs.gh
     pkgs.gnused      # BSD sed is terrible
     pkgs.htop
+    pkgs.lesspipe    # the "read a tar file in less" thing
     pkgs.jq
     pkgs.tmux
     pkgs.vim

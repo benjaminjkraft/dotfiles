@@ -37,7 +37,12 @@ HISTFILESIZE=
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# on nix it's called lesspipe.sh for whatever reason
+for lesspipe in lesspipe lesspipe.sh; do
+    if which -s $lesspipe; then
+        eval "$(SHELL=/bin/sh "$(which $lesspipe)")"
+    fi
+done
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
