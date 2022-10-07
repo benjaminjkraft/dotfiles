@@ -41,6 +41,7 @@
 
   # installed for all users
   environment.systemPackages = [
+    pkgs.autojump
     pkgs.coreutils
     pkgs.gh
     pkgs.gnused      # BSD sed is terrible
@@ -57,10 +58,7 @@
     pkgs.pandoc
     pkgs.ripgrep
   ];
-  # Needed so that the node package libpq can find the libpq headers (installed
-  # by postgresql_13). Might not be needed if I set things up in the proper
-  # build env?
-  # environment.pathsToLink = ["/include"];
+  environment.pathsToLink = ["/etc/profile.d"]; # autojump puts its init here
 
   # the one, the only, love it, hate it...
   homebrew = {
