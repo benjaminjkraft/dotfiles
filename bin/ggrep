@@ -1,0 +1,4 @@
+#!/bin/sh
+# some mac things expect GNU grep at ggrep; I like to live on the edge so it's
+# just grep
+exec grep "$@"
