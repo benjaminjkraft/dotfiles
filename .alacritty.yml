@@ -1,0 +1,19 @@
+window:
+  dimensions:
+    # defaults are teeny
+    columns: 90
+    lines: 40
+
+  # maybe once yabai?
+  # decorations: buttonless
+
+scrolling:
+  history: 100000
+
+font:
+  normal:
+    family: "Ubuntu Mono derivative Powerline"
+  size: 14
+
+# TODO revisit after setting up skhd
+# key_bindings:
