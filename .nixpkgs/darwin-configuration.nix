@@ -5,6 +5,12 @@
 # many thanks to slim, tons of cribbing from
 # https://github.com/sliminality/nix-config/blob/main/darwin-configuration.nix
 
+let yabai = pkgs.yabai.overrideAttrs (old: rec {
+  src = builtins.fetchTarball {
+    url = https://github.com/koekeishiya/yabai/files/7915231/yabai-v4.0.0.tar.gz;
+    sha256 = "sha256:0rs6ibygqqzwsx4mfdx8h1dqmpkrsfig8hi37rdmlcx46i3hv74k";
+  };
+}); in
 {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -89,6 +95,19 @@
   nix.extraOptions = ''
     experimental-features = nix-command
   '';
+
+  services.yabai = {
+    enable = true;
+    package = yabai;
+
+    # ugh can I just put this in .yabairc like a normal person?
+    extraConfig = ''
+      yabai -m config layout bsp
+      yabai -m config split_ratio 0.64
+
+      yabai -m config focus_follows_mouse autoraise
+    '';
+  };
 
   # put nix in rc file, I think?
   programs.bash.enable = true;
