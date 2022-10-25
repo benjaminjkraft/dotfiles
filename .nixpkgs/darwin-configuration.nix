@@ -77,6 +77,7 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     ];
     casks = [
       "alacritty"         # nix alacritty doesn't play nice with the dock :(
+      "bettertouchtool"
       "docker"            # TODO: how to get nix docker to start its daemon?
       "firefox"
       # installed by kandji:
