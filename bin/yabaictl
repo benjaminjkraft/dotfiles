@@ -1,0 +1,54 @@
+#!/bin/sh
+
+PATH="$PATH:/run/current-system/sw/bin"
+
+alias w="yabai -m window"
+alias s="yabai -m space"
+
+# hacky way to make next/prev cycle
+next() { "$@" next || "$@" first ; }
+prev() { "$@" prev || "$@" last ; }
+
+case "$1" in
+    nextwindow)
+        next yabai -m window --focus
+        ;;
+    prevwindow)
+        prev yabai -m window --focus
+        ;;
+    topwindow)
+        yabai -m window --focus first
+        ;;
+    movenextwindow)
+        next yabai -m window --swap
+        ;;
+    moveprevwindow)
+        prev yabai -m window --swap
+        ;;
+    movetopwindow)
+        yabai -m window --swap first
+        ;;
+    movenextspace)
+        next yabai -m window --space
+        ;;
+    moveprevspace)
+        prev yabai -m window --space
+        ;;
+    follownextspace)
+        echo "yabaictl: TODO s --focus requires disabling SIP"
+        exit 1
+        w --space next && s --focus next || \
+            w --space first && s --focus first
+        ;;
+    followprevspace)
+        echo "yabaictl: TODO s --focus requires disabling SIP"
+        exit 1
+        w --space prev && s --focus prev || \
+            w --space last && s --focus last
+        ;;
+    # TODO: also remap go to next space so it cycles
+    *)
+        echo "yabaictl: unknown command \"$1\""
+        exit 1
+        ;;
+esac
