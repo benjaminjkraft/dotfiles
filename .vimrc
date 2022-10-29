@@ -104,7 +104,7 @@ if has("gui_macvim")
   macm Window.Show\ Previous\ Tab                 key=<nop>
   macm Help.MacVim\ Help                          key=<nop>
 
-  for char in "abcdefghijklmnopqrstuvwxyz124567890`-=[];',.?"
+  for char in "abcdefghijklmnopqrstuvwxyz124567890`-=[];',.?\\"
     execute "map \<D-" . char . "> \<C-" . char . ">"
     execute "map! \<D-" . char . "> \<C-" . char . ">"
     " TODO: not clear if tmap is doing anything?
@@ -182,6 +182,7 @@ nnoremap <C-]>] :ALEGoToTypeDefinition -split<CR>
 nnoremap <C-]>s :ALEGoToTypeDefinition -split<CR>
 nnoremap <C-]>v :ALEGoToDefinition -vsplit<CR>
 nnoremap <C-]>e :ALEGoToDefinition<CR>
+nnoremap <C-[> :ALEFindReferences<CR>
 nnoremap <C-t> <C-^>
 vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
@@ -229,8 +230,8 @@ let g:ale_python_autopep8_options = '--ignore E301,E303,W503,E266,E402,E501,E712
 " JS/TS
 let g:ale_linters.typescript = ['eslint', 'tsserver']
 " eslint is too slow for a fixer (and runs before prettier) :(
-let g:ale_fixers.javascript = ['prettier']
-let g:ale_fixers.typescript = ['prettier']
+let g:ale_fixers.javascript = ['prettier', 'eslint']
+let g:ale_fixers.typescript = ['prettier', 'eslint']
 
 " (La)TeX
 let g:tex_flavor='latex'

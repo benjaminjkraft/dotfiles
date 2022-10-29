@@ -207,6 +207,8 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export NODE_OPTIONS=--openssl-legacy-provider
 # TODO: figure out how to get tfenv to build arm64 binaries instead
 export GODEBUG=asyncpreemptoff=1
+export TF_CLI_ARGS_plan="-compact-warnings"
+export TF_CLI_ARGS_apply="-compact-warnings"
 
 # ------------- Notion-specific --------------
 
@@ -242,6 +244,7 @@ homotopy)
 esac
 
 export NOTION_NO_PREPUSH=true
+export NOTION_ESLINT_DISABLE_TYPES=true
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
