@@ -46,6 +46,9 @@ case "$1" in
         w --space prev && s --focus prev || \
             w --space last && s --focus last
         ;;
+    rot)
+        yabai -m space --rotate 90
+        ;;
     # TODO: also remap go to next space so it cycles
     *)
         echo "yabaictl: unknown command \"$1\""
