@@ -55,6 +55,8 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     pkgs.htop
     pkgs.lesspipe    # the "read a tar file in less" thing
     pkgs.jq
+    pkgs.python310Packages.ipython
+    pkgs.procps      # watch et al.
     pkgs.tmux
     pkgs.vim
     pkgs.xcode-install # note: doesn't seem to actually install xcode?
