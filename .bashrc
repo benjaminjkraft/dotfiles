@@ -12,7 +12,7 @@ NIX_CURRENT_SYSTEM=/run/current-system/sw
 
 # mac /etc/profile really wants to put /usr/bin etc. before Nix stuff, which I, for one, do not want.
 # TODO: this whole profile/bashrc dance is a hot mess
-if ! which -s nix; then
+if ! which nix >/dev/null; then
 	. /etc/profile
 fi
 
@@ -48,7 +48,7 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 # on nix it's called lesspipe.sh for whatever reason
 for lesspipe in lesspipe lesspipe.sh; do
-    if which -s $lesspipe; then
+    if which $lesspipe >/dev/null; then
         eval "$(SHELL=/bin/sh "$(which $lesspipe)")"
     fi
 done
@@ -171,7 +171,7 @@ alias s='git s'
 alias d='git d'
 alias htop='title htop ; htop ; title'
 alias gd='go doc'
-if which -s gvim && ! which -s mvim; then
+if which gvim >/dev/null && ! which mvim >/dev/null; then
     alias gvim=mvim
 fi
 
@@ -240,6 +240,7 @@ case "$(hostname)" in
 homotopy)
     export GIT_AUTHOR_EMAIL=benkraft@makenotion.com
     export GIT_COMMITTER_EMAIL=benkraft@makenotion.com
+    eval "$(notion completion --install)"
     ;;
 esac
 
@@ -252,4 +253,3 @@ export NOTION_ESLINT_DISABLE_TYPES=true
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-eval "$(notion completion --install)"
