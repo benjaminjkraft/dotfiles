@@ -182,7 +182,7 @@ nnoremap <C-]>] :ALEGoToTypeDefinition -split<CR>
 nnoremap <C-]>s :ALEGoToTypeDefinition -split<CR>
 nnoremap <C-]>v :ALEGoToDefinition -vsplit<CR>
 nnoremap <C-]>e :ALEGoToDefinition<CR>
-nnoremap <C-[> :ALEFindReferences<CR>
+nnoremap <C-'> :ALEFindReferences<CR>
 nnoremap <C-t> <C-^>
 vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
