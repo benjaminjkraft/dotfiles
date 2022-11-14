@@ -53,6 +53,7 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     pkgs.gnugrep     # tfenv requires GNU grep and who can blame them
     pkgs.gnused      # BSD sed is terrible
     pkgs.htop
+    pkgs.httpie
     pkgs.lesspipe    # the "read a tar file in less" thing
     pkgs.jq
     pkgs.python310Packages.ipython
