@@ -1,0 +1,4 @@
+#!/bin/sh
+# Nix installs a sysctl that doesn't support some of the usual mac flags, which
+# breaks `npm install chromedriver`. Use the system version instead.
+exec /usr/sbin/sysctl "$@"
