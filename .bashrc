@@ -172,7 +172,7 @@ alias d='git d'
 alias htop='title htop ; htop ; title'
 alias gd='go doc'
 alias conflicts='git ls-files --unmerged | cut -f2 | uniq | xargs gvim -o'
-if which gvim >/dev/null && ! which mvim >/dev/null; then
+if ! which gvim >/dev/null && which mvim >/dev/null; then
     alias gvim=mvim
 fi
 
