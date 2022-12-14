@@ -48,6 +48,7 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
   # installed for all users
   environment.systemPackages = [
     pkgs.autojump
+    pkgs.comby
     pkgs.coreutils
     pkgs.gh
     pkgs.gnugrep     # tfenv requires GNU grep and who can blame them
