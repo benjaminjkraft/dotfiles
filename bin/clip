@@ -1,7 +1,21 @@
 #!/bin/sh
 
 if [ -t 0 ]; then  # stdin is a tty
-    xclip -out -selection clipboard
+	if which xclip >/dev/null; then
+		xclip -out -selection clipboard
+	elif which pbpaste >/dev/null; then
+		pbpaste
+	else
+		echo "no xclip nor pbcopy"
+		exit 1
+	fi
 else
-    xclip -in -selection clipboard
+	if which xclip >/dev/null; then
+		xclip -in -selection clipboard
+	elif which pbcopy >/dev/null; then
+		pbcopy
+	else
+		echo "no xclip nor pbcopy"
+		exit 1
+	fi
 fi
