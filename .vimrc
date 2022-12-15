@@ -28,6 +28,7 @@ set wildmenu
 set scrolloff=1
 set display+=lastline
 set tags=./tags;
+set foldmethod=indent
 
 " xdg-open exits before opening the URL at which point vim kills its process
 " group -- setsid works around this (so would xdg-open <url> & but that's
@@ -218,7 +219,6 @@ autocmd FileType text setlocal linebreak
 
 " Python
 autocmd FileType python setlocal ts=4 sw=4 sts=4
-autocmd FileType python setlocal foldmethod=indent
 let g:ale_linters.python = ['flake8', 'pyls']
 let g:ale_fixers.python = ['autopep8']
 " autopep8 is too aggressive about things not fixed by pycodestyle, so we have
@@ -263,7 +263,6 @@ let g:ale_linters.kotlin = ['ktlint', 'languageserver']
 
 " Go
 autocmd FileType go setlocal noexpandtab
-autocmd FileType go setlocal foldmethod=indent
 let g:ale_linters.go = ['gofumpt', 'govet', 'gopls']
 let g:ale_fixers.go = ['gofumpt', 'goimports']
 let g:ale_go_go_executable = "gotip"
