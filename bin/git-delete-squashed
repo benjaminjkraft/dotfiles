@@ -1,0 +1,17 @@
+#!/bin/sh
+# modified from https://github.com/not-an-aardvark/git-delete-squashed
+# (MIT License, Copyright © 2017 Teddy Katz)
+TARGET_BRANCH=origin/main
+git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do
+    if [[ $branch == main ]]; then
+        continue
+    fi
+
+    mergeBase=$(git merge-base $TARGET_BRANCH $branch)
+    tree=$(git rev-parse $branch\^{tree})
+    squashed=$(git commit-tree $tree -p $mergeBase -m _)
+    cherry=$(git cherry $TARGET_BRANCH $squashed)
+    if [[ $cherry == "-"* ]]; then
+        git branch -D $branch
+    fi
+done
