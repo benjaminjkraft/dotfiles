@@ -175,6 +175,9 @@ alias conflicts='git ls-files --unmerged | cut -f2 | uniq | xargs gvim -o'
 if ! which gvim >/dev/null && which mvim >/dev/null; then
     alias gvim=mvim
 fi
+if [ "$(uname -s)" == "Darwin" ]; then
+    alias man=dash-man
+fi
 
 #some little utility functions
 snip () {
