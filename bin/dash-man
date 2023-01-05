@@ -1,6 +1,7 @@
 #!/bin/sh
 # Alias to man to handle subcommands like debian's man does,
 # e.g. `man git log` looks up the man page for git-log.
+# See: https://stackoverflow.com/a/32750157/904174
 if [ $# -eq 2 ]; then
     merged="$1-$2"
     if man -w "$merged" &>/dev/null; then
