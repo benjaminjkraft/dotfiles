@@ -51,6 +51,7 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     pkgs.comby
     pkgs.coreutils
     pkgs.gh
+    pkgs.git
     pkgs.gnugrep     # tfenv requires GNU grep and who can blame them
     pkgs.gnused      # BSD sed is terrible
     pkgs.htop
