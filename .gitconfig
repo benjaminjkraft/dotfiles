@@ -40,7 +40,7 @@
     rc = rebase --continue
     ri = rebase --interactive
     pp = "!f() { git p && git push \"$@\"; }; f"
-    gred = "!f() { git grep -l \"$@\" | grep -vF -e tests_for.json -e ownership_data.json | xargs gvim -o; }; f"
+    gred = "!f() { git grep -l \"$@\" | grep -vF -e package-lock.json | xargs gvim -o; }; f"
     ramend = rebase -x 'git gsu' -x 'arc amend'
     squash = "!f() { EDITOR=\"sed -i '2,$ s/^pick/squash/'\" git rebase -i \"$@\"; }; f"
     gsu = submodule update --init --recursive
