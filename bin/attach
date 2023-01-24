@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+# modified from https://mutelight.org/practical-tmux#section-6
+# usage: attach [base_session_name]
+
+base_session_name="$1"
+if [ -z "$base_session_name" ]; then
+    base_session_name="$(tmux list-sessions -F "#{session_name}" | grep -vE '^[0-9]{14}$' | head -n1)"
+fi
+if [ -z "$base_session_name" ]; then
+    exec tmux new-session
+fi
+sessions="$(tmux list-sessions -f "#{==:#{session_name},$base_session_name}")"
+if [ -z "$sessions" ]; then
+    exec tmux new-session -s "$base_session_name"
+fi
+
+session_name="$(date +%Y%m%d%H%M%S)"
+tmux new-session -d -t "$base_session_name" -s "$session_name"
+tmux attach-session -t "$session_name"
+tmux kill-session -t "$session_name"

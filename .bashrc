@@ -221,10 +221,7 @@ notion () {
     notion_root="$HOME/src/notion-next"
     case "$1" in
     tmux)
-        if ! tmux attach; then
-            cd "$notion_root"
-            nix-shell --run tmux
-        fi
+        ( cd "$notion_root"; nix-shell --run "attach notion" )
         ;;
     *)
         if [ -n "$NOTION_IN_NIX" ]; then
