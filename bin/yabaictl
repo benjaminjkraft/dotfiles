@@ -49,6 +49,9 @@ case "$1" in
     rot)
         yabai -m space --rotate 90
         ;;
+    rotwindow)
+        yabai -m window --toggle split
+        ;;
     # TODO: also remap go to next space so it cycles
     *)
         echo "yabaictl: unknown command \"$1\""
