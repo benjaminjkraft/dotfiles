@@ -4,6 +4,14 @@
 # usage: attach [base_session_name]
 
 base_session_name="$1"
+if ! tmux ls >/dev/null 2>&1; then
+    if [ -z "$base_session_name" ]; then
+        exec tmux new-session -s "base_session_name"
+    else
+        exec tmux new-session
+    fi
+fi
+
 if [ -z "$base_session_name" ]; then
     base_session_name="$(tmux list-sessions -F "#{session_name}" | grep -vE '^[0-9]{14}$' | head -n1)"
 fi
