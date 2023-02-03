@@ -6,9 +6,9 @@
 base_session_name="$1"
 if ! tmux ls >/dev/null 2>&1; then
     if [ -z "$base_session_name" ]; then
-        exec tmux new-session -s "base_session_name"
-    else
         exec tmux new-session
+    else
+        exec tmux new-session -s "$base_session_name"
     fi
 fi
 
