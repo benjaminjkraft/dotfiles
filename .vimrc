@@ -232,7 +232,9 @@ let g:ale_python_autopep8_options = '--ignore E301,E303,W503,E266,E402,E501,E712
 let g:ale_linters.typescript = ['eslint', 'tsserver']
 " eslint is too slow for a fixer (and runs before prettier) :(
 let g:ale_fixers.javascript = ['prettier', 'eslint']
+let g:ale_fixers.javascriptreact = g:ale_fixers.javascript
 let g:ale_fixers.typescript = ['prettier', 'eslint']
+let g:ale_fixers.typescriptreact = g:ale_fixers.typescript
 
 " (La)TeX
 let g:tex_flavor='latex'
