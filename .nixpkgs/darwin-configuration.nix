@@ -50,16 +50,18 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     pkgs.autojump
     pkgs.comby
     pkgs.coreutils
+    pkgs.entr
     pkgs.gh
     pkgs.git
     pkgs.gnugrep     # tfenv requires GNU grep and who can blame them
     pkgs.gnused      # BSD sed is terrible
     pkgs.htop
     pkgs.httpie
-    pkgs.lesspipe    # the "read a tar file in less" thing
     pkgs.jq
-    pkgs.python310Packages.ipython
+    pkgs.lesspipe    # the "read a tar file in less" thing
+    pkgs.moreutils
     pkgs.procps      # watch et al.
+    pkgs.python310Packages.ipython
     pkgs.tmux
     pkgs.vim
     pkgs.xcode-install # note: doesn't seem to actually install xcode?
