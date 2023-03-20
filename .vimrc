@@ -273,6 +273,4 @@ let g:ale_go_gofumpt_executable = "gofumpt"
 autocmd BufRead,BufNewFile *.go2 set filetype=go
 
 " Terraform
-autocmd BufNewFile,BufReadPost *.tf set filetype=terraform
 autocmd FileType terraform setlocal ts=2 sw=2 sts=2 et
-autocmd FileType terraform setlocal commentstring=#\ %s
