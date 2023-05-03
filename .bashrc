@@ -192,9 +192,9 @@ gvimr () {
     if [ -z "$(gvim --serverlist)" ]; then
         gvim "$@"
     else
-        f="$(realpath "$1")"
-        shift
-        gvim --remote-send "<C-\\><C-n>:split $f<CR>" "$@"
+		for arg in "$@"; do
+			gvim --remote-send "<C-\\><C-n>:split $(realpath "$arg")<CR>"
+		done
     fi
 }
 
