@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # modified from https://github.com/not-an-aardvark/git-delete-squashed
 # (MIT License, Copyright © 2017 Teddy Katz)
 TARGET_BRANCH=origin/main
