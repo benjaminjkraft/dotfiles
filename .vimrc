@@ -185,6 +185,7 @@ nnoremap <C-]>v :ALEGoToDefinition -vsplit<CR>
 nnoremap <C-]>e :ALEGoToDefinition<CR>
 nnoremap <C-'> :ALEFindReferences<CR>
 nnoremap <C-i> :ALEImport<CR>
+nnoremap <C-l> :ALENextWrap<CR>
 nnoremap <C-t> <C-^>
 vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
