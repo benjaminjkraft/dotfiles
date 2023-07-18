@@ -51,6 +51,7 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     pkgs.comby
     pkgs.coreutils
     pkgs.entr
+    pkgs.expect      # unbuffer
     pkgs.gh
     pkgs.git
     pkgs.gnugrep     # tfenv requires GNU grep and who can blame them
@@ -65,6 +66,7 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     pkgs.tmux
     pkgs.vim
     pkgs.xcode-install # note: doesn't seem to actually install xcode?
+    pkgs.zstd
 
     # from notion setup but generally useful
     pkgs.awscli2
