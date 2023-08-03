@@ -237,6 +237,7 @@ let g:ale_fixers.javascriptreact = g:ale_fixers.javascript
 let g:ale_fixers.typescript = ['prettier', 'eslint']
 let g:ale_fixers.typescriptreact = g:ale_fixers.typescript
 let $NODE_OPTIONS = "--max-old-space-size=8192"
+let g:ale_typescript_tsserver_use_global = 1
 
 " (La)TeX
 let g:tex_flavor='latex'
