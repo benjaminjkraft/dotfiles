@@ -47,6 +47,7 @@
     co = "!f() { git checkout \"$@\" && git gsu; }; f"
     p = "!f() { git pull \"$@\" && git gsu; }; f"
     m = "!f() { git merge \"$@\" && git gsu; }; f"
+    mu = m '@{u}'
 [kaclone]
 	email = benkraft@khanacademy.org
 [ka "olc"]

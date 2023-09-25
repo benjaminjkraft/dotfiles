@@ -52,6 +52,7 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
     pkgs.coreutils
     pkgs.entr
     pkgs.expect      # unbuffer
+    pkgs.fx
     pkgs.gh
     pkgs.git
     pkgs.gnugrep     # tfenv requires GNU grep and who can blame them
