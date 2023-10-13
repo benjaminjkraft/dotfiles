@@ -191,6 +191,7 @@ vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
 " copilot/ale completions
 let g:copilot_enabled = 0
+let g:ale_completion_autoimport = 1
 inoremap <expr> <C-J> exists('b:_copilot') ? "\<Plug>(copilot-previous)" : pumvisible() ? "\<C-N>" : "\<Plug>(ale_complete)"
 inoremap <expr> <C-K> exists('b:_copilot') ? "\<Plug>(copilot-next)" : pumvisible() ? "\<C-P>" : "\<Plug>(copilot-suggest)"
 
