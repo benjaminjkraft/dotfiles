@@ -5,12 +5,6 @@
 # many thanks to slim, tons of cribbing from
 # https://github.com/sliminality/nix-config/blob/main/darwin-configuration.nix
 
-let yabai = pkgs.yabai.overrideAttrs (old: rec {
-  src = builtins.fetchTarball {
-    url = https://github.com/koekeishiya/yabai/files/7915231/yabai-v4.0.0.tar.gz;
-    sha256 = "sha256:0rs6ibygqqzwsx4mfdx8h1dqmpkrsfig8hi37rdmlcx46i3hv74k";
-  };
-}); in
 {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -109,7 +103,6 @@ let yabai = pkgs.yabai.overrideAttrs (old: rec {
 
   services.yabai = {
     enable = true;
-    package = yabai;
 
     # ugh can I just put this in .yabairc like a normal person?
     extraConfig = ''
