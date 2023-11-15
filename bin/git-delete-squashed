@@ -3,7 +3,7 @@
 # (MIT License, Copyright © 2017 Teddy Katz)
 TARGET_BRANCH=origin/main
 git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do
-    if [[ $branch == main ]]; then
+    if [[ $branch == main || $branch == *".wip."* ]]; then
         continue
     fi
 
