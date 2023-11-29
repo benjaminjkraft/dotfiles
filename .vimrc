@@ -236,6 +236,10 @@ let g:ale_fixers.python = ['autopep8']
 let g:ale_python_autopep8_options = '--ignore E301,E303,W503,E266,E402,E501,E712,E731,E741'
 
 " JS/TS
+autocmd FileType javascript setlocal ts=2 sw=2 sts=2 noet
+autocmd FileType typescript setlocal ts=2 sw=2 sts=2 noet
+autocmd FileType javascriptreact setlocal ts=2 sw=2 sts=2 noet
+autocmd FileType typescriptreact setlocal ts=2 sw=2 sts=2 noet
 let g:ale_linters.typescript = ['eslint', 'tsserver']
 " eslint is too slow for a fixer (and runs before prettier) :(
 let g:ale_fixers.javascript = ['prettier', 'eslint']
