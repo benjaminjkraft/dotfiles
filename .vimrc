@@ -284,3 +284,7 @@ autocmd BufRead,BufNewFile *.go2 set filetype=go
 
 " Terraform
 autocmd FileType terraform setlocal ts=2 sw=2 sts=2 et
+
+" Rust
+let g:ale_linters.rust = ['analyzer', 'cargo']
+let g:ale_fixers.rust = ['rustfmt']
