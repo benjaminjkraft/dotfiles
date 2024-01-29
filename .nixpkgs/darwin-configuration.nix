@@ -87,8 +87,9 @@
       # installed by kandji:
       # "google-chrome"
       # "slack"
+      # "visual-studio-code"
+      # "openvpn-connect"
       "macvim"            # nix macvim requires full xcode :(
-      "openvpn-connect"   # nix version doesn't have GUI?
       "stats"
       "vlc"
     ];
