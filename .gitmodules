@@ -136,3 +136,6 @@
 [submodule ".vim/bundle/copilot.vim"]
 	path = .vim/bundle/copilot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule ".vim/bundle/context.vim"]
+	path = .vim/bundle/context.vim
+	url = git@github.com:wellle/context.vim.git

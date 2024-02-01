@@ -164,6 +164,9 @@ let g:airline#extensions#wordcount#filetypes = '.*'
 let g:airline#extensions#wordcount#formatter#default#fmt = '%sw'  " always short!
 let g:airline#extensions#wordcount#formatter#default#fmt_short = '%sw'
 
+" context.vim
+let g:context_enabled = 0
+
 " shortcuts
 map Y y$
 cnoremap w!! w !sudo dd of=%
