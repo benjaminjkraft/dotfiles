@@ -241,9 +241,13 @@ case "$(hostname)" in
 homotopy)
     export GIT_AUTHOR_EMAIL=benkraft@makenotion.com
     export GIT_COMMITTER_EMAIL=benkraft@makenotion.com
-    eval "$(notion completion --install)"
     ;;
 esac
+
+if [ -n "$NOTION_IN_NIX" ]; then
+    eval "$(notion completion --install)"
+fi
+	
 
 export NOTION_NO_PREPUSH=true
 export NOTION_ESLINT_DISABLE_TYPES=true
