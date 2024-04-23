@@ -124,6 +124,15 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:indentLine_color_term = 235 " solarized base02
 let g:indentLine_color_gui = '#eee8d5' "solarized base2
 let g:indentLine_char = '│'
+set list listchars=tab:\│\ "trailing space
+if has('gui_running')
+    hi SpecialKey guibg=NONE guifg=#eee8d5
+    hi FirstTab guibg=NONE guifg=bg
+else
+    hi SpecialKey ctermbg=NONE ctermfg=235
+    hi FirstTab ctermbg=NONE ctermfg=bg
+endif
+match FirstTab /^\t/
 
 "emmet.vim
 let g:user_emmet_mode='nv'
