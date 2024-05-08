@@ -54,10 +54,11 @@
     pkgs.htop
     pkgs.httpie
     pkgs.jq
+    pkgs.kubectl
     pkgs.lesspipe    # the "read a tar file in less" thing
     pkgs.moreutils
     pkgs.procps      # watch et al.
-    pkgs.python310Packages.ipython
+    pkgs.python3Packages.ipython
     pkgs.tmux
     pkgs.vim
     pkgs.xcode-install # note: doesn't seem to actually install xcode?
