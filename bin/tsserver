@@ -1,3 +1,3 @@
 #!/bin/sh
 
-tee ../junk/tsin.txt | $PWD/node_modules/.bin/tsserver | tee ../junk/tsout.txt
+tee ../junk/tsin.txt | node --max-old-space-size=13312 --max-semi-space-size=512 $PWD/node_modules/.bin/tsserver | tee ../junk/tsout.txt
