@@ -34,8 +34,9 @@
     # npm set prefix "${config.users.users.benkraft.home}/.local"
   '';
 
-  networking.computerName = "homotopy";
-  networking.hostName = "homotopy";
+  # TODO(benkraft): parameterize? is that a thing?
+  networking.computerName = "fibration";
+  networking.hostName = "fibration";
 
   nixpkgs.config.allowUnfree = true;
 
@@ -77,15 +78,12 @@
     enable = true;
     # TODO once I have all the notion stuff in here:
     # cleanup = "zap";
-    taps = [
-      "homebrew/cask"
-    ];
     casks = [
       "alacritty"         # nix alacritty doesn't play nice with the dock :(
       "bettertouchtool"
       "docker"            # TODO: how to get nix docker to start its daemon?
-      "firefox"
       # installed by kandji:
+      # "firefox"
       # "google-chrome"
       # "slack"
       # "visual-studio-code"
