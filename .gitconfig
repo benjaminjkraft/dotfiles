@@ -3,6 +3,7 @@
 	name = Ben Kraft
 [core]
     excludesfile = ~/.gitignore_global
+	commentchar = !
 [color]
 	ui = auto
     status = auto

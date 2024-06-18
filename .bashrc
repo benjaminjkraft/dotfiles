@@ -251,6 +251,8 @@ fi
 
 export NOTION_NO_PREPUSH=true
 export NOTION_ESLINT_DISABLE_TYPES=true
+# direnv is silly, make notion install think I sourced it:
+# eval "$(direnv hook bash)"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
