@@ -1,3 +1,4 @@
 #!/bin/sh
 
-tee ../junk/tsin.txt | node --max-old-space-size=13312 --max-semi-space-size=512 $PWD/node_modules/.bin/tsserver | tee ../junk/tsout.txt
+export TSSERVER_TELEMETRY_ENABLED=1
+tee ../junk/tsin.txt | node --max-old-space-size=20480 --max-semi-space-size=512 $PWD/node_modules/.bin/tsserver | tee ../junk/tsout.txt

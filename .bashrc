@@ -208,7 +208,7 @@ export GEM_HOME=$HOME/.gem
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # TODO: I'm not on node 17+, why is this needed?? what does it even mean???
-export NODE_OPTIONS=--openssl-legacy-provider
+# export NODE_OPTIONS=--openssl-legacy-provider
 # TODO: figure out how to get tfenv to build arm64 binaries instead
 export GODEBUG=asyncpreemptoff=1
 export TF_CLI_ARGS_plan="-compact-warnings"

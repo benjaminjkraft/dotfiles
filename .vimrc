@@ -258,7 +258,7 @@ let g:ale_fixers.javascript = ['prettier', 'eslint']
 let g:ale_fixers.javascriptreact = g:ale_fixers.javascript
 let g:ale_fixers.typescript = ['prettier', 'eslint']
 let g:ale_fixers.typescriptreact = g:ale_fixers.typescript
-let $NODE_OPTIONS = "--max-old-space-size=8192"
+" note: tsserver flags in ~/bin/tsserver
 let g:ale_typescript_tsserver_use_global = 1
 autocmd BufRead,BufNewFile */src/notion-next*/*.json let g:ale_fixers.json = ['prettier']
 
