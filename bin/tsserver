@@ -1,4 +1,6 @@
 #!/bin/sh
 
 export TSSERVER_TELEMETRY_ENABLED=1
+export NOTION_TSSERVER_EXTRA_DIAGNOSTICS=1
+export TSS_LOG="-logToFile true -file ../junk/tslog.txt"
 tee ../junk/tsin.txt | node --max-old-space-size=20480 --max-semi-space-size=512 $PWD/node_modules/.bin/tsserver | tee ../junk/tsout.txt

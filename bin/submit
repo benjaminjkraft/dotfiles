@@ -1,0 +1,6 @@
+#!/bin/sh
+
+upstream=$(git rev-parse --abbrev-ref '@{u}')
+gt track
+gt submit "$@"
+git branch -u "$upstream"
