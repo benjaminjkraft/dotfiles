@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#! nix-shell -i bash ../src/notion-next/default.nix
+#! nix-shell -i bash ../src/notion-next/shell.nix
 
 # TODO: less hardcoded paths
 "$HOME/src/notion-next/src/cli/notion" "$@"

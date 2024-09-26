@@ -238,16 +238,16 @@ notion () {
 
 
 case "$(hostname)" in
-homotopy)
+homotopy|fibration)
     export GIT_AUTHOR_EMAIL=benkraft@makenotion.com
     export GIT_COMMITTER_EMAIL=benkraft@makenotion.com
     ;;
 esac
 
+# TODO: can this move to nixfile?
 if [ -n "$NOTION_IN_NIX" ]; then
     eval "$(notion completion --install)"
 fi
-	
 
 export NOTION_NO_PREPUSH=true
 export NOTION_ESLINT_DISABLE_TYPES=true
