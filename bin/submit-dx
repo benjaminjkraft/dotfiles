@@ -1,0 +1,3 @@
+#!/bin/sh
+
+submit --team-reviewers developer-experience --publish --no-edit --no-web
