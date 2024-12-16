@@ -261,6 +261,7 @@ let g:ale_fixers.typescriptreact = g:ale_fixers.typescript
 " note: tsserver flags in ~/bin/tsserver
 let g:ale_typescript_tsserver_use_global = 1
 autocmd BufRead,BufNewFile */src/notion-next*/*.json let g:ale_fixers.json = ['prettier']
+let $NOTION_TSSERVER_ISOLATED_DECLARATIONS = "warning"
 
 " (La)TeX
 let g:tex_flavor='latex'
