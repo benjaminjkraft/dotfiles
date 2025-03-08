@@ -202,11 +202,14 @@ nnoremap <C-l> :ALENextWrap<CR>
 nnoremap <C-t> <C-^>
 vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
-" copilot/ale completions
+" codeium/ale completions
 let g:copilot_enabled = 0
 let g:ale_completion_autoimport = 1
-inoremap <expr> <C-J> exists('b:_copilot') ? "\<Plug>(copilot-previous)" : pumvisible() ? "\<C-N>" : "\<Plug>(ale_complete)"
-inoremap <expr> <C-K> exists('b:_copilot') ? "\<Plug>(copilot-next)" : pumvisible() ? "\<C-P>" : "\<Plug>(copilot-suggest)"
+let g:codeium_disable_bindings = 1
+let g:codeium_manual = v:true
+inoremap <expr> <C-J> \<Plug>(ale_complete)
+imap <C-K> <Cmd>call codeium#CycleOrComplete()<CR>
+imap <script><silent><nowait><expr> <Tab> codeium#Accept()
 
 " easymotion
 " map  / <Plug>(easymotion-sn)
@@ -263,6 +266,7 @@ let g:ale_fixers.typescriptreact = g:ale_fixers.typescript
 let g:ale_typescript_tsserver_use_global = 1
 autocmd BufRead,BufNewFile */src/notion-next*/*.json let g:ale_fixers.json = ['prettier']
 let $NOTION_TSSERVER_ISOLATED_DECLARATIONS = "warning"
+let $NOTION_TSSERVER_PROXY_DEBUG = "true"
 
 " (La)TeX
 let g:tex_flavor='latex'

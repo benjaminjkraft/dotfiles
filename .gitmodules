@@ -52,9 +52,6 @@
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule ".vim/bundle/ultisnips"]
-	path = .vim/bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
 [submodule ".vim/bundle/vim2hs"]
 	path = .vim/bundle/vim2hs
 	url = https://github.com/dag/vim2hs.git
@@ -73,9 +70,6 @@
 [submodule ".vim/bundle/haskellmode-vim"]
 	path = .vim/bundle/haskellmode-vim
 	url = https://github.com/lukerandall/haskellmode-vim.git
-[submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule ".vim/bundle/vim-scala"]
 	path = .vim/bundle/vim-scala
 	url = https://github.com/derekwyatt/vim-scala.git
@@ -133,9 +127,9 @@
 [submodule ".vim/bundle/vim-terraform"]
 	path = .vim/bundle/vim-terraform
 	url = git@github.com:hashivim/vim-terraform.git
-[submodule ".vim/bundle/copilot.vim"]
-	path = .vim/bundle/copilot.vim
-	url = https://github.com/github/copilot.vim.git
 [submodule ".vim/bundle/context.vim"]
 	path = .vim/bundle/context.vim
 	url = git@github.com:wellle/context.vim.git
+[submodule ".vim/bundle/codeium.vim"]
+	path = .vim/bundle/codeium.vim
+	url = git@github.com:Exafunction/codeium.vim.git
