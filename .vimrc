@@ -256,14 +256,16 @@ autocmd FileType javascript setlocal ts=2 sw=2 sts=2 noet
 autocmd FileType typescript setlocal ts=2 sw=2 sts=2 noet
 autocmd FileType javascriptreact setlocal ts=2 sw=2 sts=2 noet
 autocmd FileType typescriptreact setlocal ts=2 sw=2 sts=2 noet
-let g:ale_linters.typescript = ['eslint', 'tsserver']
+let g:ale_linters.typescript = ['biome', 'eslint', 'tsserver']
 " eslint is too slow for a fixer (and runs before prettier) :(
-let g:ale_fixers.javascript = ['prettier', 'eslint']
+let g:ale_fixers.javascript = ['prettier', 'biome', 'eslint']
 let g:ale_fixers.javascriptreact = g:ale_fixers.javascript
-let g:ale_fixers.typescript = ['prettier', 'eslint']
+let g:ale_fixers.typescript = g:ale_fixers.javascript
 let g:ale_fixers.typescriptreact = g:ale_fixers.typescript
 " note: tsserver flags in ~/bin/tsserver
 let g:ale_typescript_tsserver_use_global = 1
+" biome for lint only, leave formatting to prettier
+" let g:ale_biome_options = "--formatter-enabled=false"
 autocmd BufRead,BufNewFile */src/notion-next*/*.json let g:ale_fixers.json = ['prettier']
 let $NOTION_TSSERVER_ISOLATED_DECLARATIONS = "warning"
 let $NOTION_TSSERVER_PROXY_DEBUG = "true"
