@@ -10,6 +10,8 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
+  system.primaryUser = "benkraft";
+
   # TODO: unclear if this does anything, actually
   users.users.benkraft = {
     name = "benkraft";
@@ -43,7 +45,7 @@
   # installed for all users
   environment.systemPackages = [
     pkgs.autojump
-    pkgs.comby
+    # pkgs.comby
     pkgs.coreutils
     pkgs.entr
     pkgs.expect      # unbuffer
@@ -61,6 +63,7 @@
     pkgs.procps      # watch et al.
     pkgs.python3Packages.ipython
     pkgs.tmux
+	pkgs.uv
     pkgs.vim
     pkgs.xcode-install # note: doesn't seem to actually install xcode?
     pkgs.zstd
@@ -94,9 +97,6 @@
     ];
   };
 
-  # auto-update nix itself(?)
-  services.nix-daemon.enable = true;
-
   nix.extraOptions = ''
     experimental-features = nix-command
   '';
@@ -117,9 +117,7 @@
   programs.bash.enable = true;
   programs.zsh.enable = true;
 
-  # make fonts happen (i.e. copy them into a real place)
-  fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     powerline-fonts
   ];
 
