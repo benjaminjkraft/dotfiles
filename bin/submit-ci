@@ -1,0 +1,3 @@
+#!/bin/sh
+
+submit --team-reviewers ci-cd --publish --no-edit --no-web
