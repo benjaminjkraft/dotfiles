@@ -202,20 +202,8 @@ nnoremap <C-l> :ALENextWrap<CR>
 nnoremap <C-t> <C-^>
 vnoremap // y/\V<C-r>=escape(trim(@"),'/\')<CR><CR>
 
-" codeium/ale completions
-let g:copilot_enabled = 0
-let g:ale_completion_autoimport = 1
-let g:codeium_disable_bindings = 1
-let g:codeium_manual = v:true
+" ale completions
 inoremap <expr> <C-J> \<Plug>(ale_complete)
-imap <C-K> <Cmd>call codeium#CycleOrComplete()<CR>
-imap <script><silent><nowait><expr> <Tab> codeium#Accept()
-
-" easymotion
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
 
 " highlight STOPSHIPs
 autocmd Syntax * syn keyword bonusTodo STOPSHIP containedin=.*Comment.*
