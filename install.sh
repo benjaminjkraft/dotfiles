@@ -5,7 +5,7 @@
 set -e
 
 exclude="README.md .git .gitignore LICENSE install.sh install-athena.sh"
-dir="${1:-.dotfiles}"
+dir="${1:-$HOME/.dotfiles}"
 
 if [ -d "$dir" ] ; then
   cd "$dir"
