@@ -48,7 +48,8 @@ set laststatus=2
 if has('gui_macvim')
     set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
 else
-    set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
+    " set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
+    set guifont=Ubuntu\ Mono
 endif
 highlight LineNr guifg=white guibg=black
 highlight Conceal guifg=black guibg=white
